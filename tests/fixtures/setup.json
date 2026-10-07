@@ -1,0 +1,11 @@
+{
+  "version": "1.0.0",
+  "config": {
+    "scenarioId": "loading",
+    "seed": 7,
+    "budget": 8,
+    "maxShift": 2.8
+  },
+  "shift": 999,
+  "failure": { "outcome": "this untrusted claim must be ignored" }
+}

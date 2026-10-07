@@ -1,0 +1,6 @@
+{
+  "scenarioId": "__proto__",
+  "seed": 42,
+  "budget": 1000000,
+  "maxShift": 2.4
+}
