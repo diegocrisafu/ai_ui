@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { PreferencesProvider } from "@/context/PreferencesContext";
-import { LocationProvider } from "@/context/LocationContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,9 +13,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "WeatherLens — Multi-Location Weather",
+  title: "SceneBreaker — Small changes. Big failures.",
   description:
-    "Track weather across multiple locations with real-time data, 5-day forecasts, and long-term trends.",
+    "Find, minimize, and replay robot-navigation failures in an interactive 3D sandbox. Deterministic experiments, fair search comparisons, and reproducible evidence.",
+  icons: { icon: "/icon.svg" },
 };
 
 export default function RootLayout({
@@ -30,11 +29,7 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
-        <PreferencesProvider>
-          <LocationProvider>{children}</LocationProvider>
-        </PreferencesProvider>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
