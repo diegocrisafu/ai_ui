@@ -79,7 +79,13 @@ The renderer consumes recorded trajectories. Changing playback speed or camera d
 
 Deploy as a normal Next.js 16 application using Node 22: install with `npm ci`, build with `npm run build`, and serve with `npm start`. A Next.js-compatible host can use its standard preset with the repository root as its root directory. Do not enable analytics or add secrets by default.
 
-The checked-in GitHub Actions workflow runs installation, lint, type checking, tests, production build and production-dependency audit on pushes to `main` and pull requests. Build-time font fetching requires network access; `next/font` then serves Geist fonts from this application's own origin to visitors.
+The checked-in GitHub Actions workflow runs installation, lint, type checking, tests, production build and production-dependency audit on pushes to `main` and pull requests. Uncut Sans and Spline Sans are bundled as local WOFF2 files; neither building nor viewing the app requires a font-service request.
+
+## Design system
+
+Headings use [Uncut Sans](https://uncut.wtf/sans-serif/uncut-sans/); body and interface text use [Spline Sans from Fontshare](https://www.fontshare.com/fonts/spline-sans). Both are self-hosted under the SIL Open Font License, with full notices in `public/fonts/`.
+
+The interface uses a strict 1.25× type scale, 150% line height, and shared 12/8/4-column desktop/tablet/phone grids. Three palette anchors—paper, forest and rust—produce all interface shades through opacity. See [the design system](docs/DESIGN_SYSTEM.md) for tokens, breakpoints, color roles and verification; `tests/design-system.test.ts` guards the core rules.
 
 ## Limits and privacy
 
