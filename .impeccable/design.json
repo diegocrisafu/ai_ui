@@ -1,0 +1,451 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-07T19:32:22Z",
+  "title": "Design System: SceneBreaker",
+  "extensions": {
+    "sources": {
+      "tokens": "src/app/globals.css",
+      "fonts": "src/app/layout.tsx",
+      "scenePalette": "src/lib/palette.ts",
+      "components": [
+        "src/components/lab/Fields.tsx",
+        "src/components/lab/PlanEditor.tsx",
+        "src/components/lab/Scene3D.tsx",
+        "src/components/lab/RouteLab.tsx"
+      ],
+      "comparisonLogic": "src/lib/lab/evidence.ts",
+      "canonicalDocument": "DESIGN.md"
+    },
+    "colorMeta": {
+      "accent": {
+        "role": "primary",
+        "displayName": "Ultramarine",
+        "cssProperty": "--accent",
+        "sceneProperty": "PALETTE.rust",
+        "purpose": "Actions, emphasis, moving geometry, actual route, focus and contact results; rust is a legacy identifier."
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Cool Porcelain",
+        "cssProperty": "--paper",
+        "sceneProperty": "PALETTE.paper",
+        "purpose": "Page and field surface; reverse text on solid actions."
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Graphite",
+        "cssProperty": "--ink",
+        "sceneProperty": "PALETTE.ink",
+        "purpose": "Primary text, dark actions and selected controls."
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Secondary Graphite",
+        "cssProperty": "--muted",
+        "purpose": "Secondary copy and metadata."
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Fine Rule",
+        "cssProperty": "--line",
+        "purpose": "Decorative dividers; not a control boundary."
+      },
+      "control": {
+        "role": "neutral",
+        "displayName": "Control Boundary",
+        "cssProperty": "--control",
+        "purpose": "Field and plan boundaries; planned route."
+      },
+      "soft": {
+        "role": "neutral",
+        "displayName": "Quiet Surface",
+        "cssProperty": "--soft",
+        "purpose": "Control groups, hover fills and reached-goal cells."
+      }
+    },
+    "typographyMeta": {
+      "type-small": {
+        "displayName": "Scale small",
+        "cssProperty": "--type-small",
+        "purpose": "Built size step; the complete ramp advances by 1.25 with 1.5 leading."
+      },
+      "type-base": {
+        "displayName": "Scale base",
+        "cssProperty": "--type-base",
+        "purpose": "Built size step; the complete ramp advances by 1.25 with 1.5 leading."
+      },
+      "type-1": {
+        "displayName": "Scale 1",
+        "cssProperty": "--type-1",
+        "purpose": "Built size step; the complete ramp advances by 1.25 with 1.5 leading."
+      },
+      "type-2": {
+        "displayName": "Scale 2",
+        "cssProperty": "--type-2",
+        "purpose": "Built size step; the complete ramp advances by 1.25 with 1.5 leading."
+      },
+      "type-3": {
+        "displayName": "Scale 3",
+        "cssProperty": "--type-3",
+        "purpose": "Built size step; the complete ramp advances by 1.25 with 1.5 leading."
+      },
+      "type-4": {
+        "displayName": "Scale 4",
+        "cssProperty": "--type-4",
+        "purpose": "Built size step; the complete ramp advances by 1.25 with 1.5 leading."
+      },
+      "type-5": {
+        "displayName": "Scale 5",
+        "cssProperty": "--type-5",
+        "purpose": "Built size step; the complete ramp advances by 1.25 with 1.5 leading."
+      },
+      "type-6": {
+        "displayName": "Scale 6",
+        "cssProperty": "--type-6",
+        "purpose": "Built size step; the complete ramp advances by 1.25 with 1.5 leading."
+      },
+      "type-7": {
+        "displayName": "Scale 7",
+        "cssProperty": "--type-7",
+        "purpose": "Built size step; the complete ramp advances by 1.25 with 1.5 leading."
+      },
+      "type-8": {
+        "displayName": "Scale 8",
+        "cssProperty": "--type-8",
+        "purpose": "Built size step; the complete ramp advances by 1.25 with 1.5 leading."
+      },
+      "display": {
+        "displayName": "Display",
+        "cssFamilyProperty": "--font-display",
+        "sourceSelector": ".opening-copy h1",
+        "purpose": "Opening title; type-8 desktop, type-7 tablet, type-5 phone."
+      },
+      "headline": {
+        "displayName": "Section Headline",
+        "cssFamilyProperty": "--font-display",
+        "sourceSelector": ".section-intro h2",
+        "purpose": "Workbench heading; type-6 desktop, type-5 tablet, type-4 phone."
+      },
+      "title": {
+        "displayName": "Title",
+        "cssFamilyProperty": "--font-body",
+        "sourceSelector": "h3",
+        "purpose": "Default h3; inspector and comparison titles override the size with type-1."
+      },
+      "body": {
+        "displayName": "Body",
+        "cssFamilyProperty": "--font-body",
+        "sourceSelector": "body",
+        "purpose": "Ordinary prose and input text."
+      },
+      "label": {
+        "displayName": "Small Label",
+        "cssFamilyProperty": "--font-body",
+        "sourceSelector": ".micro-note",
+        "purpose": "Secondary metadata; standard field labels remain body size."
+      },
+      "button": {
+        "displayName": "Action Label",
+        "cssFamilyProperty": "--font-body",
+        "sourceSelector": "button",
+        "purpose": "Base control text, weight 500."
+      },
+      "measurement": {
+        "displayName": "Measurement",
+        "cssFamilyProperty": "--font-mono",
+        "sourceSelector": ".measurement",
+        "purpose": "Comparison measurement paragraphs; outputs, dd and table values use context-specific scale steps.",
+        "numericVariant": "tabular-nums"
+      }
+    },
+    "fonts": [
+      {
+        "family": "Instrument Serif",
+        "cssProperty": "--font-display",
+        "files": [
+          "src/app/fonts/InstrumentSerif-Regular.woff2",
+          "src/app/fonts/InstrumentSerif-Italic.woff2"
+        ],
+        "registeredWeights": "400 normal and italic",
+        "loader": "next/font/local",
+        "display": "swap",
+        "licensePath": "public/fonts/InstrumentSerif-OFL.txt"
+      },
+      {
+        "family": "Familjen Grotesk",
+        "cssProperty": "--font-body",
+        "files": [
+          "src/app/fonts/FamiljenGrotesk-Variable.woff2"
+        ],
+        "registeredWeights": "400 700",
+        "loader": "next/font/local",
+        "display": "swap",
+        "licensePath": "public/fonts/FamiljenGrotesk-OFL.txt"
+      },
+      {
+        "family": "Azeret Mono",
+        "cssProperty": "--font-mono",
+        "files": [
+          "src/app/fonts/AzeretMono-Variable.woff2"
+        ],
+        "registeredWeights": "100 900",
+        "loader": "next/font/local",
+        "display": "swap",
+        "licensePath": "public/fonts/AzeretMono-OFL.txt"
+      }
+    ],
+    "shadows": [],
+    "depth": {
+      "interface": "No CSS box-shadow or text-shadow tokens; separation uses tone, rules and spacing.",
+      "scene": "Orthographic Three.js geometry, PCF shadows and physical lighting. Imported models retain their own materials."
+    },
+    "motion": [
+      {
+        "name": "control-color-change",
+        "value": "background 180ms, color 180ms, border-color 180ms",
+        "purpose": "Actual base button transitions; timing function is implicit CSS ease."
+      },
+      {
+        "name": "disclosure-arrow",
+        "value": "transform 180ms",
+        "purpose": "Last summary SVG rotates 90deg when details is open."
+      }
+    ],
+    "reducedMotion": {
+      "query": "(prefers-reduced-motion: reduce)",
+      "behavior": "CSS transition-duration becomes 0s, animation becomes none and scroll-behavior becomes auto. Playback starts paused; explicit replay remains available."
+    },
+    "focus": {
+      "default": {
+        "outline": "3px solid var(--accent)",
+        "offset": "4px"
+      },
+      "primary": {
+        "outline": "3px solid var(--ink)",
+        "offset": "4px"
+      },
+      "sceneHandle": {
+        "outline": "3px solid var(--accent)",
+        "offset": "2px"
+      },
+      "heatCell": {
+        "hover": "2px solid var(--ink)",
+        "selected": "3px solid var(--ink)",
+        "offset": "1px"
+      }
+    },
+    "breakpoints": [
+      {
+        "name": "tablet-max",
+        "value": "1199px",
+        "query": "(max-width: 1199px)"
+      },
+      {
+        "name": "phone-max",
+        "value": "767px",
+        "query": "(max-width: 767px)"
+      }
+    ],
+    "layout": {
+      "container": {
+        "maxWidth": "1600px",
+        "includesPadding": true,
+        "sourceSelector": ".site-nav, main, footer"
+      },
+      "grids": [
+        {
+          "name": "desktop",
+          "range": "min-width: 1200px",
+          "columns": 12,
+          "gutter": "24px",
+          "edge": "4vw",
+          "stageSpan": 9,
+          "inspectorSpan": 3
+        },
+        {
+          "name": "tablet",
+          "range": "768px to 1199px",
+          "columns": 8,
+          "gutter": "20px",
+          "edge": "3vw",
+          "stageSpan": 5,
+          "inspectorSpan": 3
+        },
+        {
+          "name": "phone",
+          "range": "max-width: 767px",
+          "columns": 4,
+          "gutter": "16px",
+          "edge": "20px",
+          "stageSpan": 4,
+          "inspectorSpan": 4
+        }
+      ],
+      "mobileContext": {
+        "sourceSelector": ".mobile-context",
+        "position": "sticky",
+        "top": "0",
+        "zIndex": 5,
+        "previewMaxWidth": "230px",
+        "previewMaxHeight": "150px",
+        "purpose": "Live read-only plan with computed whole-run outcome and play/pause within the inspector."
+      },
+      "comparison": {
+        "columns": 2,
+        "gap": "20px",
+        "mobileOverride": false
+      },
+      "heatmap": {
+        "minWidth": "670px",
+        "overflowContainer": ".heatmap-scroll"
+      }
+    },
+    "interactionLimits": {
+      "comparison": "inputChanges reports effective settings and summarized route changes, including visual height. It is not a coordinate-level diff or proof of causal isolation.",
+      "restore": "Restores pinned experiment and replay speed/phase; undo recovers previous geometry. Visual files need reattachment.",
+      "nearestContrast": "Reached versus not-reached on the finite sampled grid. Manhattan index distance from nearest baseline-speed sample and phase index zero; ties prefer lower delay, then lower speed. Not an optimum or safe operating recommendation."
+    },
+    "limitations": [
+      "Source documentation only; no browser, rebuild or new review score. Final corrections are reviewed separately.",
+      "No synthetic eight-step tonalRamp is supplied because the implementation has no such scale.",
+      "Panel HTML/CSS demonstrates source styling, with root-variable fallbacks; static snippets do not implement React interactions or simulation.",
+      "Panel fonts inherit local app variables; without that environment the named family may fall back. Font files and licenses are recorded above.",
+      "Comparison remains two columns on phone; this is an implementation limit, not a required pattern for future screens.",
+      "Product-brief font sourcing and PALETTE.rust naming drift are documented, not repaired."
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Action",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Ultramarine action, as used to play or test a route. Preview button has no simulator handler.",
+      "html": "<button class=\"ds-primary\" type=\"button\">Stress-test this route</button>",
+      "css": ".ds-primary { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 44px; padding: 9px 14px; border: 1px solid var(--control, color-mix(in srgb, var(--ink, #17191f) 60%, var(--paper, #f5f6f8))); border-radius: 5px; background: transparent; color: var(--ink, #17191f); text-decoration: none; font-family: var(--font-body, 'Familjen Grotesk'), sans-serif; font-weight: 500; font-size: var(--type-base, 1rem); line-height: var(--leading, 1.5); cursor: pointer; transition: background 180ms, color 180ms, border-color 180ms; background: var(--accent, #2547d0); border-color: var(--accent, #2547d0); color: var(--paper, #f5f6f8); } .ds-primary:hover { background: color-mix(in srgb, var(--accent, #2547d0) 88%, var(--ink, #17191f)); } .ds-primary:focus-visible { outline: 3px solid var(--ink, #17191f); outline-offset: 4px; } .ds-primary:disabled { cursor: not-allowed; opacity: 0.45; } @media (prefers-reduced-motion: reduce) { .ds-primary, .ds-default, .ds-dark, .ds-text, .ds-icon, .ds-segment-button, .ds-heat-cell { transition-duration: 0s !important; animation: none !important; } }"
+    },
+    {
+      "name": "Outlined Action",
+      "kind": "button",
+      "refersTo": "button-default",
+      "description": "Default action for pinning, saving and restoring experiments.",
+      "html": "<button class=\"ds-default\" type=\"button\">Pin this run for comparison</button>",
+      "css": ".ds-default { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 44px; padding: 9px 14px; border: 1px solid var(--control, color-mix(in srgb, var(--ink, #17191f) 60%, var(--paper, #f5f6f8))); border-radius: 5px; background: transparent; color: var(--ink, #17191f); text-decoration: none; font-family: var(--font-body, 'Familjen Grotesk'), sans-serif; font-weight: 500; font-size: var(--type-base, 1rem); line-height: var(--leading, 1.5); cursor: pointer; transition: background 180ms, color 180ms, border-color 180ms; } .ds-default:hover { background: var(--soft, color-mix(in srgb, var(--ink, #17191f) 4.5%, var(--paper, #f5f6f8))); } .ds-default:focus-visible { outline: 3px solid var(--accent, #2547d0); outline-offset: 4px; } .ds-default:disabled { cursor: not-allowed; opacity: 0.45; } @media (prefers-reduced-motion: reduce) { .ds-primary, .ds-default, .ds-dark, .ds-text, .ds-icon, .ds-segment-button, .ds-heat-cell { transition-duration: 0s !important; animation: none !important; } }"
+    },
+    {
+      "name": "Dark Action",
+      "kind": "button",
+      "refersTo": "button-dark",
+      "description": "Graphite action with ultramarine hover, used in the opening demonstration.",
+      "html": "<button class=\"ds-dark\" type=\"button\">Play the crossing</button>",
+      "css": ".ds-dark { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 44px; padding: 9px 14px; border: 1px solid var(--control, color-mix(in srgb, var(--ink, #17191f) 60%, var(--paper, #f5f6f8))); border-radius: 5px; background: transparent; color: var(--ink, #17191f); text-decoration: none; font-family: var(--font-body, 'Familjen Grotesk'), sans-serif; font-weight: 500; font-size: var(--type-base, 1rem); line-height: var(--leading, 1.5); cursor: pointer; transition: background 180ms, color 180ms, border-color 180ms; background: var(--ink, #17191f); color: var(--paper, #f5f6f8); border-color: var(--ink, #17191f); } .ds-dark:hover { background: var(--accent, #2547d0); border-color: var(--accent, #2547d0); } .ds-dark:focus-visible { outline: 3px solid var(--accent, #2547d0); outline-offset: 4px; } .ds-dark:disabled { cursor: not-allowed; opacity: 0.45; } @media (prefers-reduced-motion: reduce) { .ds-primary, .ds-default, .ds-dark, .ds-text, .ds-icon, .ds-segment-button, .ds-heat-cell { transition-duration: 0s !important; animation: none !important; } }"
+    },
+    {
+      "name": "Text Action",
+      "kind": "button",
+      "refersTo": "button-text",
+      "description": "Underlined secondary action for clearing comparison or returning to settings.",
+      "html": "<button class=\"ds-text\" type=\"button\">Clear comparison</button>",
+      "css": ".ds-text { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 44px; padding: 9px 14px; border: 1px solid var(--control, color-mix(in srgb, var(--ink, #17191f) 60%, var(--paper, #f5f6f8))); border-radius: 5px; background: transparent; color: var(--ink, #17191f); text-decoration: none; font-family: var(--font-body, 'Familjen Grotesk'), sans-serif; font-weight: 500; font-size: var(--type-base, 1rem); line-height: var(--leading, 1.5); cursor: pointer; transition: background 180ms, color 180ms, border-color 180ms; border: 0; padding: 8px 0; justify-content: flex-start; color: var(--accent, #2547d0); text-decoration: underline; text-underline-offset: 0.2em; gap: 6px; } .ds-text:hover { background: transparent; color: var(--ink, #17191f); } .ds-text:focus-visible { outline: 3px solid var(--accent, #2547d0); outline-offset: 4px; } .ds-text:disabled { cursor: not-allowed; opacity: 0.45; } @media (prefers-reduced-motion: reduce) { .ds-primary, .ds-default, .ds-dark, .ds-text, .ds-icon, .ds-segment-button, .ds-heat-cell { transition-duration: 0s !important; animation: none !important; } }"
+    },
+    {
+      "name": "Icon Action",
+      "kind": "button",
+      "refersTo": "button-icon",
+      "description": "44px-wide play control with an explicit accessible name. SVG copied from the installed Lucide Play icon.",
+      "html": "<button class=\"ds-icon\" type=\"button\" aria-label=\"Play inspector preview\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z\"/></svg></button>",
+      "css": ".ds-icon { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 44px; padding: 9px 14px; border: 1px solid var(--control, color-mix(in srgb, var(--ink, #17191f) 60%, var(--paper, #f5f6f8))); border-radius: 5px; background: transparent; color: var(--ink, #17191f); text-decoration: none; font-family: var(--font-body, 'Familjen Grotesk'), sans-serif; font-weight: 500; font-size: var(--type-base, 1rem); line-height: var(--leading, 1.5); cursor: pointer; transition: background 180ms, color 180ms, border-color 180ms; width: 44px; min-width: 44px; padding: 8px; border-color: transparent; } .ds-icon svg { flex-shrink: 0; } .ds-icon:hover { background: var(--soft, color-mix(in srgb, var(--ink, #17191f) 4.5%, var(--paper, #f5f6f8))); } .ds-icon:focus-visible { outline: 3px solid var(--accent, #2547d0); outline-offset: 4px; } .ds-icon:disabled { cursor: not-allowed; opacity: 0.45; } @media (prefers-reduced-motion: reduce) { .ds-primary, .ds-default, .ds-dark, .ds-text, .ds-icon, .ds-segment-button, .ds-heat-cell { transition-duration: 0s !important; animation: none !important; } }"
+    },
+    {
+      "name": "Numeric Field",
+      "kind": "input",
+      "refersTo": "numeric-field",
+      "description": "Source numeric field with units and bounds. Native input is editable; commit-on-blur validation and error announcement require Fields.tsx.",
+      "html": "<label class=\"ds-numeric\"><span class=\"ds-numeric-label\">Robot maximum speed<small class=\"ds-numeric-unit\">m/s</small></span><input class=\"ds-numeric-input\" type=\"number\" value=\"1.2\" min=\"0.2\" max=\"3\" step=\"0.1\" aria-invalid=\"false\"></label>",
+      "css": ".ds-numeric { display: flex; flex-direction: column; gap: 6px; min-width: 0; font-family: var(--font-body, 'Familjen Grotesk'), sans-serif; font-size: var(--type-base, 1rem); line-height: var(--leading, 1.5); color: var(--ink, #17191f); } .ds-numeric-label { min-height: 48px; display: flex; flex-direction: column; justify-content: end; } .ds-numeric-unit, .ds-numeric-error { color: var(--muted, color-mix(in srgb, var(--ink, #17191f) 76%, var(--paper, #f5f6f8))); font-size: var(--type-small, 0.8rem); } .ds-numeric-error { color: var(--accent, #2547d0); } .ds-numeric-input { width: 100%; min-width: 0; min-height: 44px; border: 1px solid var(--control, color-mix(in srgb, var(--ink, #17191f) 60%, var(--paper, #f5f6f8))); background: var(--paper, #f5f6f8); padding: 7px 10px; border-radius: 3px; color: var(--ink, #17191f); font-family: var(--font-body, 'Familjen Grotesk'), sans-serif; font-size: var(--type-base, 1rem); line-height: var(--leading, 1.5); font-weight: 400; font-variant-numeric: tabular-nums; accent-color: var(--accent, #2547d0); caret-color: var(--accent, #2547d0); } .ds-numeric-input:focus-visible { outline: 3px solid var(--accent, #2547d0); outline-offset: 4px; } .ds-numeric-input:disabled { opacity: 0.5; cursor: not-allowed; }"
+    },
+    {
+      "name": "Main Navigation",
+      "kind": "nav",
+      "refersTo": "navigation",
+      "description": "Text navigation with an ultramarine hover and a hidden middle link on phone; no current-section state or mobile menu exists.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Main navigation\"><a class=\"ds-nav-link\" href=\"#workbench\">Laboratory</a><a class=\"ds-nav-link\" href=\"#how-it-works\">How it works</a><a class=\"ds-nav-link\" href=\"https://github.com/diegocrisafu/ai_ui\" target=\"_blank\" rel=\"noreferrer\" aria-label=\"Source (opens a new tab)\">Source</a></nav>",
+      "css": ".ds-nav { display: flex; gap: 36px; align-items: center; color: var(--ink, #17191f); font-family: var(--font-body, 'Familjen Grotesk'), sans-serif; font-size: var(--type-base, 1rem); line-height: var(--leading, 1.5); font-weight: 400; } .ds-nav-link { min-height: 44px; display: inline-flex; align-items: center; gap: 5px; color: inherit; text-decoration: none; text-underline-offset: 0.22em; } .ds-nav-link:hover { color: var(--accent, #2547d0); } .ds-nav-link:focus-visible { outline: 3px solid var(--accent, #2547d0); outline-offset: 4px; } @media (max-width: 767px) { .ds-nav { gap: 12px; } .ds-nav-link { font-size: var(--type-small, 0.8rem); } .ds-nav-link:nth-child(2) { display: none; } }"
+    },
+    {
+      "name": "Plan / 3D Switch",
+      "kind": "custom",
+      "refersTo": "segmented",
+      "description": "Soft segmented view control with a graphite selected button. Preview preserves aria-pressed styling; switching requires the app.",
+      "html": "<div class=\"ds-segmented\" aria-label=\"Scene view\"><button class=\"ds-segment-button\" type=\"button\" aria-pressed=\"true\">2D plan</button><button class=\"ds-segment-button\" type=\"button\" aria-pressed=\"false\">3D view</button></div>",
+      "css": ".ds-segmented { display: flex; gap: 2px; background: var(--soft, color-mix(in srgb, var(--ink, #17191f) 4.5%, var(--paper, #f5f6f8))); padding: 3px; border-radius: 6px; } .ds-segment-button { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 44px; padding: 9px 14px; border: 1px solid var(--control, color-mix(in srgb, var(--ink, #17191f) 60%, var(--paper, #f5f6f8))); border-radius: 5px; background: transparent; color: var(--ink, #17191f); text-decoration: none; font-family: var(--font-body, 'Familjen Grotesk'), sans-serif; font-weight: 500; font-size: var(--type-base, 1rem); line-height: var(--leading, 1.5); cursor: pointer; transition: background 180ms, color 180ms, border-color 180ms; border-color: transparent; min-width: 92px; } .ds-segment-button:hover { background: var(--soft, color-mix(in srgb, var(--ink, #17191f) 4.5%, var(--paper, #f5f6f8))); } .ds-segment-button[aria-pressed=\"true\"] { background: var(--ink, #17191f); color: var(--paper, #f5f6f8); } .ds-segment-button:focus-visible { outline: 3px solid var(--accent, #2547d0); outline-offset: 4px; } .ds-segment-button:disabled { cursor: not-allowed; opacity: 0.45; } @media (prefers-reduced-motion: reduce) { .ds-primary, .ds-default, .ds-dark, .ds-text, .ds-icon, .ds-segment-button, .ds-heat-cell { transition-duration: 0s !important; animation: none !important; } }"
+    },
+    {
+      "name": "Stress Result Cell",
+      "kind": "custom",
+      "refersTo": "heat-cell",
+      "description": "Reached-goal cell plus source collision/timeout and selected CSS variants. Duration is an illustrative value from the recorded 0.60m/s replay; this snippet does not simulate.",
+      "html": "<button class=\"ds-heat-cell\" type=\"button\" aria-pressed=\"false\" aria-label=\"0.60 metres per second, 0.0 seconds delay: Goal reached. Replay\"><svg width=\"19\" height=\"19\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M20 6 9 17l-5-5\"/></svg><span class=\"ds-heat-duration\">16.5 s</span></button>",
+      "css": ".ds-heat-cell { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 44px; padding: 9px 14px; border: 1px solid var(--control, color-mix(in srgb, var(--ink, #17191f) 60%, var(--paper, #f5f6f8))); border-radius: 5px; background: transparent; color: var(--ink, #17191f); text-decoration: none; font-family: var(--font-body, 'Familjen Grotesk'), sans-serif; font-weight: 500; font-size: var(--type-base, 1rem); line-height: var(--leading, 1.5); cursor: pointer; transition: background 180ms, color 180ms, border-color 180ms; width: 100%; min-height: 64px; flex-direction: column; gap: 2px; border: 1px solid var(--line, color-mix(in srgb, var(--ink, #17191f) 18%, var(--paper, #f5f6f8))); background: var(--soft, color-mix(in srgb, var(--ink, #17191f) 4.5%, var(--paper, #f5f6f8))); padding: 6px; } .ds-heat-cell svg { flex-shrink: 0; } .ds-heat-duration { font-family: var(--font-mono, 'Azeret Mono'), monospace; font-size: var(--type-small, 0.8rem); font-variant-numeric: tabular-nums; } .ds-heat-cell.ds-collision { background: var(--accent, #2547d0); color: var(--paper, #f5f6f8); border-color: var(--accent, #2547d0); } .ds-heat-cell.ds-timeout { background: var(--ink, #17191f); color: var(--paper, #f5f6f8); } .ds-heat-cell:focus-visible { outline: 3px solid var(--accent, #2547d0); outline-offset: 4px; } .ds-heat-cell:hover { outline: 2px solid var(--ink, #17191f); outline-offset: 1px; } .ds-heat-cell[aria-pressed=\"true\"] { outline: 3px solid var(--ink, #17191f); outline-offset: 1px; } .ds-heat-cell:disabled { cursor: not-allowed; opacity: 0.45; } @media (prefers-reduced-motion: reduce) { .ds-primary, .ds-default, .ds-dark, .ds-text, .ds-icon, .ds-segment-button, .ds-heat-cell { transition-duration: 0s !important; animation: none !important; } }"
+    },
+    {
+      "name": "Pinned Run Comparison",
+      "kind": "custom",
+      "refersTo": "run-comparison",
+      "description": "Two ruled columns with effective-input differences and a restore action. Example reflects the recorded initial-delay edit; snippets are illustrative, not live result evidence.",
+      "html": "<div class=\"ds-comparison\" aria-label=\"Pinned and current run comparison\"><section class=\"ds-run\"><h3 class=\"ds-run-title\">Pinned run</h3><p class=\"ds-run-copy\">Contact with Crossing cart</p><p class=\"ds-measurement\">4.13 s · 1.20 m/s</p><small class=\"ds-run-meta\">The crossing · +0.0 s extra grid delay</small></section><section class=\"ds-run\"><h3 class=\"ds-run-title\">Current run</h3><p class=\"ds-run-copy\">Goal reached</p><p class=\"ds-measurement\">9.28 s · 1.20 m/s</p><small class=\"ds-run-meta\">The crossing · +0.0 s extra grid delay</small></section><div class=\"ds-differences\"><h3 class=\"ds-run-title\">What changed</h3><ul class=\"ds-change-list\"><li class=\"ds-change\">Crossing cart starts after: 0 s → 6 s</li></ul><button class=\"ds-default\" type=\"button\">Restore pinned experiment</button></div></div>",
+      "css": ".ds-comparison { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin-top: 20px; border-block: 1px solid var(--line, color-mix(in srgb, var(--ink, #17191f) 18%, var(--paper, #f5f6f8))); padding-block: 20px; color: var(--ink, #17191f); font-family: var(--font-body, 'Familjen Grotesk'), sans-serif; font-size: var(--type-base, 1rem); line-height: var(--leading, 1.5); font-weight: 400; } .ds-run + .ds-run { border-left: 1px solid var(--line, color-mix(in srgb, var(--ink, #17191f) 18%, var(--paper, #f5f6f8))); padding-left: 20px; } .ds-run-title { font-family: var(--font-body, 'Familjen Grotesk'), sans-serif; font-size: var(--type-1, 1.25rem); line-height: var(--leading, 1.5); font-weight: 500; letter-spacing: -0.02em; margin: 0 0 8px; } .ds-run-copy, .ds-measurement { margin: 0; } .ds-measurement { font-family: var(--font-mono, 'Azeret Mono'), monospace; font-variant-numeric: tabular-nums; } .ds-run-meta { font-size: var(--type-small, 0.8rem); color: var(--muted, color-mix(in srgb, var(--ink, #17191f) 76%, var(--paper, #f5f6f8))); } .ds-differences { grid-column: 1 / -1; border-top: 1px solid var(--line, color-mix(in srgb, var(--ink, #17191f) 18%, var(--paper, #f5f6f8))); padding-top: 20px; } .ds-change-list { margin: 12px 0 20px; padding-left: 20px; } .ds-change { margin-bottom: 8px; } .ds-default { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 44px; padding: 9px 14px; border: 1px solid var(--control, color-mix(in srgb, var(--ink, #17191f) 60%, var(--paper, #f5f6f8))); border-radius: 5px; background: transparent; color: var(--ink, #17191f); text-decoration: none; font-family: var(--font-body, 'Familjen Grotesk'), sans-serif; font-weight: 500; font-size: var(--type-base, 1rem); line-height: var(--leading, 1.5); cursor: pointer; transition: background 180ms, color 180ms, border-color 180ms; } .ds-default:hover { background: var(--soft, color-mix(in srgb, var(--ink, #17191f) 4.5%, var(--paper, #f5f6f8))); } .ds-default:focus-visible { outline: 3px solid var(--accent, #2547d0); outline-offset: 4px; } .ds-default:disabled { cursor: not-allowed; opacity: 0.45; } @media (prefers-reduced-motion: reduce) { .ds-primary, .ds-default, .ds-dark, .ds-text, .ds-icon, .ds-segment-button, .ds-heat-cell { transition-duration: 0s !important; animation: none !important; } }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Live Route Study",
+    "overview": "SceneBreaker presents editable geometry as a precise product study on cool porcelain. Graphite supplies structure; ultramarine draws attention to actions, movement and contact. Broad surfaces and fine rules keep the experiment visible while serif display type gives the opening a distinct editorial voice.\n\nThe same world continues into practical controls: readable sans-serif labels, monospaced measurements, restrained corners and explicitly named outcomes. The visual centerpiece is working Three.js geometry and an SVG plan, with motion started by the visitor. There is no authored raster artwork in this world; imported floorplans and models are user content.",
+    "keyCharacteristics": [
+      "Three color anchors with derived opacity tones.",
+      "Instrument Serif display, Familjen Grotesk interface, Azeret Mono measurements.",
+      "Exact 1.25 type scale with 150% leading.",
+      "Shared 12/8/4-track alignment and flat, ruled control groups.",
+      "Live spatial context and measured input-to-outcome comparisons."
+    ],
+    "rules": [
+      {
+        "name": "The Three Anchors Rule",
+        "body": "Derive interface tones from paper, ink and accent; keep user-imported imagery and model materials outside the interface palette.",
+        "section": "colors"
+      },
+      {
+        "name": "The Outcome Has a Name Rule",
+        "body": "Pair color with outcome text, geometry, line style or an icon; never make color the sole explanation of a result.",
+        "section": "colors"
+      },
+      {
+        "name": "The Whole Steps Rule",
+        "body": "Use the existing 1.25 scale and 1.5 line height; responsive type changes move between whole scale steps.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Interface Rule",
+        "body": "Separate controls with tone, spacing and rules; let rendered scene geometry carry physical depth.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Compare Inputs Rule",
+        "body": "Explain a changed result with recorded effective inputs and replayable conditions; retain the finite-grid limits beside the finding.",
+        "section": "components"
+      }
+    ],
+    "dos": [
+      "Do use the three anchors and their existing opacity-derived tones.",
+      "Do keep the exact 1.25 type steps, 150% leading and 12/8/4-track breakpoints.",
+      "Do load the three current font families locally and retain their bundled license files.",
+      "Do pair measured outcomes with text and show effective input differences beside comparisons.",
+      "Do preserve visible focus, accessible names, numeric validation and mobile spatial context."
+    ],
+    "donts": [
+      "Don't restore the archived cream, forest and rust palette or Uncut/Spline typography.",
+      "Don't present a nearest sampled contrast as an optimum, safety score or exhaustive result.",
+      "Don't invent card, chip, shadow or motion primitives absent from the build.",
+      "Don't substitute decorative raster artwork for the live route study.",
+      "Don't treat this documentation pass, prior screenshots or target review scores as a fresh accessibility or quality certification."
+    ]
+  }
+}

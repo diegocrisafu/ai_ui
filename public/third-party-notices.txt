@@ -1,6 +1,15 @@
 SceneBreaker — Third-party notices
 
 The following software and font notices accompany the application.
+Active Route Laboratory fonts (self-hosted, SIL Open Font License 1.1):
+- Instrument Serif: /fonts/InstrumentSerif-OFL.txt
+  Source: https://github.com/Instrument/instrument-serif
+- Familjen Grotesk: /fonts/FamiljenGrotesk-OFL.txt
+  Downloaded from Fontshare: https://www.fontshare.com/fonts/familjen-grotesk
+- Azeret Mono: /fonts/AzeretMono-OFL.txt
+  Source: https://github.com/displaay/Azeret
+The complete font licenses above are distributed with this site.
+Uncut Sans and Spline Sans notices below apply to the archived preset interface.
 Scene geometry, scene thumbnails and the favicon are generated in this repository.
 Transitive dependencies retain their own notices in their installed distributions.
 
