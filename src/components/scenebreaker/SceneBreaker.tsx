@@ -33,6 +33,7 @@ import {
   X,
 } from "lucide-react";
 import SceneView from "./SceneView";
+import { PALETTE, tone } from "@/lib/palette";
 import {
   DEFAULT_CONFIG,
   ENGINE_VERSION,
@@ -78,12 +79,12 @@ function SceneThumbnail({ id }: { id: ScenarioId }) {
         width="118"
         height="78"
         rx="5"
-        fill="#eeefe7"
-        stroke="#d5dace"
+        fill={tone(PALETTE.ink, 0.04)}
+        stroke={tone(PALETTE.ink, 0.2)}
       />
       <path
         d={`M12 ${scene.start.y * 10}H108`}
-        stroke="#98b9a4"
+        stroke={tone(PALETTE.ink, 0.6)}
         strokeWidth="2"
         strokeDasharray="3 3"
       />
@@ -95,16 +96,16 @@ function SceneThumbnail({ id }: { id: ScenarioId }) {
           width={o.width * 10}
           height={o.depth * 10}
           rx="2"
-          fill={o.movable ? "#c57953" : "#b5bcad"}
+          fill={o.movable ? tone(PALETTE.rust, 0.65) : tone(PALETTE.ink, 0.25)}
         />
       ))}
-      <circle cx="12" cy={scene.start.y * 10} r="4" fill="#26775f" />
+      <circle cx="12" cy={scene.start.y * 10} r="4" fill={PALETTE.ink} />
       <circle
         cx="108"
         cy={scene.goal.y * 10}
         r="4"
         fill="none"
-        stroke="#26775f"
+        stroke={PALETTE.ink}
         strokeWidth="2"
       />
     </svg>
@@ -504,7 +505,7 @@ export default function SceneBreaker() {
             <div className="panel-eyebrow">
               <span>01</span> EXPERIMENT SETUP <SlidersHorizontal size={14} />
             </div>
-            <fieldset disabled={running}>
+            <fieldset className="environment-group" disabled={running}>
               <legend className="field-label">Choose your environment</legend>
               <div className="scene-options">
                 {(Object.keys(SCENARIOS) as ScenarioId[]).map((id) => (
@@ -535,104 +536,108 @@ export default function SceneBreaker() {
                 ))}
               </div>
             </fieldset>
-            <div className="setup-divider" />
-            <div className="field-label">What can change?</div>
-            <div className="mutation-card">
-              <span className="pallet-icon">
-                <Box size={19} />
-              </span>
-              <div>
-                <strong>One movable obstacle</strong>
-                <span>Translate P-01 along its rail</span>
+            <div className="mutation-group">
+              <div className="setup-divider" />
+              <div className="field-label">What can change?</div>
+              <div className="mutation-card">
+                <span className="pallet-icon">
+                  <Box size={19} />
+                </span>
+                <div>
+                  <strong>One movable obstacle</strong>
+                  <span>Translate P-01 along its rail</span>
+                </div>
+                <MoveDown size={17} />
               </div>
-              <MoveDown size={17} />
+              <label className="slider-label" htmlFor="shift-limit">
+                Maximum shift <output>{config.maxShift.toFixed(2)} m</output>
+              </label>
+              <input
+                id="shift-limit"
+                type="range"
+                min={0.05}
+                max={baseScene.maxShift}
+                step={0.05}
+                value={config.maxShift}
+                disabled={running}
+                onChange={(e) =>
+                  updateConfig({ maxShift: Number(e.target.value) })
+                }
+              />
+              <div className="range-extents">
+                <span>0.05 m</span>
+                <span>{baseScene.maxShift.toFixed(2)} m</span>
+              </div>
+              <details className="advanced">
+                <summary>
+                  Search settings <ChevronDown size={14} />
+                </summary>
+                <div className="advanced-fields">
+                  <label htmlFor="seed">
+                    Random seed
+                    <input
+                      id="seed"
+                      type="number"
+                      min="0"
+                      max="4294967295"
+                      step="1"
+                      value={config.seed}
+                      disabled={running}
+                      onChange={(e) =>
+                        updateConfig({ seed: Number(e.target.value) })
+                      }
+                    />
+                  </label>
+                  <label htmlFor="budget">
+                    Trials per method
+                    <select
+                      id="budget"
+                      value={config.budget}
+                      disabled={running}
+                      onChange={(e) =>
+                        updateConfig({ budget: Number(e.target.value) })
+                      }
+                    >
+                      <option value="8">8 trials</option>
+                      <option value="24">24 trials</option>
+                      <option value="48">48 trials</option>
+                      <option value="96">96 trials</option>
+                      {![8, 24, 48, 96].includes(config.budget) && (
+                        <option value={config.budget}>
+                          {config.budget} trials
+                        </option>
+                      )}
+                    </select>
+                  </label>
+                </div>
+              </details>
             </div>
-            <label className="slider-label" htmlFor="shift-limit">
-              Maximum shift <output>{config.maxShift.toFixed(2)} m</output>
-            </label>
-            <input
-              id="shift-limit"
-              type="range"
-              min={0.05}
-              max={baseScene.maxShift}
-              step={0.05}
-              value={config.maxShift}
-              disabled={running}
-              onChange={(e) =>
-                updateConfig({ maxShift: Number(e.target.value) })
-              }
-            />
-            <div className="range-extents">
-              <span>0.05 m</span>
-              <span>{baseScene.maxShift.toFixed(2)} m</span>
-            </div>
-            <details className="advanced">
-              <summary>
-                Search settings <ChevronDown size={14} />
-              </summary>
-              <div className="advanced-fields">
-                <label htmlFor="seed">
-                  Random seed
-                  <input
-                    id="seed"
-                    type="number"
-                    min="0"
-                    max="4294967295"
-                    step="1"
-                    value={config.seed}
-                    disabled={running}
-                    onChange={(e) =>
-                      updateConfig({ seed: Number(e.target.value) })
-                    }
-                  />
-                </label>
-                <label htmlFor="budget">
-                  Trials per method
-                  <select
-                    id="budget"
-                    value={config.budget}
-                    disabled={running}
-                    onChange={(e) =>
-                      updateConfig({ budget: Number(e.target.value) })
-                    }
+            <div className="search-group">
+              <div className="guardrail">
+                <ShieldCheck size={17} />
+                <p>
+                  A route must stay open.
+                  <br />
+                  <span>Impossible scenes don’t count.</span>
+                </p>
+              </div>
+              <div className="search-action">
+                {running ? (
+                  <button
+                    className="primary-button searching"
+                    onClick={cancelSearch}
                   >
-                    <option value="8">8 trials</option>
-                    <option value="24">24 trials</option>
-                    <option value="48">48 trials</option>
-                    <option value="96">96 trials</option>
-                    {![8, 24, 48, 96].includes(config.budget) && (
-                      <option value={config.budget}>
-                        {config.budget} trials
-                      </option>
-                    )}
-                  </select>
-                </label>
+                    <Square size={15} /> Stop search
+                  </button>
+                ) : (
+                  <button className="primary-button" onClick={runSearch}>
+                    <Crosshair size={18} />
+                    {result ? "Run experiment again" : "Find a failure"}
+                    <ArrowRight size={17} />
+                  </button>
+                )}
+                <small>{trialCount} trials per method · 5 cm resolution</small>
               </div>
-            </details>
-            <div className="guardrail">
-              <ShieldCheck size={17} />
-              <p>
-                A route must stay open.
-                <br />
-                <span>Impossible scenes don’t count.</span>
-              </p>
-            </div>
-            <div className="search-action">
-              {running ? (
-                <button
-                  className="primary-button searching"
-                  onClick={cancelSearch}
-                >
-                  <Square size={15} /> Stop search
-                </button>
-              ) : (
-                <button className="primary-button" onClick={runSearch}>
-                  <Crosshair size={18} />
-                  {result ? "Run experiment again" : "Find a failure"}
-                  <ArrowRight size={17} />
-                </button>
-              )}
-              <small>{trialCount} trials per method · 5 cm resolution</small>
             </div>
           </aside>
 

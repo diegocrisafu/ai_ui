@@ -5,6 +5,7 @@ import { frameAt } from "@/lib/simulation/engine";
 import { ROBOT_RADIUS, SCENARIOS } from "@/lib/simulation/scenarios";
 import type { Run, Scenario } from "@/lib/simulation/types";
 import type * as Three from "three";
+import { PALETTE, ROUTE_COLORS, tone } from "@/lib/palette";
 
 type Props = {
   scene: Scenario;
@@ -14,7 +15,7 @@ type Props = {
   camera: "perspective" | "top";
   showRoute: boolean;
 };
-const colors = { baseline: "#167d6a", failure: "#c14f36", repaired: "#2567aa" };
+const colors = ROUTE_COLORS;
 
 function PlanView({ scene, run, time, kind, showRoute }: Props) {
   const p = frameAt(run, time);
@@ -28,8 +29,8 @@ function PlanView({ scene, run, time, kind, showRoute }: Props) {
       <rect
         width="12"
         height="8"
-        fill="#f3f1e9"
-        stroke="#c9cfc7"
+        fill={PALETTE.paper}
+        stroke={tone(PALETTE.ink, 0.25)}
         strokeWidth=".04"
         rx=".15"
       />
@@ -37,7 +38,7 @@ function PlanView({ scene, run, time, kind, showRoute }: Props) {
         <path
           key={`x${i}`}
           d={`M${i + 1} 0v8`}
-          stroke="#dce0d7"
+          stroke={tone(PALETTE.ink, 0.12)}
           strokeWidth=".015"
         />
       ))}
@@ -45,7 +46,7 @@ function PlanView({ scene, run, time, kind, showRoute }: Props) {
         <path
           key={`y${i}`}
           d={`M0 ${i + 1}h12`}
-          stroke="#dce0d7"
+          stroke={tone(PALETTE.ink, 0.12)}
           strokeWidth=".015"
         />
       ))}
@@ -57,8 +58,10 @@ function PlanView({ scene, run, time, kind, showRoute }: Props) {
             width={o.width}
             height={o.depth}
             rx=".07"
-            fill={o.movable ? "#d4855c" : "#c7c6b9"}
-            stroke={o.movable ? "#a85335" : "#989f94"}
+            fill={
+              o.movable ? tone(PALETTE.rust, 0.58) : tone(PALETTE.ink, 0.22)
+            }
+            stroke={o.movable ? PALETTE.rust : tone(PALETTE.ink, 0.4)}
             strokeWidth=".04"
           />
           <text
@@ -66,7 +69,7 @@ function PlanView({ scene, run, time, kind, showRoute }: Props) {
             y={o.y + 0.06}
             textAnchor="middle"
             fontSize=".18"
-            fill="#3c473e"
+            fill={PALETTE.ink}
           >
             {o.id}
           </text>
@@ -78,7 +81,7 @@ function PlanView({ scene, run, time, kind, showRoute }: Props) {
           fill="none"
           stroke={colors[kind]}
           strokeWidth=".045"
-          strokeDasharray=".11 .06"
+          strokeDasharray={kind === "repaired" ? undefined : ".11 .06"}
         />
       )}
       <circle
@@ -86,15 +89,15 @@ function PlanView({ scene, run, time, kind, showRoute }: Props) {
         cy={scene.start.y}
         r=".38"
         fill="none"
-        stroke="#167d6a"
+        stroke={PALETTE.ink}
         strokeWidth=".025"
       />
       <circle
         cx={scene.goal.x}
         cy={scene.goal.y}
         r=".38"
-        fill="#dfecdf"
-        stroke="#167d6a"
+        fill={tone(PALETTE.ink, 0.1)}
+        stroke={PALETTE.ink}
         strokeWidth=".025"
       />
       <text
@@ -102,7 +105,7 @@ function PlanView({ scene, run, time, kind, showRoute }: Props) {
         y={scene.start.y + 0.8}
         textAnchor="middle"
         fontSize=".19"
-        fill="#43554b"
+        fill={PALETTE.ink}
       >
         START
       </text>
@@ -111,7 +114,7 @@ function PlanView({ scene, run, time, kind, showRoute }: Props) {
         y={scene.goal.y + 0.8}
         textAnchor="middle"
         fontSize=".19"
-        fill="#43554b"
+        fill={PALETTE.ink}
       >
         GOAL
       </text>
@@ -121,13 +124,13 @@ function PlanView({ scene, run, time, kind, showRoute }: Props) {
         <circle
           r={ROBOT_RADIUS}
           fill={colors[kind]}
-          stroke="white"
+          stroke={PALETTE.paper}
           strokeWidth=".04"
         />
         <path
           d="M.08 -.08 .19 0 .08 .08"
           fill="none"
-          stroke="white"
+          stroke={PALETTE.paper}
           strokeWidth=".035"
         />
       </g>
@@ -155,6 +158,7 @@ function SceneView(props: Props) {
     Promise.all([
       import("three"),
       import("three/addons/controls/OrbitControls.js"),
+      document.fonts.ready,
     ])
       .then(([T, { OrbitControls }]) => {
         if (disposed) return;
@@ -173,7 +177,7 @@ function SceneView(props: Props) {
         renderer.shadowMap.enabled = true;
         renderer.shadowMap.type = T.PCFShadowMap;
         renderer.outputColorSpace = T.SRGBColorSpace;
-        renderer.setClearColor(0xf3f4ef, 0);
+        renderer.setClearColor(PALETTE.paper, 0);
         host.replaceChildren(renderer.domElement);
         renderer.domElement.setAttribute(
           "aria-label",
@@ -196,8 +200,10 @@ function SceneView(props: Props) {
         controls.minPolarAngle = 0.15;
         controls.maxPolarAngle = Math.PI / 2.4;
         controls.update();
-        world.add(new T.HemisphereLight(0xffffff, 0xa8b29e, 2.7));
-        const sun = new T.DirectionalLight(0xfff9ef, 3.3);
+        world.add(
+          new T.HemisphereLight(PALETTE.paper, tone(PALETTE.ink, 0.3), 2.7),
+        );
+        const sun = new T.DirectionalLight(PALETTE.paper, 3.3);
         sun.position.set(-3, 14, 9);
         sun.castShadow = true;
         sun.shadow.mapSize.set(2048, 2048);
@@ -239,9 +245,18 @@ function SceneView(props: Props) {
           parent.add(mesh);
           return mesh;
         };
-        box(world, 6, -0.23, 4, 12.5, 0.44, 8.5, "#e2e5dc");
-        box(world, 6, -0.005, 4, 12.2, 0.02, 8.2, "#f1f1e9");
-        box(world, 6, 0.009, scene.start.y, 11.8, 0.012, 0.86, "#e4eade");
+        box(world, 6, -0.23, 4, 12.5, 0.44, 8.5, tone(PALETTE.ink, 0.18));
+        box(world, 6, -0.005, 4, 12.2, 0.02, 8.2, PALETTE.paper);
+        box(
+          world,
+          6,
+          0.009,
+          scene.start.y,
+          11.8,
+          0.012,
+          0.86,
+          tone(PALETTE.ink, 0.06),
+        );
         const gridPoints: Three.Vector3[] = [];
         for (let x = 0; x <= 12; x++)
           gridPoints.push(
@@ -257,7 +272,7 @@ function SceneView(props: Props) {
           new T.LineSegments(
             new T.BufferGeometry().setFromPoints(gridPoints),
             new T.LineBasicMaterial({
-              color: "#d5dbcf",
+              color: tone(PALETTE.ink, 0.16),
               transparent: true,
               opacity: 0.75,
             }),
@@ -268,14 +283,14 @@ function SceneView(props: Props) {
           x: number,
           y: number,
           z: number,
-          color = "#48594c",
+          color: string = PALETTE.ink,
           scale = 1,
         ) => {
           const canvas = document.createElement("canvas");
           canvas.width = 512;
           canvas.height = 96;
           const ctx = canvas.getContext("2d")!;
-          ctx.font = "500 34px monospace";
+          ctx.font = `500 31.25px ${getComputedStyle(document.body).fontFamily}`;
           ctx.fillStyle = color;
           ctx.textAlign = "center";
           ctx.textBaseline = "middle";
@@ -303,7 +318,7 @@ function SceneView(props: Props) {
             o.width + 0.08,
             0.15,
             o.depth + 0.08,
-            o.movable ? "#99664b" : "#9ca395",
+            o.movable ? tone(PALETTE.rust, 0.8) : tone(PALETTE.ink, 0.4),
           );
           box(
             g,
@@ -313,7 +328,7 @@ function SceneView(props: Props) {
             o.width,
             h,
             o.depth,
-            o.movable ? "#d68c63" : "#babdaf",
+            o.movable ? tone(PALETTE.rust, 0.55) : tone(PALETTE.ink, 0.22),
           );
           for (const side of [-1, 1]) {
             box(
@@ -324,7 +339,7 @@ function SceneView(props: Props) {
               0.045,
               0.025,
               o.depth + 0.012,
-              o.movable ? "#a15e41" : "#939c8c",
+              o.movable ? PALETTE.rust : tone(PALETTE.ink, 0.45),
             );
             box(
               g,
@@ -334,7 +349,7 @@ function SceneView(props: Props) {
               0.045,
               h,
               0.015,
-              o.movable ? "#a15e41" : "#939c8c",
+              o.movable ? PALETTE.rust : tone(PALETTE.ink, 0.45),
             );
           }
           label(
@@ -342,7 +357,7 @@ function SceneView(props: Props) {
             o.x,
             h + 0.6,
             o.y,
-            o.movable ? "#824b33" : "#53604e",
+            o.movable ? PALETTE.rust : PALETTE.ink,
             0.7,
           );
           if (o.movable && kind !== "baseline") {
@@ -352,7 +367,7 @@ function SceneView(props: Props) {
             const outline = new T.LineSegments(
               new T.EdgesGeometry(new T.BoxGeometry(o.width, 0.06, o.depth)),
               new T.LineDashedMaterial({
-                color: "#8b9686",
+                color: tone(PALETTE.ink, 0.6),
                 dashSize: 0.12,
                 gapSize: 0.08,
                 transparent: true,
@@ -370,21 +385,24 @@ function SceneView(props: Props) {
         ] as const) {
           const ring = new T.Mesh(
             new T.RingGeometry(0.4, 0.44, 48),
-            new T.MeshBasicMaterial({ color: "#679480", side: T.DoubleSide }),
+            new T.MeshBasicMaterial({ color: PALETTE.ink, side: T.DoubleSide }),
           );
           ring.rotation.x = -Math.PI / 2;
           ring.position.set(p.x, 0.04, p.y);
           world.add(ring);
-          label(name, p.x, 0.2, p.y + 0.8, "#3f6955", 0.85);
+          label(name, p.x, 0.2, p.y + 0.8, PALETTE.ink, 0.85);
         }
         const goalPad = new T.Mesh(
           new T.CircleGeometry(0.37, 48),
-          new T.MeshBasicMaterial({ color: "#c0d5ba", side: T.DoubleSide }),
+          new T.MeshBasicMaterial({
+            color: tone(PALETTE.ink, 0.12),
+            side: T.DoubleSide,
+          }),
         );
         goalPad.rotation.x = -Math.PI / 2;
         goalPad.position.set(scene.goal.x, 0.037, scene.goal.y);
         world.add(goalPad);
-        label("12 m", 6, -0.15, 8.65, "#7a8376", 0.7);
+        label("12 m", 6, -0.15, 8.65, tone(PALETTE.ink, 0.76), 0.7);
         if (showRoute) {
           const points = run.frames.map((f) => new T.Vector3(f.x, 0.045, f.y));
           const trail = new T.Line(
@@ -392,7 +410,7 @@ function SceneView(props: Props) {
             new T.LineDashedMaterial({
               color: colors[kind],
               dashSize: 0.13,
-              gapSize: 0.07,
+              gapSize: kind === "repaired" ? 0 : 0.07,
             }),
           );
           trail.computeLineDistances();
@@ -402,17 +420,17 @@ function SceneView(props: Props) {
         world.add(robot);
         const body = new T.Mesh(
           new T.CylinderGeometry(0.25, 0.25, 0.24, 32),
-          material("#eff2e9"),
+          material(PALETTE.paper),
         );
         body.position.y = 0.27;
         body.castShadow = true;
         robot.add(body);
         box(robot, 0.02, 0.42, 0, 0.32, 0.13, 0.32, colors[kind]);
-        box(robot, 0.192, 0.41, 0, 0.03, 0.075, 0.21, "#223e36");
+        box(robot, 0.192, 0.41, 0, 0.03, 0.075, 0.21, PALETTE.ink);
         for (const side of [-1, 1]) {
           const wheel = new T.Mesh(
             new T.CylinderGeometry(0.12, 0.12, 0.07, 16),
-            material("#38433c"),
+            material(PALETTE.ink),
           );
           wheel.rotation.x = Math.PI / 2;
           wheel.position.set(0, 0.15, side * 0.245);
@@ -420,7 +438,7 @@ function SceneView(props: Props) {
         }
         const eye = new T.Mesh(
           new T.SphereGeometry(0.035, 12, 8),
-          new T.MeshBasicMaterial({ color: "#aee8c4" }),
+          new T.MeshBasicMaterial({ color: PALETTE.paper }),
         );
         eye.position.set(0.22, 0.43, 0);
         robot.add(eye);
