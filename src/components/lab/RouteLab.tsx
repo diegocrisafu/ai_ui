@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowDown,
   ArrowRight,
@@ -7,6 +7,7 @@ import {
   Box,
   Check,
   ChevronRight,
+  Clock,
   Code2 as Github,
   Download,
   FileUp,
@@ -120,9 +121,7 @@ function Opening() {
   return (
     <section className="opening" aria-labelledby="opening-title">
       <div className="opening-copy">
-        <h1 id="opening-title">
-          Break the <em>route.</em>
-        </h1>
+        <h1 id="opening-title">Break the route.</h1>
         <div className="opening-aside">
           <p>Build a robot’s route. Find where it fails.</p>
           <p className="muted">
@@ -627,7 +626,7 @@ export default function RouteLab() {
             <h2 id="lab-heading">
               Your world.
               <br />
-              <em>Your what-if.</em>
+              Your what-if.
             </h2>
             <p>
               Move a cart. Bend the route. Try a faster robot.
@@ -1109,7 +1108,7 @@ export default function RouteLab() {
                       </select>
                     </label>
                     {selectedBody ? (
-                      <>
+                      <Fragment key={selected}>
                         <label className="field">
                           Object name
                           <input
@@ -1293,7 +1292,7 @@ export default function RouteLab() {
                           <Trash2 size={15} />
                           Remove object
                         </button>
-                      </>
+                      </Fragment>
                     ) : (
                       <p className="hint">
                         Select an object on the plan, or add one. A blank scene
@@ -1485,7 +1484,7 @@ export default function RouteLab() {
                       ))}
                     </ol>
                     {selectedPoint >= 0 && e.route[selectedPoint] && (
-                      <div className="field-pair">
+                      <div className="field-pair" key={selected}>
                         <Numeric
                           label="Point X"
                           unit="m"
@@ -1823,7 +1822,7 @@ export default function RouteLab() {
                                   ) : t.outcome === "collision" ? (
                                     <X size={19} />
                                   ) : (
-                                    <RotateCcw size={19} />
+                                    <Clock size={19} />
                                   )}
                                   <span>{t.duration.toFixed(1)} s</span>
                                 </button>

@@ -40,18 +40,21 @@ typography:
   type-8:
     fontSize: "5.9604644775390625rem"
     lineHeight: 1.5
+  type-9:
+    fontSize: "7.450580596923828rem"
+    lineHeight: 1.5
   display:
-    fontFamily: "Instrument Serif, serif"
-    fontSize: "5.9604644775390625rem"
-    fontWeight: 400
+    fontFamily: "Familjen Grotesk, sans-serif"
+    fontSize: "7.450580596923828rem"
+    fontWeight: 700
     lineHeight: 1.5
-    letterSpacing: "-0.025em"
+    letterSpacing: "-0.035em"
   headline:
-    fontFamily: "Instrument Serif, serif"
+    fontFamily: "Familjen Grotesk, sans-serif"
     fontSize: "3.814697265625rem"
-    fontWeight: 400
+    fontWeight: 700
     lineHeight: 1.5
-    letterSpacing: "-0.025em"
+    letterSpacing: "-0.035em"
   title:
     fontFamily: "Familjen Grotesk, sans-serif"
     fontSize: "1.5625rem"
@@ -180,14 +183,14 @@ components:
 
 **Creative North Star: "The Live Route Study"**
 
-SceneBreaker presents editable geometry as a precise product study on cool porcelain. Graphite supplies structure; ultramarine draws attention to actions, movement and contact. Broad surfaces and fine rules keep the experiment visible while serif display type gives the opening a distinct editorial voice.
+SceneBreaker presents editable geometry as a precise product study on cool porcelain. Graphite supplies structure; ultramarine draws attention to actions, movement and contact. Broad surfaces and fine rules keep the experiment visible. Bold, monochrome Familjen Grotesk headings replace the serif-and-coloured-italic treatment rejected by the user on October 8.
 
 The same world continues into practical controls: readable sans-serif labels, monospaced measurements, restrained corners and explicitly named outcomes. The visual centerpiece is working Three.js geometry and an SVG plan, with motion started by the visitor. There is no authored raster artwork in this world; imported floorplans and models are user content.
 
 **Key Characteristics:**
 
 - Three color anchors with derived opacity tones.
-- Instrument Serif display, Familjen Grotesk interface, Azeret Mono measurements.
+- Familjen Grotesk bold headings and interface, Azeret Mono measurements.
 - Exact 1.25 type scale with 150% leading.
 - Shared 12/8/4-track alignment and flat, ruled control groups.
 - Live spatial context and measured input-to-outcome comparisons.
@@ -200,7 +203,7 @@ The palette has three anchors. The four derived neutral tokens in the frontmatte
 
 ### Primary
 
-Ultramarine (`accent`) serves primary actions, italic emphasis, active tabs, moving geometry, the actual route, collision cells and focus indicators. It is not a failure-only color.
+Ultramarine (`accent`) serves primary actions, active tabs, moving geometry, the actual route, collision cells and focus indicators. It is not a failure-only color. Headings remain entirely graphite; no individual-word colour or italic emphasis.
 
 ### Neutral
 
@@ -229,25 +232,25 @@ The frontmatter records the complete implemented size ramp and the main semantic
 | type-5 | 48.828125px | Mobile opening, tablet workbench, desktop methodology |
 | type-6 | 61.03515625px | Desktop workbench heading |
 | type-7 | 76.2939453125px | Tablet opening |
-| type-8 | 95.367431640625px | Desktop opening |
+| type-8 | 95.367431640625px | Opening at 1200–1439px |
+| type-9 | 119.20928955078125px | Opening at 1440px and wider |
 
 **The Whole Steps Rule.** Use the existing 1.25 scale and 1.5 line height; responsive type changes move between whole scale steps.
 
-Display and section headings use Instrument Serif at weight 400, with tight tracking and the locally bundled italic for emphasis. Familjen Grotesk carries body copy, controls and labels, with weight 500 for buttons and h3 headings and 600 for the wordmark. Azeret Mono is reserved for measured output, definition-list values, grid headings, grid durations and stopping distance. Numeric inputs retain Familjen Grotesk with tabular figures.
+Display and section headings use Familjen Grotesk at weight 700, normal style, −0.035em tracking and balanced natural wrapping. All heading text is graphite. Familjen also carries body copy, controls and labels, with weight 400 for body, 500 for buttons and h3 headings and 600 for the wordmark. Azeret Mono is reserved for measured output, definition-list values, grid headings, grid durations and stopping distance. Numeric inputs retain Familjen Grotesk with tabular figures.
 
-The opening uses type-8 / type-7 / type-5 across desktop / tablet / phone. The workbench heading uses type-6 / type-5 / type-4. The methodology heading uses type-5 / type-4 / type-4. Inspector and comparison headings override the general title size with type-1. Measurement text inherits its context's scale step; the frontmatter measurement role describes the ordinary comparison measurement paragraph. Methodology and import-review prose are bounded at 75ch; the stress introduction uses 60ch. These are observed local limits, not a page-wide measure.
+The opening uses type-9 at 1440px and wider, type-8 at 1200–1439px, type-7 on tablet and type-5 on phone. The workbench heading uses type-6 / type-5 / type-4. The methodology heading uses type-5 / type-4 / type-4. Inspector and comparison headings override the general title size with type-1. Measurement text inherits its context's scale step; the frontmatter measurement role describes the ordinary comparison measurement paragraph. Methodology and import-review prose are bounded at 75ch; the stress introduction uses 60ch. These are observed local limits, not a page-wide measure.
 
 ### Local font files and licenses
 
-[layout.tsx](src/app/layout.tsx) uses `next/font/local` and `display: "swap"` for all three families. The CSS family variables are `--font-display`, `--font-body` and `--font-mono`, with serif, sans-serif and monospace fallbacks respectively; generated Next.js family names are implementation details.
+[layout.tsx](src/app/layout.tsx) uses `next/font/local` and `display: "swap"` for the two active families. The CSS family variables are `--font-body` and `--font-mono`, with sans-serif and monospace fallbacks; generated Next.js family names are implementation details. Instrument Serif files and their license are retained as archived assets but are not registered or loaded by the application.
 
 | Family | Bundled files under src/app/fonts/ | Registered weights | License |
 | --- | --- | --- | --- |
-| Instrument Serif | InstrumentSerif-Regular.woff2; InstrumentSerif-Italic.woff2 | 400 normal and italic | [InstrumentSerif-OFL.txt](public/fonts/InstrumentSerif-OFL.txt) |
 | Familjen Grotesk | FamiljenGrotesk-Variable.woff2 | 400–700 | [FamiljenGrotesk-OFL.txt](public/fonts/FamiljenGrotesk-OFL.txt) |
 | Azeret Mono | AzeretMono-Variable.woff2 | 100–900 | [AzeretMono-OFL.txt](public/fonts/AzeretMono-OFL.txt) |
 
-The notices are in [public/third-party-notices.txt](public/third-party-notices.txt). Uncut Sans and Spline Sans remain archived assets, not current layout families. The product brief's sourcing wish is not evidence that the current display face came from Uncut.
+The notices are in [public/third-party-notices.txt](public/third-party-notices.txt). Instrument Serif, Uncut Sans and Spline Sans remain archived assets, not current layout families. Familjen Grotesk was sourced from Fontshare.
 
 ## Layout
 
@@ -259,7 +262,7 @@ The notices are in [public/third-party-notices.txt](public/third-party-notices.t
 
 Header, main and footer share a centered maximum width (1600px), including their horizontal padding. The opening, section introduction, laboratory and methodology each use explicit repeated tracks; the current CSS does not use subgrid. Main navigation is flex layout, with a 100px desktop/tablet header and 76px phone header.
 
-The opening title spans eight desktop tracks, with supporting copy starting at track ten. On tablet they use five and three tracks; on phone both span the full grid. Methodology follows a six-track title / track-eight content arrangement on desktop, four / four on tablet, and full-width sections on phone. These are this surface's compositions.
+The opening title spans nine desktop tracks, with supporting copy starting at track ten. On tablet they use five and three tracks; on phone both span the full grid. Methodology follows a six-track title / track-eight content arrangement on desktop, four / four on tablet, and full-width sections on phone. These are this surface's compositions.
 
 Spacing is a practical vocabulary, not a strict multiples-of-eight system: labels use 6–7px separation, adjacent actions commonly use 8–12px, control groups use 16–24px, and major sections have larger explicit breaks. The frontmatter records recurring small spacing values; it does not claim every gap uses a custom property.
 
@@ -331,7 +334,8 @@ File/import tools use native details/summary and ruled groups. Empty stress resu
 
 - Do use the three anchors and their existing opacity-derived tones.
 - Do keep the exact 1.25 type steps, 150% leading and 12/8/4-track breakpoints.
-- Do load the three current font families locally and retain their bundled license files.
+- Do load the two current font families locally and retain all bundled license files.
+- Do keep headlines bold and monochrome; preserve the user's rejection of coloured italic words.
 - Do pair measured outcomes with text and show effective input differences beside comparisons.
 - Do preserve visible focus, accessible names, numeric validation and mobile spatial context.
 

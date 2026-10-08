@@ -22,7 +22,7 @@
         "displayName": "Ultramarine",
         "cssProperty": "--accent",
         "sceneProperty": "PALETTE.rust",
-        "purpose": "Actions, emphasis, moving geometry, actual route, focus and contact results; rust is a legacy identifier."
+        "purpose": "Actions, moving geometry, actual route, focus and contact results; headings stay graphite. rust is a legacy identifier."
       },
       "paper": {
         "role": "neutral",
@@ -114,17 +114,22 @@
         "cssProperty": "--type-8",
         "purpose": "Built size step; the complete ramp advances by 1.25 with 1.5 leading."
       },
+      "type-9": {
+        "displayName": "Scale 9",
+        "cssProperty": "--type-9",
+        "purpose": "Opening at 1440px and wider: 7.450580596923828rem, 1.5 leading."
+      },
       "display": {
         "displayName": "Display",
-        "cssFamilyProperty": "--font-display",
+        "cssFamilyProperty": "--font-body",
         "sourceSelector": ".opening-copy h1",
-        "purpose": "Opening title; type-8 desktop, type-7 tablet, type-5 phone."
+        "purpose": "Bold monochrome opening; type-9 at 1440px+, type-8 small desktop, type-7 tablet, type-5 phone."
       },
       "headline": {
         "displayName": "Section Headline",
-        "cssFamilyProperty": "--font-display",
+        "cssFamilyProperty": "--font-body",
         "sourceSelector": ".section-intro h2",
-        "purpose": "Workbench heading; type-6 desktop, type-5 tablet, type-4 phone."
+        "purpose": "Bold monochrome workbench heading; type-6 desktop, type-5 tablet, type-4 phone."
       },
       "title": {
         "displayName": "Title",
@@ -159,18 +164,6 @@
       }
     },
     "fonts": [
-      {
-        "family": "Instrument Serif",
-        "cssProperty": "--font-display",
-        "files": [
-          "src/app/fonts/InstrumentSerif-Regular.woff2",
-          "src/app/fonts/InstrumentSerif-Italic.woff2"
-        ],
-        "registeredWeights": "400 normal and italic",
-        "loader": "next/font/local",
-        "display": "swap",
-        "licensePath": "public/fonts/InstrumentSerif-OFL.txt"
-      },
       {
         "family": "Familjen Grotesk",
         "cssProperty": "--font-body",
@@ -398,10 +391,10 @@
   ],
   "narrative": {
     "northStar": "The Live Route Study",
-    "overview": "SceneBreaker presents editable geometry as a precise product study on cool porcelain. Graphite supplies structure; ultramarine draws attention to actions, movement and contact. Broad surfaces and fine rules keep the experiment visible while serif display type gives the opening a distinct editorial voice.\n\nThe same world continues into practical controls: readable sans-serif labels, monospaced measurements, restrained corners and explicitly named outcomes. The visual centerpiece is working Three.js geometry and an SVG plan, with motion started by the visitor. There is no authored raster artwork in this world; imported floorplans and models are user content.",
+    "overview": "SceneBreaker presents editable geometry as a precise product study on cool porcelain. Graphite supplies structure; ultramarine draws attention to actions, movement and contact. Bold monochrome Familjen Grotesk headings replace the serif and coloured-italic treatment rejected by the user on October 8.\n\nThe same world continues into practical controls: readable sans-serif labels, monospaced measurements, restrained corners and explicitly named outcomes. The visual centerpiece is working Three.js geometry and an SVG plan, with motion started by the visitor. There is no authored raster artwork in this world; imported floorplans and models are user content.",
     "keyCharacteristics": [
       "Three color anchors with derived opacity tones.",
-      "Instrument Serif display, Familjen Grotesk interface, Azeret Mono measurements.",
+      "Familjen Grotesk bold monochrome headings and interface, Azeret Mono measurements.",
       "Exact 1.25 type scale with 150% leading.",
       "Shared 12/8/4-track alignment and flat, ruled control groups.",
       "Live spatial context and measured input-to-outcome comparisons."
@@ -436,7 +429,7 @@
     "dos": [
       "Do use the three anchors and their existing opacity-derived tones.",
       "Do keep the exact 1.25 type steps, 150% leading and 12/8/4-track breakpoints.",
-      "Do load the three current font families locally and retain their bundled license files.",
+      "Do load the two current font families locally and retain all bundled license files.",
       "Do pair measured outcomes with text and show effective input differences beside comparisons.",
       "Do preserve visible focus, accessible names, numeric validation and mobile spatial context."
     ],

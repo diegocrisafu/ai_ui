@@ -1,0 +1,820 @@
+{
+  "assessment": "B",
+  "status": "complete",
+  "date": "2026-10-08",
+  "completed_at_utc": "2026-10-08 05:00:38 UTC",
+  "method": "Independent final post-edit Assessment B: one bundled CLI detector execution plus bounded fresh-tab CUA inspection.",
+  "isolation": {
+    "assessment_a_read": false,
+    "prior_reviews_read": false,
+    "prior_detector_results_read": false,
+    "current_product_and_design_context_read": true,
+    "findings_withheld_from_chat": true,
+    "synthesis": "Deferred to parent after Assessment A completes."
+  },
+  "scope": {
+    "repository": "/Users/diegocrisafulli/Documents/ai_ui",
+    "live_url": "http://127.0.0.1:3100/",
+    "requested_targets": [
+      "src/components/lab",
+      "src/app/layout.tsx",
+      "."
+    ],
+    "scan_note": "The exact requested command includes '.', so generated out/ files and a test fixture also entered the scan. Findings are not all defects in the authored lab source.",
+    "source_findings_in_lab_or_layout": 0,
+    "generated_out_findings": 37,
+    "test_fixture_findings": 1,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "viewport_changed": false,
+    "browser": "Codex In-app Browser",
+    "own_tab_id": "1",
+    "own_tab_created": true,
+    "own_tab_closed": true,
+    "browser_mutation_via_evaluate": false,
+    "overlay_injected": false,
+    "live_detector_server_started": false,
+    "application_code_edited": false,
+    "screenshot_count": 3,
+    "screenshot_scope": [
+      "Opening at initial viewport",
+      "Laboratory anchor transition / workbench heading",
+      "3D workbench with route inspector"
+    ],
+    "screenshot_files_saved": [],
+    "ui_actions": "Ordinary in-tab controls only; transient experiment edits discarded when the dedicated tab closed.",
+    "not_tested": [
+      "Mobile and tablet rendering or zoom: viewport held unchanged while Assessment A runs.",
+      "Actual screen-reader speech.",
+      "File upload/import and downloaded JSON round-trip.",
+      "External GitHub destination availability.",
+      "Timeout simulation path or stress-test cancellation.",
+      "Exhaustive contrast, accessibility, performance or engine-correctness certification."
+    ]
+  },
+  "skill": {
+    "main": "/Users/diegocrisafulli/.codex/skills/impeccable/SKILL.md",
+    "reference": "/Users/diegocrisafulli/.codex/skills/impeccable/reference/critique.md",
+    "fully_read": true,
+    "context_runs": 1,
+    "context_target": "src/components/lab",
+    "browser_overlay_step": "Skipped by explicit user instruction: no injected overlays or evaluate mutations. All evaluate calls were read-only DOM/computed-style inspection.",
+    "questions": "Questions skipped: Assessment B evidence-only delegation; user explicitly requested path and completion only."
+  },
+  "detector": {
+    "command": "IMPECCABLE_NO_TELEMETRY=1 sh /Users/diegocrisafulli/.codex/skills/impeccable/scripts/impeccable detect --json src/components/lab src/app/layout.tsx .",
+    "cwd": "/Users/diegocrisafulli/Documents/ai_ui",
+    "executions": 1,
+    "phase": "final post-edit scan, distinct from any earlier typeset precheck",
+    "exit_code": 2,
+    "output_complete": true,
+    "original_output_tokens": 5355,
+    "counts": {
+      "total": 38,
+      "bySeverity": {
+        "warning": 17,
+        "advisory": 21
+      },
+      "byRule": {
+        "design-system-font": 12,
+        "design-system-color": 13,
+        "design-system-font-size": 7,
+        "design-system-radius": 1,
+        "cramped-padding": 3,
+        "tight-leading": 2
+      },
+      "byFile": {
+        "/Users/diegocrisafulli/Documents/ai_ui/out/404.html": 6,
+        "/Users/diegocrisafulli/Documents/ai_ui/out/_next/static/chunks/05o7gr42jqv9c.js": 1,
+        "/Users/diegocrisafulli/Documents/ai_ui/out/_next/static/chunks/3a4v4ybvarofy.css": 7,
+        "/Users/diegocrisafulli/Documents/ai_ui/out/_next/static/chunks/3cfn99dbrcvvp.js": 4,
+        "/Users/diegocrisafulli/Documents/ai_ui/out/_not-found.html": 6,
+        "/Users/diegocrisafulli/Documents/ai_ui/out/index.html": 13,
+        "/Users/diegocrisafulli/Documents/ai_ui/tests/design-system.test.ts": 1
+      }
+    },
+    "raw_detector": [
+      {
+        "antipattern": "design-system-font",
+        "name": "Font outside DESIGN.md",
+        "description": "A font is used that is not declared in DESIGN.md typography. Use the documented type system or update DESIGN.md if this is an intentional brand addition.",
+        "severity": "warning",
+        "category": "quality",
+        "file": "/Users/diegocrisafulli/Documents/ai_ui/out/404.html",
+        "line": 0,
+        "snippet": "h1 \"404\" uses familjen; not declared in DESIGN.md typography",
+        "ignoreValue": "familjen"
+      },
+      {
+        "antipattern": "design-system-color",
+        "name": "Color outside DESIGN.md",
+        "description": "A literal color is outside the DESIGN.md palette and sidecar tonal ramps. This may be legitimate, but it should be an intentional design-system addition rather than drift.",
+        "severity": "advisory",
+        "category": "quality",
+        "file": "/Users/diegocrisafulli/Documents/ai_ui/out/404.html",
+        "line": 1,
+        "snippet": "border-right rgba(255, 255, 255, 0.3) on h1 \"404\" is outside DESIGN.md colors",
+        "advisory": true,
+        "ignoreValue": "rgba(255, 255, 255, 0.3)"
+      },
+      {
+        "antipattern": "design-system-font",
+        "name": "Font outside DESIGN.md",
+        "description": "A font is used that is not declared in DESIGN.md typography. Use the documented type system or update DESIGN.md if this is an intentional brand addition.",
+        "severity": "warning",
+        "category": "quality",
+        "file": "/Users/diegocrisafulli/Documents/ai_ui/out/404.html",
+        "line": 1,
+        "snippet": "font-family: &Quot is not declared in DESIGN.md typography",
+        "ignoreValue": "&Quot"
+      },
+      {
+        "antipattern": "design-system-color",
+        "name": "Color outside DESIGN.md",
+        "description": "A literal color is outside the DESIGN.md palette and sidecar tonal ramps. This may be legitimate, but it should be an intentional design-system addition rather than drift.",
+        "severity": "advisory",
+        "category": "quality",
+        "file": "/Users/diegocrisafulli/Documents/ai_ui/out/404.html",
+        "line": 1,
+        "snippet": "Undocumented color #000 is outside DESIGN.md colors",
+        "advisory": true,
+        "ignoreValue": "#000"
+      },
+      {
+        "antipattern": "design-system-font-size",
+        "name": "Font size outside DESIGN.md",
+        "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+        "severity": "advisory",
+        "category": "quality",
+        "file": "/Users/diegocrisafulli/Documents/ai_ui/out/404.html",
+        "line": 1,
+        "snippet": "font-size: 24px is off the DESIGN.md type ramp",
+        "advisory": true,
+        "ignoreValue": "24px"
+      },
+      {
+        "antipattern": "design-system-font-size",
+        "name": "Font size outside DESIGN.md",
+        "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+        "severity": "advisory",
+        "category": "quality",
+        "file": "/Users/diegocrisafulli/Documents/ai_ui/out/404.html",
+        "line": 1,
+        "snippet": "font-size: 14px is off the DESIGN.md type ramp",
+        "advisory": true,
+        "ignoreValue": "14px"
+      },
+      {
+        "antipattern": "design-system-color",
+        "name": "Color outside DESIGN.md",
+        "description": "A literal color is outside the DESIGN.md palette and sidecar tonal ramps. This may be legitimate, but it should be an intentional design-system addition rather than drift.",
+        "severity": "advisory",
+        "category": "quality",
+        "file": "/Users/diegocrisafulli/Documents/ai_ui/out/_next/static/chunks/05o7gr42jqv9c.js",
+        "line": 1,
+        "snippet": "Undocumented color RGB(1,1,1) is outside DESIGN.md colors",
+        "advisory": true,
+        "ignoreValue": "RGB(1,1,1)"
+      },
+      {
+        "antipattern": "design-system-font",
+        "name": "Font outside DESIGN.md",
+        "description": "A font is used that is not declared in DESIGN.md typography. Use the documented type system or update DESIGN.md if this is an intentional brand addition.",
+        "severity": "warning",
+        "category": "quality",
+        "file": "/Users/diegocrisafulli/Documents/ai_ui/out/_next/static/chunks/3a4v4ybvarofy.css",
+        "line": 1,
+        "snippet": "font-family: Azeretmono is not declared in DESIGN.md typography",
+        "ignoreValue": "Azeretmono"
+      },
+      {
+        "antipattern": "design-system-font",
+        "name": "Font outside DESIGN.md",
+        "description": "A font is used that is not declared in DESIGN.md typography. Use the documented type system or update DESIGN.md if this is an intentional brand addition.",
+        "severity": "warning",
+        "category": "quality",
+        "file": "/Users/diegocrisafulli/Documents/ai_ui/out/_next/static/chunks/3a4v4ybvarofy.css",
+        "line": 1,
+        "snippet": "font-family: Azeretmono Fallback is not declared in DESIGN.md typography",
+        "ignoreValue": "Azeretmono Fallback"
+      },
+      {
+        "antipattern": "design-system-font",
+        "name": "Font outside DESIGN.md",
+        "description": "A font is used that is not declared in DESIGN.md typography. Use the documented type system or update DESIGN.md if this is an intentional brand addition.",
+        "severity": "warning",
+        "category": "quality",
+        "file": "/Users/diegocrisafulli/Documents/ai_ui/out/_next/static/chunks/3a4v4ybvarofy.css",
+        "line": 2,
+        "snippet": "font-family: Familjen is not declared in DESIGN.md typography",
+        "ignoreValue": "Familjen"
+      },
+      {
+        "antipattern": "design-system-font",
+        "name": "Font outside DESIGN.md",
+        "description": "A font is used that is not declared in DESIGN.md typography. Use the documented type system or update DESIGN.md if this is an intentional brand addition.",
+        "severity": "warning",
+        "category": "quality",
+        "file": "/Users/diegocrisafulli/Documents/ai_ui/out/_next/static/chunks/3a4v4ybvarofy.css",
+        "line": 2,
+        "snippet": "font-family: Familjen Fallback is not declared in DESIGN.md typography",
+        "ignoreValue": "Familjen Fallback"
+      },
+      {
+        "antipattern": "design-system-color",
+        "name": "Color outside DESIGN.md",
+        "description": "A literal color is outside the DESIGN.md palette and sidecar tonal ramps. This may be legitimate, but it should be an intentional design-system addition rather than drift.",
+        "severity": "advisory",
+        "category": "quality",
+        "file": "/Users/diegocrisafulli/Documents/ai_ui/out/_next/static/chunks/3a4v4ybvarofy.css",
+        "line": 3,
+        "snippet": "Undocumented color #fff is outside DESIGN.md colors",
+        "advisory": true,
+        "ignoreValue": "#fff"
+      },
+      {
+        "antipattern": "design-system-color",
+        "name": "Color outside DESIGN.md",
+        "description": "A literal color is outside the DESIGN.md palette and sidecar tonal ramps. This may be legitimate, but it should be an intentional design-system addition rather than drift.",
+        "severity": "advisory",
+        "category": "quality",
+        "file": "/Users/diegocrisafulli/Documents/ai_ui/out/_next/static/chunks/3a4v4ybvarofy.css",
+        "line": 3,
+        "snippet": "Undocumented color #0000001a is outside DESIGN.md colors",
+        "advisory": true,
+        "ignoreValue": "#0000001a"
+      },
+      {
+        "antipattern": "design-system-radius",
+        "name": "Radius outside DESIGN.md",
+        "description": "A border-radius value is outside the DESIGN.md rounded scale. Use a documented radius token or update the design system if the new shape is intentional.",
+        "severity": "advisory",
+        "category": "quality",
+        "file": "/Users/diegocrisafulli/Documents/ai_ui/out/_next/static/chunks/3a4v4ybvarofy.css",
+        "line": 3,
+        "snippet": "border-radius: .25rem is outside the DESIGN.md rounded scale",
+        "advisory": true,
+        "ignoreValue": ".25rem"
+      },
+      {
+        "antipattern": "design-system-font",
+        "name": "Font outside DESIGN.md",
+        "description": "A font is used that is not declared in DESIGN.md typography. Use the documented type system or update DESIGN.md if this is an intentional brand addition.",
+        "severity": "warning",
+        "category": "quality",
+        "file": "/Users/diegocrisafulli/Documents/ai_ui/out/_next/static/chunks/3cfn99dbrcvvp.js",
+        "line": 1,
+        "snippet": "fontFamily: Sfmono-Regular is not declared in DESIGN.md typography",
+        "ignoreValue": "Sfmono-Regular"
+      },
+      {
+        "antipattern": "design-system-font-size",
+        "name": "Font size outside DESIGN.md",
+        "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+        "severity": "advisory",
+        "category": "quality",
+        "file": "/Users/diegocrisafulli/Documents/ai_ui/out/_next/static/chunks/3cfn99dbrcvvp.js",
+        "line": 1,
+        "snippet": "fontSize: 24px is off the DESIGN.md type ramp",
+        "advisory": true,
+        "ignoreValue": "24px"
+      },
+      {
+        "antipattern": "design-system-font-size",
+        "name": "Font size outside DESIGN.md",
+        "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+        "severity": "advisory",
+        "category": "quality",
+        "file": "/Users/diegocrisafulli/Documents/ai_ui/out/_next/static/chunks/3cfn99dbrcvvp.js",
+        "line": 1,
+        "snippet": "fontSize: 14px is off the DESIGN.md type ramp",
+        "advisory": true,
+        "ignoreValue": "14px"
+      },
+      {
+        "antipattern": "design-system-font-size",
+        "name": "Font size outside DESIGN.md",
+        "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+        "severity": "advisory",
+        "category": "quality",
+        "file": "/Users/diegocrisafulli/Documents/ai_ui/out/_next/static/chunks/3cfn99dbrcvvp.js",
+        "line": 1,
+        "snippet": "fontSize: 12px is off the DESIGN.md type ramp",
+        "advisory": true,
+        "ignoreValue": "12px"
+      },
+      {
+        "antipattern": "design-system-font",
+        "name": "Font outside DESIGN.md",
+        "description": "A font is used that is not declared in DESIGN.md typography. Use the documented type system or update DESIGN.md if this is an intentional brand addition.",
+        "severity": "warning",
+        "category": "quality",
+        "file": "/Users/diegocrisafulli/Documents/ai_ui/out/_not-found.html",
+        "line": 0,
+        "snippet": "h1 \"404\" uses familjen; not declared in DESIGN.md typography",
+        "ignoreValue": "familjen"
+      },
+      {
+        "antipattern": "design-system-color",
+        "name": "Color outside DESIGN.md",
+        "description": "A literal color is outside the DESIGN.md palette and sidecar tonal ramps. This may be legitimate, but it should be an intentional design-system addition rather than drift.",
+        "severity": "advisory",
+        "category": "quality",
+        "file": "/Users/diegocrisafulli/Documents/ai_ui/out/_not-found.html",
+        "line": 1,
+        "snippet": "border-right rgba(255, 255, 255, 0.3) on h1 \"404\" is outside DESIGN.md colors",
+        "advisory": true,
+        "ignoreValue": "rgba(255, 255, 255, 0.3)"
+      },
+      {
+        "antipattern": "design-system-font",
+        "name": "Font outside DESIGN.md",
+        "description": "A font is used that is not declared in DESIGN.md typography. Use the documented type system or update DESIGN.md if this is an intentional brand addition.",
+        "severity": "warning",
+        "category": "quality",
+        "file": "/Users/diegocrisafulli/Documents/ai_ui/out/_not-found.html",
+        "line": 1,
+        "snippet": "font-family: &Quot is not declared in DESIGN.md typography",
+        "ignoreValue": "&Quot"
+      },
+      {
+        "antipattern": "design-system-color",
+        "name": "Color outside DESIGN.md",
+        "description": "A literal color is outside the DESIGN.md palette and sidecar tonal ramps. This may be legitimate, but it should be an intentional design-system addition rather than drift.",
+        "severity": "advisory",
+        "category": "quality",
+        "file": "/Users/diegocrisafulli/Documents/ai_ui/out/_not-found.html",
+        "line": 1,
+        "snippet": "Undocumented color #000 is outside DESIGN.md colors",
+        "advisory": true,
+        "ignoreValue": "#000"
+      },
+      {
+        "antipattern": "design-system-font-size",
+        "name": "Font size outside DESIGN.md",
+        "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+        "severity": "advisory",
+        "category": "quality",
+        "file": "/Users/diegocrisafulli/Documents/ai_ui/out/_not-found.html",
+        "line": 1,
+        "snippet": "font-size: 24px is off the DESIGN.md type ramp",
+        "advisory": true,
+        "ignoreValue": "24px"
+      },
+      {
+        "antipattern": "design-system-font-size",
+        "name": "Font size outside DESIGN.md",
+        "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+        "severity": "advisory",
+        "category": "quality",
+        "file": "/Users/diegocrisafulli/Documents/ai_ui/out/_not-found.html",
+        "line": 1,
+        "snippet": "font-size: 14px is off the DESIGN.md type ramp",
+        "advisory": true,
+        "ignoreValue": "14px"
+      },
+      {
+        "antipattern": "cramped-padding",
+        "name": "Cramped padding",
+        "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the space between the rendered text and the border box is too small for the font size, and (2) a wrapper whose children's text lands flush against a visible boundary (border, outline, or non-transparent background) with nothing to inset it. Add at least 8px (ideally 12–16px) of space inside bordered, outlined, or colored containers.",
+        "severity": "warning",
+        "category": "quality",
+        "file": "/Users/diegocrisafulli/Documents/ai_ui/out/index.html",
+        "line": 0,
+        "snippet": "<div> \"plan-editor\": children flush against border+bg on all sides (no inset)"
+      },
+      {
+        "antipattern": "cramped-padding",
+        "name": "Cramped padding",
+        "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the space between the rendered text and the border box is too small for the font size, and (2) a wrapper whose children's text lands flush against a visible boundary (border, outline, or non-transparent background) with nothing to inset it. Add at least 8px (ideally 12–16px) of space inside bordered, outlined, or colored containers.",
+        "severity": "warning",
+        "category": "quality",
+        "file": "/Users/diegocrisafulli/Documents/ai_ui/out/index.html",
+        "line": 0,
+        "snippet": "<div> \"mobile-context\": children flush against border-bottom on bottom (no inset)"
+      },
+      {
+        "antipattern": "cramped-padding",
+        "name": "Cramped padding",
+        "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the space between the rendered text and the border box is too small for the font size, and (2) a wrapper whose children's text lands flush against a visible boundary (border, outline, or non-transparent background) with nothing to inset it. Add at least 8px (ideally 12–16px) of space inside bordered, outlined, or colored containers.",
+        "severity": "warning",
+        "category": "quality",
+        "file": "/Users/diegocrisafulli/Documents/ai_ui/out/index.html",
+        "line": 0,
+        "snippet": "<div> \"plan-editor\": children flush against border+bg on all sides (no inset)"
+      },
+      {
+        "antipattern": "tight-leading",
+        "name": "Tight line height",
+        "description": "Line height below 1.3x the font size makes multi-line text hard to read. Use 1.5 to 1.7 for body text so lines have room to breathe.",
+        "severity": "warning",
+        "category": "quality",
+        "file": "/Users/diegocrisafulli/Documents/ai_ui/out/index.html",
+        "line": 0,
+        "snippet": "line-height 1.20x (need >=1.3)"
+      },
+      {
+        "antipattern": "tight-leading",
+        "name": "Tight line height",
+        "description": "Line height below 1.3x the font size makes multi-line text hard to read. Use 1.5 to 1.7 for body text so lines have room to breathe.",
+        "severity": "warning",
+        "category": "quality",
+        "file": "/Users/diegocrisafulli/Documents/ai_ui/out/index.html",
+        "line": 0,
+        "snippet": "line-height 1.20x (need >=1.3)"
+      },
+      {
+        "antipattern": "design-system-font",
+        "name": "Font outside DESIGN.md",
+        "description": "A font is used that is not declared in DESIGN.md typography. Use the documented type system or update DESIGN.md if this is an intentional brand addition.",
+        "severity": "warning",
+        "category": "quality",
+        "file": "/Users/diegocrisafulli/Documents/ai_ui/out/index.html",
+        "line": 0,
+        "snippet": "a \"Skip to the route editor\" uses familjen; not declared in DESIGN.md typography",
+        "ignoreValue": "familjen"
+      },
+      {
+        "antipattern": "design-system-color",
+        "name": "Color outside DESIGN.md",
+        "description": "A literal color is outside the DESIGN.md palette and sidecar tonal ramps. This may be legitimate, but it should be an intentional design-system addition rather than drift.",
+        "severity": "advisory",
+        "category": "quality",
+        "file": "/Users/diegocrisafulli/Documents/ai_ui/out/index.html",
+        "line": 0,
+        "snippet": "text color rgb(76, 78, 83) on p \"Your scene, your robot, your experiment.\" is outside DESIGN.md colors",
+        "advisory": true,
+        "ignoreValue": "rgb(76, 78, 83)"
+      },
+      {
+        "antipattern": "design-system-color",
+        "name": "Color outside DESIGN.md",
+        "description": "A literal color is outside the DESIGN.md palette and sidecar tonal ramps. This may be legitimate, but it should be an intentional design-system addition rather than drift.",
+        "severity": "advisory",
+        "category": "quality",
+        "file": "/Users/diegocrisafulli/Documents/ai_ui/out/index.html",
+        "line": 0,
+        "snippet": "border-top rgb(205, 206, 209) on div \"Same route. Different timing.Delay the c\" is outside DESIGN.md colors",
+        "advisory": true,
+        "ignoreValue": "rgb(205, 206, 209)"
+      },
+      {
+        "antipattern": "design-system-font",
+        "name": "Font outside DESIGN.md",
+        "description": "A font is used that is not declared in DESIGN.md typography. Use the documented type system or update DESIGN.md if this is an intentional brand addition.",
+        "severity": "warning",
+        "category": "quality",
+        "file": "/Users/diegocrisafulli/Documents/ai_ui/out/index.html",
+        "line": 0,
+        "snippet": "output \"0.0 s\" uses sfmono-regular; not declared in DESIGN.md typography",
+        "ignoreValue": "sfmono-regular"
+      },
+      {
+        "antipattern": "design-system-color",
+        "name": "Color outside DESIGN.md",
+        "description": "A literal color is outside the DESIGN.md palette and sidecar tonal ramps. This may be legitimate, but it should be an intentional design-system addition rather than drift.",
+        "severity": "advisory",
+        "category": "quality",
+        "file": "/Users/diegocrisafulli/Documents/ai_ui/out/index.html",
+        "line": 0,
+        "snippet": "border-bottom rgb(112, 113, 118) on input is outside DESIGN.md colors",
+        "advisory": true,
+        "ignoreValue": "rgb(112, 113, 118)"
+      },
+      {
+        "antipattern": "design-system-color",
+        "name": "Color outside DESIGN.md",
+        "description": "A literal color is outside the DESIGN.md palette and sidecar tonal ramps. This may be legitimate, but it should be an intentional design-system addition rather than drift.",
+        "severity": "advisory",
+        "category": "quality",
+        "file": "/Users/diegocrisafulli/Documents/ai_ui/out/index.html",
+        "line": 0,
+        "snippet": "background rgb(235, 236, 238) on div \"2D edit3D view\" is outside DESIGN.md colors",
+        "advisory": true,
+        "ignoreValue": "rgb(235, 236, 238)"
+      },
+      {
+        "antipattern": "design-system-color",
+        "name": "Color outside DESIGN.md",
+        "description": "A literal color is outside the DESIGN.md palette and sidecar tonal ramps. This may be legitimate, but it should be an intentional design-system addition rather than drift.",
+        "severity": "advisory",
+        "category": "quality",
+        "file": "/Users/diegocrisafulli/Documents/ai_ui/out/index.html",
+        "line": 1,
+        "snippet": "Undocumented color #000 is outside DESIGN.md colors",
+        "advisory": true,
+        "ignoreValue": "#000"
+      },
+      {
+        "antipattern": "design-system-color",
+        "name": "Color outside DESIGN.md",
+        "description": "A literal color is outside the DESIGN.md palette and sidecar tonal ramps. This may be legitimate, but it should be an intentional design-system addition rather than drift.",
+        "severity": "advisory",
+        "category": "quality",
+        "file": "/Users/diegocrisafulli/Documents/ai_ui/out/index.html",
+        "line": 1,
+        "snippet": "Undocumented color #fff is outside DESIGN.md colors",
+        "advisory": true,
+        "ignoreValue": "#fff"
+      },
+      {
+        "antipattern": "design-system-font",
+        "name": "Font outside DESIGN.md",
+        "description": "A font is used that is not declared in DESIGN.md typography. Use the documented type system or update DESIGN.md if this is an intentional brand addition.",
+        "severity": "warning",
+        "category": "quality",
+        "file": "/Users/diegocrisafulli/Documents/ai_ui/tests/design-system.test.ts",
+        "line": 164,
+        "snippet": "font-family: \\S*Var\\(--Font-Body\\) is not declared in DESIGN.md typography",
+        "ignoreValue": "\\S*Var\\(--Font-Body\\)"
+      }
+    ],
+    "triage": [
+      {
+        "rules": [
+          "design-system-font"
+        ],
+        "finding_count": 12,
+        "assessment": "Generated font aliases, HTML entity parsing and test strings dominate this group. Live heading family is familjen and measurement family is azeretMono; layout.tsx maps these to the documented Familjen Grotesk and Azeret Mono local files. The test regex at tests/design-system.test.ts:164 is not a font declaration.",
+        "breakdown": {
+          "documented_font_aliases_in_generated_files": 7,
+          "html_entity_parser_artifacts": 2,
+          "generated_chunk_sfmono_string": 1,
+          "index_measurement_sfmono_report_not_reproduced_live": 1,
+          "test_regex_not_a_declaration": 1
+        },
+        "live_evidence": "0.0 s and replay-time outputs compute to azeretMono with 12.8px size / 19.2px line height, not sfmono-regular."
+      },
+      {
+        "rules": [
+          "design-system-color"
+        ],
+        "finding_count": 13,
+        "assessment": "Four index.html RGB findings correspond to documented color-mix tokens: muted, line, control and soft. Remaining entries originate in generated fallback/framework/shader code or static output; they were not established as visible homepage drift.",
+        "confirmed_documented_derived_colors": [
+          "rgb(76, 78, 83): muted",
+          "rgb(205, 206, 209): line",
+          "rgb(112, 113, 118): control",
+          "rgb(235, 236, 238): soft"
+        ]
+      },
+      {
+        "rules": [
+          "design-system-font-size",
+          "design-system-radius"
+        ],
+        "finding_count": 8,
+        "assessment": "Seven off-ramp sizes and one radius are in generated 404 pages or generated chunks. The 404 surfaces were not visually reviewed. Do not convert these into eight observed typography defects on the lab page."
+      },
+      {
+        "rules": [
+          "cramped-padding"
+        ],
+        "finding_count": 3,
+        "assessment": "Two plan-editor reports refer to the spatial editing canvas and its hidden miniature instance, both intentionally zero-padded. Live plan labels compute to 12.8/19.2px. The mobile-context padding report remains unverified because mobile rendering was explicitly out of scope.",
+        "confirmed_product_defects": 0,
+        "unresolved_mobile_reports": 1
+      },
+      {
+        "rules": [
+          "tight-leading"
+        ],
+        "finding_count": 2,
+        "assessment": "Detector gives no element identity beyond line 0 and ratio 1.20x. Sampled current headings, measurement outputs and plan labels all compute to 1.5x. These two static findings were not reproduced in the bounded live samples; not a proof that every hidden element is clear.",
+        "confirmed_in_live_sample": 0
+      }
+    ]
+  },
+  "manual_evidence": {
+    "typography": {
+      "major_heading_result": "Pass: sampled h1/h2 are bold, monochrome, normal style and 150% leading.",
+      "family": "familjen, \"familjen Fallback\", sans-serif",
+      "color": "rgb(23, 25, 31)",
+      "headings": [
+        {
+          "text": "Break the route.",
+          "tag": "h1",
+          "weight": 700,
+          "font_style": "normal",
+          "size_px": 95.3674,
+          "line_height_px": 143.051,
+          "color": "rgb(23, 25, 31)"
+        },
+        {
+          "text": "Your world. Your what-if.",
+          "tag": "h2",
+          "weight": 700,
+          "font_style": "normal",
+          "size_px": 61.0352,
+          "line_height_px": 91.5528,
+          "color": "rgb(23, 25, 31)"
+        },
+        {
+          "text": "The model. Its limits.",
+          "tag": "h2",
+          "weight": 700,
+          "font_style": "normal",
+          "size_px": 48.8282,
+          "line_height_px": 73.2422,
+          "color": "rgb(23, 25, 31)"
+        },
+        {
+          "text": "Room & starting scene / Object geometry / Object motion",
+          "tag": "h3",
+          "weight": 500,
+          "font_style": "normal",
+          "size_px": 20,
+          "line_height_px": 30,
+          "color": "rgb(23, 25, 31)"
+        },
+        {
+          "text": "A floorplan / A 3D scene / An experiment / One successful run isn’t the whole story.",
+          "tag": "h3",
+          "weight": 500,
+          "font_style": "normal",
+          "size_px": 25,
+          "line_height_px": 37.5,
+          "color": "rgb(23, 25, 31)"
+        }
+      ],
+      "heading_child_emphasis": "No coloured or italic word emphasis was present in the sampled heading descendants; h2 children were line breaks.",
+      "measurement_outputs": [
+        {
+          "text": "0.0 s",
+          "family": "azeretMono, \"azeretMono Fallback\", monospace",
+          "size_px": 12.8,
+          "line_height_px": 19.2
+        },
+        {
+          "text": "0.00 / 4.13 s",
+          "family": "azeretMono, \"azeretMono Fallback\", monospace",
+          "size_px": 12.8,
+          "line_height_px": 19.2
+        }
+      ],
+      "notes": "The general h3 weight is 500 as documented. A claim that every heading is 700 would be inaccurate. FontFaceSet enumeration was unavailable through the read-only adapter; computed style and local font registration were inspected instead."
+    },
+    "console": {
+      "initial_warn_error_entries": [],
+      "final_all_level_entries": [],
+      "result": "No console entries returned in the dedicated tab during the tested sequence."
+    },
+    "navigation": [
+      {
+        "action": "Laboratory header link",
+        "result": "URL changed to #workbench and the workbench became the scroll target."
+      },
+      {
+        "action": "How it works header link",
+        "result": "URL changed to #how-it-works; model-limit disclosures could be opened."
+      },
+      {
+        "action": "Privacy & limits footer link",
+        "result": "URL changed to #privacy; the opened privacy disclosure remained available."
+      },
+      {
+        "action": "Back to top",
+        "result": "URL changed to #top."
+      },
+      {
+        "action": "Skip to the route editor, activated with Enter, then Tab",
+        "result": "URL changed to #workbench; next keyboard focus was the Experiment name input, with a visible 3px ultramarine outline."
+      },
+      {
+        "action": "Open scene",
+        "result": "Scene files disclosure expanded and focus moved to its summary; floorplan, 3D model and experiment controls were exposed."
+      }
+    ],
+    "actions": [
+      {
+        "action": "Scene tab ArrowRight",
+        "result": "Robot tab selected and focused, aria-selected=true. Visible focus: rgb(37,71,208) solid 3px, 4px offset."
+      },
+      {
+        "action": "Footprint radius set to 0 and blurred",
+        "result": "Displayed 'Enter 0.12–0.8. Your previous value is unchanged.' Input aria-invalid=true and aria-describedby pointed to the error. Previous committed scene result remained."
+      },
+      {
+        "action": "Footprint radius restored to 0.3 and blurred",
+        "result": "Inline error disappeared and the valid value remained."
+      },
+      {
+        "action": "Stress-test this route on default crossing",
+        "result": "45 grid cells, 23 cases did not reach the goal; speeds 0.60–1.80 m/s and 0–4s extra delay. Each cell carried speed, delay, outcome and Replay in its accessible name."
+      },
+      {
+        "action": "Compare these conditions",
+        "result": "Pinned baseline contact at 4.13s / 1.20m/s; current goal reached at 11.56s / 0.90m/s with +0.0s delay. What changed explicitly listed 1.2→0.9m/s. Replay heading received focus."
+      },
+      {
+        "action": "Play simulation",
+        "result": "Button changed to Pause simulation; replay advanced to 0.33s and current speed to 0.27m/s."
+      },
+      {
+        "action": "Pause and Restore pinned experiment",
+        "result": "Returned to the 4.13s baseline with 1.20m/s and +0.0s replay conditions; comparison stated identical inputs. Restoration limitations were announced."
+      },
+      {
+        "action": "Add waypoint",
+        "result": "Route changed from two to three points, selected Waypoint 1 at (6.0,4.0), and opened Route controls."
+      },
+      {
+        "action": "Move Waypoint 1 with ArrowUp",
+        "result": "Y changed from 4.0 to 3.9m and duration from 4.13 to 4.14s. Focus outline remained visible at 3px, 2px offset."
+      },
+      {
+        "action": "Undo",
+        "result": "Waypoint Y returned to 4.0m and duration to 4.13s; status 'Change undone.'"
+      },
+      {
+        "action": "3D view, then 2D edit",
+        "result": "Rendered 3D replay and corresponding orbit instructions appeared; switching back restored named editable plan handles."
+      }
+    ],
+    "labels_and_focus": {
+      "visible_unlabelled_fields_in_inspected_state": [],
+      "tab_semantics": "Scene/Robot/Route exposed as tabs with selected state and keyboard selection.",
+      "plan_handles": "Named buttons expose object/route name and keyboard movement help; focused waypoint movement tested.",
+      "live_regions": [
+        {
+          "aria_live": "polite",
+          "purpose": "Opening result"
+        },
+        {
+          "aria_live": "polite",
+          "purpose": "Computed run summary"
+        },
+        {
+          "role": "status",
+          "purpose": "Action feedback"
+        }
+      ],
+      "numeric_error": "aria-invalid and associated alert verified; error text sits inside the label and becomes part of the accessible name as well as the description. Exact-name automation changed after validation. Actual screen-reader duplication was not tested.",
+      "viewport_overflow": {
+        "client_width": 1280,
+        "scroll_width": 1280
+      }
+    },
+    "important_claims": [
+      {
+        "claim": "Results come from editable inputs and nearest tested contrast is finite.",
+        "evidence": "Live waypoint keyboard change altered duration; stress grid and comparison exposed effective speed/delay and explicit non-probability/non-safety wording. evidence.ts closestContrast uses grid-index Manhattan distance, then phase and speed for ties.",
+        "conclusion": "Supported in the exercised crossing example; no robustness or optimality certification implied."
+      },
+      {
+        "claim": "40ms kinematics, sampled clearance, continuous collision checks and bounded duration.",
+        "evidence": "Opened methodology disclosure. model.ts defines STEP=0.04; engine.ts iterates LIMIT_SECONDS/STEP and calls hitDuring with reversal splitting. This is source inspection, not a fresh mathematical proof of the solver.",
+        "conclusion": "UI bounds the claim and distinguishes sampled clearance from collision checking."
+      },
+      {
+        "claim": "Imported geometry is an approximation.",
+        "evidence": "Visible disclosure states floorplans are references and GLB/glTF becomes axis-aligned boxes crossing a 0.08–0.6m band. import.ts shows those thresholds, mesh exclusions and self-contained resource checks.",
+        "conclusion": "Clear scope limits present. No actual import was performed."
+      },
+      {
+        "claim": "Files stay in tab memory and fonts are local.",
+        "evidence": "Visible privacy text discloses no persistence, save-before-reload, original visual assets excluded from exports and ordinary host logs. layout.tsx registers local fonts; import.ts reads file.arrayBuffer and blocks non-data/blob model dependencies. Scoped source search found no fetch/localStorage/sessionStorage/cookie/sendBeacon/XMLHttpRequest calls in the lab and app files.",
+        "conclusion": "Consistent with inspected implementation; not a network or dependency audit."
+      },
+      {
+        "claim": "Save experiment includes every trial.",
+        "evidence": "RouteLab.tsx save() serializes experiment, replay, run, sweep and comparison, and discloses visual reattachment.",
+        "conclusion": "Source supported; actual download round-trip not exercised."
+      }
+    ],
+    "bounded_findings": [
+      {
+        "id": "B-01",
+        "severity": "P3",
+        "status": "source-confirmed copy/icon mismatch; timeout path not exercised",
+        "title": "Timeout legend calls the icon a clock, but markup uses a rotate arrow.",
+        "evidence": "RouteLab.tsx table caption says 'clock = time limit'; timeout branch renders RotateCcw. This is a minor legend consistency issue. The full accessible cell outcome is explicit.",
+        "location": "src/components/lab/RouteLab.tsx:1786",
+        "suggested_action": "Align the caption and timeout glyph in a later scoped polish pass."
+      }
+    ],
+    "unconfirmed_observations": [
+      "The numeric validation error becomes part of the input's accessible name and its description. Potentially repetitive speech is unverified.",
+      "Coordinate-only route changes are summarized with point counts by inputChanges(); current code can describe equal-count edits as N→N ordered points. Exact coordinate differences are not exposed in this summary. This was inspected in source, not reproduced against a same-count pin in this bounded pass."
+    ],
+    "summary": "No P0, P1 or P2 product defect was confirmed in the bounded desktop sequence. This does not clear untested mobile, import, download, timeout, screen-reader or generated 404 surfaces."
+  },
+  "provenance": {
+    "inspected_at_local_date": "2026-10-08",
+    "source_sha256": {
+      "src/components/lab/Fields.tsx": "908175a5a88ff189cab507e8206a85e0785e36b43e4cc9f1b47ec14e78b6df69",
+      "src/components/lab/PlanEditor.tsx": "a729a29c463b4e0e6b6264c53df17d42bbf7971f61deb8d133a8e2eb9dd22a37",
+      "src/components/lab/RouteLab.tsx": "51d2a77b01a474155d140e02a81db38ae3b9a8ee50c8a9f05d81244277775b67",
+      "src/components/lab/Scene3D.tsx": "4227a058063216937b2d3ee988a2d72df9516fea9f579c722a47b13d26ca18b6",
+      "src/app/layout.tsx": "82c4e47339a25cf28d55e173c9d23ec1a89bcb8d3a8177738a80b7fb8dd015fd",
+      "src/app/globals.css": "a222b2972552916158fb975d6a96f1ced6147cb98e64186d160d73e5d5cb64bc"
+    },
+    "modification_times": {
+      "src/app/globals.css": "2026-10-08T00:51:55-0400",
+      "src/app/layout.tsx": "2026-10-08T00:51:55-0400",
+      "out/index.html": "2026-10-08T00:52:09-0400"
+    }
+  }
+}

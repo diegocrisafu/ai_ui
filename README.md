@@ -75,7 +75,7 @@ The CI workflow runs lint, types, tests, build and a production dependency audit
 
 ## Design and limits
 
-The typography uses locally bundled Instrument Serif, Familjen Grotesk (downloaded from Fontshare), and Azeret Mono. The system follows a 1.25× type scale, 150% line height and 12/8/4-column layout. Paper, graphite and ultramarine are the three colour anchors.
+The typography uses locally bundled Familjen Grotesk (downloaded from Fontshare) for bold, monochrome headings and the interface, with Azeret Mono for measurements. The system follows a 1.25× type scale, 150% line height and 12/8/4-column layout. Paper, graphite and ultramarine are the three colour anchors; headline words are not colour-highlighted. Archived Instrument Serif assets are no longer loaded.
 
 Imported 3D meshes are visual references; **editable axis-aligned boxes drive collision detection**. Floorplans require manual tracing. No articulated bodies, physical contact dynamics, perception, model training or real-world validation are included. See [methodology](docs/METHODOLOGY.md), [demo script](docs/DEMO.md), [practical pre-launch review](docs/REVIEW.md), and [licenses](public/third-party-notices.txt).
 

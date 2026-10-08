@@ -1,0 +1,125 @@
+{
+  "assessment": "isolated pre-edit typeset mechanical assessment",
+  "date": "2026-10-08",
+  "status": "complete",
+  "project": "/Users/diegocrisafulli/Documents/ai_ui",
+  "scope": {
+    "detector_targets": [
+      "src/components/lab",
+      "src/app/layout.tsx"
+    ],
+    "manual_inspection": [
+      "src/app/globals.css"
+    ],
+    "manual_focus": [
+      "dynamic or arbitrary typography values",
+      "font-weight availability"
+    ],
+    "source_edits": false,
+    "browser_used": false,
+    "assessmentA_read": false,
+    "old_reports_read": false,
+    "visual_assessment": false
+  },
+  "detector": {
+    "command": "IMPECCABLE_NO_TELEMETRY=1 sh /Users/diegocrisafulli/.codex/skills/impeccable/scripts/impeccable detect --json --scope type src/components/lab src/app/layout.tsx",
+    "run_count": 1,
+    "exit_code": 0,
+    "raw_output": "[]\n",
+    "raw_results": [],
+    "finding_count": 0
+  },
+  "short_results": {
+    "detector": "The single requested detector invocation exited successfully and returned an empty JSON array.",
+    "dynamic_type_values": [
+      {
+        "evidence": "src/app/globals.css:10",
+        "result": "Declared font sizes reference root custom properties. --type-small is 0.8rem, --type-base is 1rem, and --type-1 through --type-8 form a 1.25 ratio scale. No calc(), clamp(), viewport-unit sizing, or variable font-weight expression occurs in the inspected typography declarations.",
+        "tokens": {
+          "--type-small": "0.8rem",
+          "--type-base": "1rem",
+          "--type-1": "1.25rem",
+          "--type-2": "1.5625rem",
+          "--type-3": "1.953125rem",
+          "--type-4": "2.44140625rem",
+          "--type-5": "3.0517578125rem",
+          "--type-6": "3.814697265625rem",
+          "--type-7": "4.76837158203125rem",
+          "--type-8": "5.9604644775390625rem"
+        }
+      },
+      {
+        "evidence": [
+          "src/app/globals.css:20",
+          "src/app/globals.css:39",
+          "src/app/globals.css:54",
+          "src/app/globals.css:134",
+          "src/app/globals.css:138"
+        ],
+        "result": "Explicit line-height declarations use --leading, defined as unitless 1.5. Controls inherit font settings. Letter spacing uses literal em values (-0.025em and -0.02em)."
+      },
+      {
+        "evidence": [
+          "src/app/globals.css:1113",
+          "src/app/globals.css:1170",
+          "src/app/globals.css:1167",
+          "src/app/globals.css:1358"
+        ],
+        "result": "Media queries at 1199px and 767px substitute existing size tokens. For example, dd changes from --type-2 to --type-1 at 1199px; .run-summary strong changes from --type-2 to --type-1 at 767px."
+      }
+    ],
+    "weights_availability": {
+      "explicit_css_weights": [
+        400,
+        500,
+        600
+      ],
+      "evidence": {
+        "400": [
+          "src/app/globals.css:132",
+          "src/app/globals.css:144",
+          "src/app/globals.css:846",
+          "src/app/globals.css:882",
+          "src/app/globals.css:993"
+        ],
+        "500": [
+          "src/app/globals.css:79",
+          "src/app/globals.css:139",
+          "src/app/globals.css:307",
+          "src/app/globals.css:688",
+          "src/app/globals.css:868",
+          "src/app/globals.css:970"
+        ],
+        "600": [
+          "src/app/globals.css:188"
+        ]
+      },
+      "family_indirection": [
+        {
+          "variable": "--font-body",
+          "generic_fallback": "sans-serif",
+          "evidence": "src/app/globals.css:37"
+        },
+        {
+          "variable": "--font-display",
+          "generic_fallback": "serif",
+          "evidence": "src/app/globals.css:131"
+        },
+        {
+          "variable": "--font-mono",
+          "generic_fallback": "monospace",
+          "evidence": "src/app/globals.css:165"
+        }
+      ],
+      "availability_status": "not verifiable from inspected CSS",
+      "result": "The stylesheet references font-family custom properties but does not define them or contain @font-face rules, weight ranges, or font-synthesis settings. It imports tailwindcss at line 1. CSS requests 400, 500, and 600; actual family assignments, loaded weight coverage, implicit inherited/default weights, and synthesis cannot be confirmed by this CSS-only inspection."
+    }
+  },
+  "limitations": [
+    "This is the isolated mechanical assessment only; it contains no visual, hierarchy, or design-fit assessment and no synthesis with assessmentA.",
+    "The detector targeted the requested component directory and layout file; globals.css received only the requested supplementary manual checks.",
+    "No layout/component source was manually inspected. Font filenames were enumerated, but asset metadata, font-loader configuration, generated CSS, and runtime styles were not inspected.",
+    "An empty detector result does not establish rendered typography quality or available font weights.",
+    "Only the requested detector invocation ran; the general skill context loader and post-edit rerun were omitted to preserve the explicitly isolated pre-edit scope."
+  ]
+}

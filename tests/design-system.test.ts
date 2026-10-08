@@ -38,12 +38,12 @@ function composite(foreground: string, background: string, alpha: number) {
 
 test("every type step is exactly 1.25 times the previous step", () => {
   const steps = [
-    ...css.matchAll(/--type-(?:small|base|[1-8]):\s*([\d.]+)rem/g),
+    ...css.matchAll(/--type-(?:small|base|[1-9]):\s*([\d.]+)rem/g),
   ].map((m) => Number(m[1]));
-  assert.equal(steps.length, 10);
+  assert.equal(steps.length, 11);
   steps.slice(1).forEach((step, i) => assert.equal(step / steps[i], 1.25));
   for (const size of css.matchAll(/font-size:\s*([^;]+);/g)) {
-    assert.match(size[1], /^var\(--type-(?:small|base|[1-8])\)$/);
+    assert.match(size[1], /^var\(--type-(?:small|base|[1-9])\)$/);
   }
 });
 
@@ -117,7 +117,7 @@ test("normal and muted text retain AA contrast on every semantic surface", () =>
   );
 });
 
-test("all three self-hosted typefaces include WOFF2 data and full OFL licenses", () => {
+test("bundled typefaces retain WOFF2 data and full OFL licenses", () => {
   for (const name of ["AzeretMono", "FamiljenGrotesk"]) {
     const font = readFileSync(
       new URL(`../src/app/fonts/${name}-Variable.woff2`, import.meta.url),
@@ -153,4 +153,26 @@ test("all three self-hosted typefaces include WOFF2 data and full OFL licenses",
   );
   assert.ok(layout.includes("next/font/local"));
   assert.ok(!layout.includes("next/font/google"));
+  assert.ok(
+    !layout.includes("InstrumentSerif"),
+    "retired display font is not loaded",
+  );
+});
+
+test("headings use bold monochrome type without decorative word emphasis", () => {
+  const heading = css.match(/h1,\s*h2\s*\{([^}]+)\}/)![1];
+  assert.match(heading, /font-family:\s*var\(--font-body\), sans-serif/);
+  assert.match(heading, /font-weight:\s*700/);
+  assert.match(heading, /font-style:\s*normal/);
+  assert.match(heading, /color:\s*var\(--ink\)/);
+  const source = readFileSync(
+    new URL("../src/components/lab/RouteLab.tsx", import.meta.url),
+    "utf8",
+  );
+  for (const heading of source.matchAll(/<h[12]\b[^>]*>([\s\S]*?)<\/h[12]>/g)) {
+    assert.ok(
+      !/<em\b|<i\b/.test(heading[1]),
+      "headings must not restore coloured italic words",
+    );
+  }
 });

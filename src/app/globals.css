@@ -17,6 +17,7 @@
   --type-6: 3.814697265625rem;
   --type-7: 4.76837158203125rem;
   --type-8: 5.9604644775390625rem;
+  --type-9: 7.450580596923828rem;
   --leading: 1.5;
   --grid-columns: 12;
   --gutter: 24px;
@@ -128,20 +129,20 @@ p {
 }
 h1,
 h2 {
-  font-family: var(--font-display), serif;
-  font-weight: 400;
-  letter-spacing: -0.025em;
+  font-family: var(--font-body), sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  color: var(--ink);
+  letter-spacing: -0.035em;
   line-height: var(--leading);
+  text-wrap: balance;
+  overflow-wrap: break-word;
 }
 h3 {
   font-size: var(--type-2);
   line-height: var(--leading);
   font-weight: 500;
   letter-spacing: -0.02em;
-}
-em {
-  color: var(--accent);
-  font-weight: 400;
 }
 .muted,
 .hint,
@@ -218,7 +219,7 @@ nav a:hover {
   gap: var(--gutter);
 }
 .opening-copy h1 {
-  grid-column: span 8;
+  grid-column: span 9;
   font-size: var(--type-8);
   align-self: center;
 }
@@ -1109,6 +1110,11 @@ footer small {
 }
 .skip-link:focus {
   top: 12px;
+}
+@media (min-width: 1440px) {
+  .opening-copy h1 {
+    font-size: var(--type-9);
+  }
 }
 @media (max-width: 1199px) {
   :root {

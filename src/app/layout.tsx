@@ -2,15 +2,6 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 
-const instrumentSerif = localFont({
-  src: [
-    { path: "./fonts/InstrumentSerif-Regular.woff2", weight: "400", style: "normal" },
-    { path: "./fonts/InstrumentSerif-Italic.woff2", weight: "400", style: "italic" },
-  ],
-  variable: "--font-display",
-  display: "swap",
-});
-
 const azeretMono = localFont({
   src: "./fonts/AzeretMono-Variable.woff2",
   variable: "--font-mono",
@@ -38,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${instrumentSerif.variable} ${azeretMono.variable} ${familjen.variable}`}>
+    <html lang="en" className={`${azeretMono.variable} ${familjen.variable}`}>
       <body>{children}</body>
     </html>
   );
