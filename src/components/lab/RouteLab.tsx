@@ -23,6 +23,7 @@ import {
   X,
 } from "lucide-react";
 import { sampleAt, simulateRoute, sweepAxes } from "@/lib/lab/engine";
+import { assetPath } from "@/lib/site-paths";
 import {
   clone,
   example,
@@ -616,7 +617,7 @@ export default function RouteLab() {
           <a href="#workbench">Laboratory</a>
           <a href="#how-it-works">How it works</a>
           <a
-            href="https://github.com/diegocrisafu/ai_ui/tree/codex/scenebreaker-route-lab"
+            href="https://github.com/diegocrisafu/ai_ui/tree/codex/scenebreaker-pages"
             target="_blank"
             rel="noreferrer"
           >
@@ -814,7 +815,7 @@ export default function RouteLab() {
                 />
                 <a
                   className="text-link"
-                  href="/examples/simple-room.gltf"
+                  href={assetPath("/examples/simple-room.gltf")}
                   download
                 >
                   Download a sample 3D scene
@@ -1963,7 +1964,7 @@ export default function RouteLab() {
             </details>
             <a
               className="text-link"
-              href="https://github.com/diegocrisafu/ai_ui/tree/codex/scenebreaker-route-lab"
+              href="https://github.com/diegocrisafu/ai_ui/tree/codex/scenebreaker-pages"
               target="_blank"
               rel="noreferrer"
             >
@@ -1977,7 +1978,7 @@ export default function RouteLab() {
         <span>SceneBreaker · Built by Diego Crisafulli</span>
         <div>
           <a href="#privacy">Privacy & limits</a>
-          <a href="/third-party-notices.txt">Font & software credits</a>
+          <a href={assetPath("/third-party-notices.txt")}>Font & software credits</a>
           <a href="#top">
             Back to top <ArrowUp size={16} />
           </a>

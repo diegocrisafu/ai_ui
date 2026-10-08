@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { assetPath } from "@/lib/site-paths";
 import "./globals.css";
 
 const azeretMono = localFont({
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
   title: "SceneBreaker — Break the route.",
   description:
     "Build a robot-route experiment. Import a scene, edit paths and motion, then find and replay speed-and-timing failures. No account or GPU server.",
-  icons: { icon: "/icon.svg" },
+  icons: { icon: assetPath("/icon.svg") },
 };
 
 export default function RootLayout({

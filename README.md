@@ -69,7 +69,19 @@ The old `src/lib/simulation/` engine and `src/components/scenebreaker/` interfac
 
 ## Static hosting
 
-Build with `npm run build` and publish `out/` on a static host at the domain root. Vercel's Next.js preset supports the configured export. A free hosting subdomain is sufficient; no paid compute backend is required. Provider quotas and acceptable-use rules still apply.
+GitHub Pages address: **https://diegocrisafu.github.io/ai_ui/**. The repository's Pages setting uses the `gh-pages` branch at `/`; that branch contains generated files only. Development source is on `codex/scenebreaker-pages`.
+
+```sh
+# Build and validate a static export with the /ai_ui prefix.
+npm run build:pages
+
+# After committing and pushing source, verify and publish the release.
+npm run deploy:pages
+```
+
+The publish command requires a clean worktree and a matching pushed source commit. It runs lint, type checks, tests, the Pages build and the production dependency audit, then publishes `out/` without force-pushing. `build.json` records the source commit. It never changes the original working checkout or the previous hosting provider. The first release requires enabling Pages for `gh-pages` in GitHub repository settings. Subsequent releases deploy from that branch automatically. Confirm the Pages build succeeded and verify the public URL after each release.
+
+For domain-root hosting, use `npm run build` without `NEXT_PUBLIC_BASE_PATH` and publish `out/`. A free hosting subdomain is sufficient; no paid compute backend is required. Provider quotas and acceptable-use rules still apply.
 
 The CI workflow runs lint, types, tests, build and a production dependency audit. The app and fonts are self-hosted; viewing it does not call a font service. A deployment URL must be separately verified before calling a release live.
 
