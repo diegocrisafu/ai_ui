@@ -1,0 +1,379 @@
+{
+  "schema_version": 1,
+  "assessment": "B",
+  "task": "Independent mechanical layout and type assessment of the method section and file entries",
+  "date": "2026-10-08",
+  "recorded_at_utc": "2026-10-08T05:16:09.019Z",
+  "status": "complete",
+  "repository": "/Users/diegocrisafulli/Documents/ai_ui",
+  "revision": "b34cd7b8e23a8219df7271e256975eaecca72d76",
+  "target": "src/components/lab/RouteLab.tsx",
+  "report_path": ".impeccable/review/method-layout-b-20261008.json",
+  "scope": {
+    "mode": "mechanical_only",
+    "design_judgment": false,
+    "browser_used": false,
+    "screenshots_used": false,
+    "assessment_a_read": false,
+    "previous_reviews_read": false,
+    "prior_review_links_followed": false,
+    "source_modified": false,
+    "detector_targets": [
+      "src/components/lab/RouteLab.tsx"
+    ],
+    "detector_root_or_generated_output_scanned": false,
+    "manual_source_scope": [
+      "src/components/lab/RouteLab.tsx: method-section, file-drawer/file-grid, pending import and file-error states",
+      "src/app/globals.css: shared rules and relevant media-query overrides",
+      "src/app/layout.tsx: font registration and global CSS import",
+      "src/components/lab/Fields.tsx: Numeric field used by the 3D file entry",
+      "src/lib/lab/import.ts: provenance of the displayed imported filename",
+      "node_modules/tailwindcss/preflight.css: targeted reset/wrapping lookup"
+    ],
+    "file_entry_interpretation": "There is no file-entry selector in the inspected source. This term was mapped to the three sections in .file-grid within .file-drawer, including their conditional removal actions, pending import review and adjacent file error.",
+    "ownership": "Parent owns rendered assessment and synthesis with A."
+  },
+  "instructions_read_fully": [
+    "/Users/diegocrisafulli/.codex/skills/impeccable/SKILL.md",
+    "/Users/diegocrisafulli/.codex/skills/impeccable/reference/layout.md",
+    "/Users/diegocrisafulli/.codex/skills/impeccable/reference/typeset.md",
+    "/Users/diegocrisafulli/Documents/ai_ui/AGENTS.md"
+  ],
+  "workflow": {
+    "user_overrides": [
+      "No design assessment, visual scoring, synthesis with A, browser work or source edits.",
+      "Each requested detector scope ran exactly once; the references' post-edit rerun did not apply.",
+      "Only this JSON report is authored."
+    ],
+    "launcher": "sh /Users/diegocrisafulli/.codex/skills/impeccable/scripts/impeccable",
+    "engine_version_from_launcher_version_file": "0.1.11",
+    "engine_resolution": "Version-pinned local cache at /Users/diegocrisafulli/.impeccable/bin/0.1.11/impeccable; no sibling platform binary was present.",
+    "environment": {
+      "IMPECCABLE_NO_TELEMETRY": "1",
+      "DO_NOT_TRACK": "1"
+    },
+    "telemetry_evidence": "The cached engine's embedded help states that the ping is skipped when DO_NOT_TRACK or IMPECCABLE_NO_TELEMETRY is set; both were set on context and both detector invocations.",
+    "context": {
+      "invocations": 1,
+      "command": "IMPECCABLE_NO_TELEMETRY=1 DO_NOT_TRACK=1 sh /Users/diegocrisafulli/.codex/skills/impeccable/scripts/impeccable context --target src/components/lab/RouteLab.tsx",
+      "exit_code": 0,
+      "loaded": [
+        "PRODUCT.md",
+        "DESIGN.md"
+      ],
+      "resolved_target_exists": true,
+      "platform": "web",
+      "surface_brief": null,
+      "surface_brief_reason": "not-found",
+      "note": "Context included links to earlier review evidence; those links were not opened and their contents were not used."
+    }
+  },
+  "detector_results": [
+    {
+      "scope": "layout",
+      "invocations": 1,
+      "command": "IMPECCABLE_NO_TELEMETRY=1 DO_NOT_TRACK=1 sh /Users/diegocrisafulli/.codex/skills/impeccable/scripts/impeccable detect --json --scope layout src/components/lab/RouteLab.tsx",
+      "cwd": "/Users/diegocrisafulli/Documents/ai_ui",
+      "exit_code": 0,
+      "raw_output": "[]\n",
+      "result": [],
+      "finding_count": 0,
+      "interpretation": "The invocation returned an empty findings array. It supplies no per-file coverage, rules-tested or suppression statistics. The CSS dependency was inspected manually, not passed as a detector target."
+    },
+    {
+      "scope": "type",
+      "invocations": 1,
+      "command": "IMPECCABLE_NO_TELEMETRY=1 DO_NOT_TRACK=1 sh /Users/diegocrisafulli/.codex/skills/impeccable/scripts/impeccable detect --json --scope type src/components/lab/RouteLab.tsx",
+      "cwd": "/Users/diegocrisafulli/Documents/ai_ui",
+      "exit_code": 0,
+      "raw_output": "[]\n",
+      "result": [],
+      "finding_count": 0,
+      "interpretation": "The invocation returned an empty findings array. It supplies no per-file coverage, rules-tested or suppression statistics. The CSS dependency was inspected manually, not passed as a detector target."
+    }
+  ],
+  "result": {
+    "conclusion": "Both requested detector invocations returned zero findings. Source inspection documents breakpoint, spacing and type behavior and identifies one conditional long-filename overflow risk for the parent's rendered verification.",
+    "mechanical_pass_certification": false,
+    "counts": {
+      "detector_invocations": 2,
+      "detector_layout_findings": 0,
+      "detector_type_findings": 0,
+      "detector_total_findings": 0,
+      "manual_observations": 9,
+      "manual_confirmed_rendered_defects": 0,
+      "manual_source_risks_requiring_rendered_verification": 1,
+      "browser_checks": 0,
+      "source_files_changed": 0
+    }
+  },
+  "source_observations": [
+    {
+      "id": "B-M01",
+      "topic": "Method DOM and disclosure structure",
+      "evidence": [
+        "src/components/lab/RouteLab.tsx:1861-1931"
+      ],
+      "facts": [
+        "The method section follows the workbench and contains an h2 followed by .method-content.",
+        "The heading contains an explicit br between 'The model.' and 'Its limits.' at every breakpoint.",
+        "Content order is lead paragraph, explanatory paragraph, three native details/summary disclosures, then the code link.",
+        "None of the method details has an authored open attribute; initially closed content expands in normal document flow when opened.",
+        "No authored CSS order, absolute positioning or sticky positioning changes method content order."
+      ],
+      "verification": "source_only",
+      "judgment": null
+    },
+    {
+      "id": "B-M02",
+      "topic": "Method grid breakpoints and container geometry",
+      "evidence": [
+        "src/app/globals.css:22-24",
+        "src/app/globals.css:169-175",
+        "src/app/globals.css:213-220",
+        "src/app/globals.css:1036-1047",
+        "src/app/globals.css:1119-1124",
+        "src/app/globals.css:1162-1168",
+        "src/app/globals.css:1176-1181",
+        "src/app/globals.css:1410-1420"
+      ],
+      "facts": [
+        "Main is a centered border-box container capped at 1600px, including horizontal padding.",
+        "The shared grid uses minmax(0, 1fr); the method heading and content do not require implicit columns at the inspected breakpoint configurations.",
+        "Above 1199 CSS px: 12 tracks, 24px gaps, 4vw side padding, heading spans six tracks and content occupies tracks eight through twelve.",
+        "Above 767 through 1199 CSS px: eight tracks, 20px gaps, 3vw side padding, heading spans four tracks and content occupies tracks five through eight.",
+        "At or below 767 CSS px: four tracks, 16px gaps, 20px side padding; heading and content each occupy 1 / -1 and therefore successive rows.",
+        "The 1440px minimum-width media query changes the opening h1 only; it does not change the method section.",
+        "The method content has max-width: 75ch, so grid allocation does not imply that its used width always fills its grid area."
+      ],
+      "derived_allocation_examples_css_px": [
+        {
+          "viewport": 1200,
+          "main_inner": 1104,
+          "heading_grid_area": 540,
+          "method_content_grid_area_before_75ch_cap": 446
+        },
+        {
+          "viewport": 1199,
+          "main_inner": 1127.06,
+          "heading_grid_area": 553.53,
+          "method_content_grid_area_before_75ch_cap": 553.53
+        },
+        {
+          "viewport": 768,
+          "main_inner": 721.92,
+          "heading_grid_area": 350.96,
+          "method_content_grid_area_before_75ch_cap": 350.96
+        },
+        {
+          "viewport": 767,
+          "main_inner": 727,
+          "heading_grid_area": 727,
+          "method_content_grid_area_before_75ch_cap": 727
+        },
+        {
+          "viewport": 390,
+          "main_inner": 350,
+          "heading_grid_area": 350,
+          "method_content_grid_area_before_75ch_cap": 350
+        },
+        {
+          "viewport": 320,
+          "main_inner": 280,
+          "heading_grid_area": 280,
+          "method_content_grid_area_before_75ch_cap": 280
+        }
+      ],
+      "calculation_limit": "Algebra from authored CSS, assuming viewport width equals the main containing width and no scrollbar deduction. These are allocations, not browser measurements or text measures.",
+      "verification": "source_and_arithmetic_only",
+      "judgment": null
+    },
+    {
+      "id": "B-M03",
+      "topic": "Method spacing and disclosure height",
+      "evidence": [
+        "src/app/globals.css:124-140",
+        "src/app/globals.css:862-880",
+        "src/app/globals.css:1036-1065",
+        "src/app/globals.css:1410-1420"
+      ],
+      "facts": [
+        "Method section padding is 80px top / 110px bottom, changing to 50px / 64px on phone, with a 1px top border.",
+        "Lead bottom margin is 18px; the following top-level paragraph has a 28px bottom margin; disclosure paragraphs have an 18px bottom margin; the terminal link has a 24px top margin.",
+        "On phone the h2 adds an 18px bottom margin to the 16px grid row gap: 34px authored separation from the heading border box to the following content row, before text line-box considerations.",
+        "Summary is flex with a 10px gap, 16px vertical padding and min-height: 64px. Its chevron cannot flex-shrink and receives margin-left: auto.",
+        "Summary height is a minimum, not a fixed height; wrapped text can increase it. No local max-height or overflow clipping is applied to method disclosures."
+      ],
+      "verification": "source_only",
+      "judgment": null
+    },
+    {
+      "id": "B-M04",
+      "topic": "File entry grid and breakpoint behavior",
+      "evidence": [
+        "src/components/lab/RouteLab.tsx:1539-1656",
+        "src/app/globals.css:859-912",
+        "src/app/globals.css:1375-1390"
+      ],
+      "facts": [
+        "The file drawer has three sections in DOM order: floorplan, 3D scene, experiment.",
+        "Above 767 CSS px the file grid remains three equal minmax(0, 1fr) columns with 36px gaps; it has no separate tablet column override.",
+        "At 768px, the authored main inner allocation of 721.92px gives each file section approximately 216.64px: (721.92 - 72) / 3.",
+        "At or below 767px it becomes one column with a 28px gap; every section after the first gains a 1px top border and 24px top padding.",
+        "File sections explicitly have min-width: 0. The outer drawer has borders and no local width, max-height or overflow restriction.",
+        "The drawer summary wraps on phone; its explanatory span moves to a full-width line via flex-basis: 100% and order: 2. This affects the description placement, not the order of the three file sections."
+      ],
+      "verification": "source_and_arithmetic_only",
+      "judgment": null
+    },
+    {
+      "id": "B-M05",
+      "topic": "File entry spacing, conditional controls and intrinsic heights",
+      "evidence": [
+        "src/components/lab/RouteLab.tsx:1547-1654",
+        "src/app/globals.css:66-85",
+        "src/app/globals.css:748-766",
+        "src/app/globals.css:795-803",
+        "src/app/globals.css:886-919",
+        "src/components/lab/Fields.tsx:25-58"
+      ],
+      "facts": [
+        "File grid padding is 12px top / 36px bottom. Each descriptive paragraph has margins 8px top / 20px bottom.",
+        "File sections use ordinary flow rather than a shared row layout. There is no authored mechanism aligning the three primary actions to one baseline.",
+        "The 3D section adds Numeric before its choose button. Numeric has a minimum 48px label area, 6px gap and minimum 44px input, giving a minimum 98px control stack before its 14px bottom margin.",
+        "The numeric field is capped at 200px; its input uses width: 100% and min-width: 0. A validation error adds content rather than using a fixed-height slot.",
+        "Primary choose/load buttons have min-height: 44px with 9px / 14px padding. File removal actions use display: flex and 8px vertical padding; the sample link uses display: flex and min-height: 44px.",
+        "No explicit sibling margin or gap separates a choose/load button from the following removal action or sample link. Their actual line-box separation is browser-dependent because the first button is inline-flex.",
+        "Conditional removal controls add normal-flow height without overlays. Hidden file inputs do not reserve a visible file-picker box."
+      ],
+      "verification": "source_only",
+      "judgment": null
+    },
+    {
+      "id": "B-M06",
+      "topic": "Authored type values in the requested regions",
+      "evidence": [
+        "src/app/globals.css:10-21",
+        "src/app/globals.css:34-41",
+        "src/app/globals.css:51-56",
+        "src/app/globals.css:124-145",
+        "src/app/globals.css:760-762",
+        "src/app/globals.css:862-869",
+        "src/app/globals.css:1040-1050",
+        "src/app/globals.css:1162-1168",
+        "src/app/globals.css:1417-1420"
+      ],
+      "facts": [
+        "Relevant font sizes use the existing custom-property scale. No inline dynamic font size or arbitrary type utility is authored within method or file entries.",
+        "Body, paragraphs, buttons and summary use 1rem with unitless 1.5 leading; file entry h3 uses 1.5625rem, weight 500, tracking -0.02em.",
+        "Method heading uses 3.0517578125rem above 1199px and 2.44140625rem at or below 1199px, weight 700, tracking -0.035em.",
+        "Method lead uses 1.25rem; numeric unit and validation text use 0.8rem.",
+        "At a 16px root these are respectively 16/24px body, 25/37.5px h3, 48.828125/73.2421875px large method heading, 39.0625/58.59375px smaller method heading, 20/30px lead and 12.8/19.2px small text.",
+        "These are declared role values and arithmetic, not computed browser measurements or a judgment of hierarchy."
+      ],
+      "verification": "source_and_arithmetic_only",
+      "judgment": null
+    },
+    {
+      "id": "B-M07",
+      "topic": "Text wrapping, overflow and interaction dimensions",
+      "evidence": [
+        "src/app/globals.css:95-99",
+        "src/app/globals.css:124-140",
+        "src/app/globals.css:862-919",
+        "src/app/globals.css:1036-1065",
+        "src/components/lab/RouteLab.tsx:1877-1929"
+      ],
+      "facts": [
+        "h1/h2 have overflow-wrap: break-word and text-wrap: balance. Method prose, summary text, file descriptions, import-review text and file errors have no authored overflow-wrap or word-break override.",
+        "Method content and import-review paragraphs are capped at 75ch; file descriptions have no ch-based cap. A maximum measure alone does not force long unbroken text to wrap.",
+        "Method summaries reserve an 18px non-shrinking icon plus a 10px gap. The code link reserves 18px and 16px icons plus two 8px gaps, leaving the remainder for its text.",
+        "The inspected regions have no local horizontal scrolling container, clipping rule, positioned overlay or z-index. Ordinary text can wrap at normal break opportunities; unbroken token behavior is not additionally guarded.",
+        "No rendered overflow, localized string, zoom, focus-ring or touch-target width measurement was performed. Declared minimum control heights do not certify all hit-target dimensions."
+      ],
+      "verification": "source_only",
+      "judgment": null
+    },
+    {
+      "id": "B-M08",
+      "topic": "Font registration and fallback boundaries",
+      "evidence": [
+        "src/app/layout.tsx:5-17",
+        "src/app/layout.tsx:32",
+        "src/app/globals.css:38-40",
+        "src/app/globals.css:130-139"
+      ],
+      "facts": [
+        "Both active fonts are registered with next/font/local and display: swap: Familjen Grotesk variable weight range 400-700 and Azeret Mono 100-900.",
+        "Method and file entry prose, headings and controls inherit the body family, with an authored sans-serif fallback. Numeric inputs also inherit the body family.",
+        "The scoped declared weights 400, 500 and 700 fall within the registered Familjen range.",
+        "Source registration alone does not prove loaded font assets, generated fallback metrics, absence of invisible text or absence of layout shift."
+      ],
+      "verification": "source_only",
+      "judgment": null
+    },
+    {
+      "id": "B-M09",
+      "topic": "Arbitrary spacing and dynamic layout values beyond detector coverage",
+      "evidence": [
+        "src/app/globals.css:23-24",
+        "src/app/globals.css:66-85",
+        "src/app/globals.css:886-919",
+        "src/app/globals.css:1036-1065",
+        "src/app/globals.css:1375-1420"
+      ],
+      "facts": [
+        "Grid dimensions use --grid-columns, --gutter and --edge. Local file/method spacing is mostly literal CSS values rather than spacing custom properties.",
+        "Examples include 18px paragraph/title margins, 14px numeric bottom margin, 36px desktop file gaps, 28px mobile file gaps and 50/64/80/110px section padding.",
+        "Literal values are recorded as mechanical facts, not automatically classified as defects; the loaded design context describes a practical spacing vocabulary rather than a strict divisibility requirement.",
+        "The manual inspection includes the external stylesheet because the requested detector target is a TSX component whose layout/type declarations mostly live outside that target."
+      ],
+      "verification": "source_only",
+      "judgment": null
+    }
+  ],
+  "manual_risks": [
+    {
+      "id": "B-R01",
+      "category": "conditional_horizontal_overflow",
+      "severity": "unrated_pending_rendered_verification",
+      "source_condition_confirmed": true,
+      "rendered_defect_confirmed": false,
+      "title": "Pending model filename has no emergency line-break rule",
+      "evidence": [
+        "src/lib/lab/import.ts:107 returns name: file.name without a display-length bound",
+        "src/components/lab/RouteLab.tsx:479-486 stores the returned asset as pendingModel",
+        "src/components/lab/RouteLab.tsx:1660-1667 renders pendingModel.name at the start of the import-review paragraph",
+        "src/app/globals.css:913-920 caps import-review prose at 75ch and assigns margins, with no word-break, overflow-wrap or overflow control",
+        "src/app/globals.css:139 applies overflow-wrap: break-word only to h1/h2, not this paragraph"
+      ],
+      "trigger": "Import a valid self-contained GLB/glTF with a long basename containing no spaces or hyphens, then inspect the pending import review before applying it.",
+      "implication": "If the filename's unbroken rendered width exceeds the paragraph's used width, normal line breaking cannot wrap that token; text can extend beyond the paragraph and potentially the viewport.",
+      "suggested_parent_verification": "At 320px or 390px CSS viewport width, use a valid model named with approximately 120 consecutive ASCII letters plus .glb. Compare the paragraph and document scrollWidth/clientWidth while the review is visible. Also inspect at increased text size.",
+      "limitation": "No model was imported and no scroll dimensions were measured in this assessment. This is a source-backed conditional risk, not an observed browser failure.",
+      "source_fix_applied": false
+    }
+  ],
+  "limitations": [
+    "No design judgments, squint tests, hierarchy scores, reading-comfort judgments or recommendations about composition were made.",
+    "The detector's empty arrays are not proof of complete CSS coverage or absence of layout/type defects. Only the named TSX target was supplied, exactly as requested.",
+    "The detector did not report counts of files examined, rules executed, ignored values or suppressed findings; these counts remain unknown.",
+    "No browser, screenshot, computed-style query, application build, runtime import, zoom simulation or assistive-technology interaction was used.",
+    "Breakpoint allocations and type conversions are algebra from source. Actual font metrics, scrollbar dimensions, fallback timing, line counts, margin/baseline behavior and native disclosure rendering require the parent browser assessment.",
+    "Source inspection covers method and file-entry mechanics and their direct dependencies, not every route laboratory state or a whole-application accessibility audit.",
+    "No A result or previous review was opened; cross-assessment synthesis is intentionally left to the parent.",
+    "Native disclosure open state, long file names, error messages, localization, font fallback, fractional viewport widths and text-only zoom are not certified by this report.",
+    "A non-blocking locale warning occurred during shasum; the command still produced hashes and exited successfully. It was unrelated to detector output.",
+    "No source edit was performed and neither detector scope was rerun."
+  ],
+  "source_snapshot": {
+    "relevant_paths_clean_in_git_at_inspection": true,
+    "sha256": {
+      "src/components/lab/RouteLab.tsx": "c065d1c3c40494a17ff23a8649e140d7ad3daa2148a2b14091f3039df1f917be",
+      "src/app/globals.css": "a222b2972552916158fb975d6a96f1ced6147cb98e64186d160d73e5d5cb64bc",
+      "src/app/layout.tsx": "82c4e47339a25cf28d55e173c9d23ec1a89bcb8d3a8177738a80b7fb8dd015fd",
+      "src/components/lab/Fields.tsx": "908175a5a88ff189cab507e8206a85e0785e36b43e4cc9f1b47ec14e78b6df69",
+      "src/lib/lab/import.ts": "41d086665b4615a5f17c8235526ca8746d24980c574149d9ebe958c388a829c8"
+    }
+  }
+}

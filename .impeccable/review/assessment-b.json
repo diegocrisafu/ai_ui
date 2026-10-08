@@ -1,0 +1,276 @@
+{
+  "assessment": "B",
+  "completion_status": "complete",
+  "generated_at": "2026-10-07T19:21:21.518Z",
+  "target": "/Users/diegocrisafulli/Documents/ai_ui/src/components/lab",
+  "live_url": "http://127.0.0.1:3101/",
+  "scope": "Independent detector and browser evidence; functional UI behavior, accessibility, and UI-observable security signals.",
+  "isolation": {
+    "assessment_a_report_inspected": false,
+    "assessment_a_findings_received": false,
+    "findings_disclosed_to_parent": false,
+    "handoff_policy": "Return file path and completion status only. Parent may read after Assessment A finishes.",
+    "source_edits_performed": false,
+    "files_written_by_this_assessment": [
+      "/Users/diegocrisafulli/Documents/ai_ui/.impeccable/review/assessment-b.json"
+    ]
+  },
+  "instructions": {
+    "fully_read": [
+      "/Users/diegocrisafulli/.codex/skills/impeccable/SKILL.md",
+      "/Users/diegocrisafulli/.codex/skills/impeccable/reference/critique.md"
+    ],
+    "project_instructions_read": [
+      "AGENTS.md",
+      "CLAUDE.md"
+    ],
+    "context_command": "sh /Users/diegocrisafulli/.codex/skills/impeccable/scripts/impeccable context --target src/components/lab",
+    "context_run_count": 1,
+    "product_context_loaded": true,
+    "design_document": null,
+    "critique_ignore_file_present": false,
+    "questions": "Questions skipped: this delegated Assessment B supplies private evidence only; synthesis and any critique questions belong to the parent."
+  },
+  "detector": {
+    "command": "sh /Users/diegocrisafulli/.codex/skills/impeccable/scripts/impeccable detect --json src/components/lab",
+    "cwd": "/Users/diegocrisafulli/Documents/ai_ui",
+    "execution_count": 1,
+    "exit_code": 0,
+    "status": "clean",
+    "finding_count": 0,
+    "output_raw": "[]\n",
+    "output_json": [],
+    "output_truncated": false,
+    "stderr_separately_available": false,
+    "output_note": "exec_command returned a single output stream. Its exact content is preserved in output_raw.",
+    "source_files_in_target": [
+      "src/components/lab/Fields.tsx",
+      "src/components/lab/PlanEditor.tsx",
+      "src/components/lab/RouteLab.tsx",
+      "src/components/lab/Scene3D.tsx"
+    ],
+    "counts_by_rule": {},
+    "counts_by_file": {},
+    "false_positives": [],
+    "interpretation": "The detector emitted no findings. This does not establish functional correctness, accessibility conformance, or security."
+  },
+  "browser": {
+    "tool": "mcp__cua_repl",
+    "browser": "Codex In-app Browser",
+    "own_fresh_tab": true,
+    "tab_id": "1",
+    "reused_other_assessment_tab": false,
+    "initial_url": "http://127.0.0.1:3101/",
+    "final_url": "http://127.0.0.1:3101/#workbench",
+    "title": "SceneBreaker — A clear path. Until it isn’t.",
+    "viewport": {
+      "width": 1280,
+      "height": 720,
+      "device_pixel_ratio": 2
+    },
+    "final_viewport": {
+      "width": 1280,
+      "height": 720,
+      "device_pixel_ratio": 2
+    },
+    "viewport_override_used": false,
+    "responsive_testing_performed": false,
+    "visibility": "background",
+    "visibility_note": "The initial visible-tab request was refused because IAB visibility is unsupported in a subagent task. A fresh background tab was then created successfully.",
+    "tab_closed": true,
+    "tab_close_confirmed_by_tool": true,
+    "presentation_and_overlay": {
+      "mutable_preflight": "skipped",
+      "injected_dom_mutations": false,
+      "document_title_changed": false,
+      "script_tag_appended": false,
+      "overlay_injected": false,
+      "user_visible_overlay_claimed": false,
+      "live_server_started": false,
+      "reason": "User explicitly prohibited page mutation/overlays, and the documented evaluate API is read-only. Used screenshots, accessibility state, read-only DOM inspection, console reads, and ordinary UI controls instead.",
+      "disclosure": "No injected page mutation or overlay was attempted. Native UI interactions changed temporary tab state: tabs, playback, disclosures, stress-test selection, and one route-handle move that was immediately undone. No user file was uploaded or saved through the app."
+    },
+    "console": {
+      "status": "captured",
+      "reads": 4,
+      "read_limit_each": 100,
+      "entries": [],
+      "warning_count": 0,
+      "error_count": 0,
+      "total_count": 0,
+      "phases": [
+        "initial page",
+        "after 3D workbench activation",
+        "after replay and file-control inspection",
+        "before tab close"
+      ],
+      "note": "Every console read returned an empty array. No injected Impeccable browser detector ran, so these are app-console observations only."
+    },
+    "screenshots": [
+      {
+        "view": "initial landing viewport",
+        "dimensions": "1280 × 720 CSS px",
+        "observation": "3D scene, primary navigation, and Build your experiment link rendered."
+      },
+      {
+        "view": "workbench after primary link",
+        "dimensions": "1280 × 720 CSS px",
+        "observation": "Name/action toolbar, 2D/3D controls, plan, and Scene/Robot/Route tabs rendered."
+      },
+      {
+        "view": "replay result plus expanded scene-file section",
+        "dimensions": "1280 × 720 CSS px",
+        "observation": "Current-input collision result and stale successful-grid-replay status were simultaneously visible; three file-entry groups rendered."
+      }
+    ],
+    "screenshot_note": "Screenshots were inspected through the native browser tool. Image files were not written; the observed states and exact strings are preserved here."
+  },
+  "manual_findings": [
+    {
+      "id": "B-01",
+      "priority": "P2",
+      "category": "functional UI / accessibility status",
+      "title": "Returning from a grid replay leaves a contradictory success message on screen",
+      "confidence": "high",
+      "affected_ui": "Current-input result summary and workbench status paragraph below it",
+      "reproduction": [
+        "Open the default Crossing cart example.",
+        "Run Stress-test this route.",
+        "Choose the cell named '1.20 metres per second, 3.0 seconds delay: Goal reached. Replay'.",
+        "Click Return to my settings.",
+        "Read the result summary and status paragraph; playing the restored simulation and opening Scene files do not clear the stale message."
+      ],
+      "observed": {
+        "grid_selected_result": "Goal reached · Grid replay: 1.20 m/s · +3.0 s cart delay; Travel time 9.28 s; Closest gap 0.23 m",
+        "restored_result": "Contact with Crossing cart · Current inputs · deterministic simulation; Travel time 4.13 s; Closest gap 0.00 m",
+        "status_still_visible": "Replaying 1.20 m/s with 3.0 s extra delay: Goal reached.",
+        "status_semantics": "role=status",
+        "verification": "Exact text confirmed in the accessibility tree, read-only DOM inspection, and a screenshot showing both contradictory statements."
+      },
+      "impact": "Users returning to their own scene can mistake a successful test case for the current experiment's outcome. Assistive technology also receives no updated status explaining the return.",
+      "recommendation": "Update or clear the workbench status when returning to current settings; explicitly confirm that the current experiment is active.",
+      "suggested_command": "/impeccable harden"
+    },
+    {
+      "id": "B-02",
+      "priority": "P2",
+      "category": "keyboard accessibility",
+      "title": "Configuration tabs do not respond to the expected arrow-key navigation",
+      "confidence": "high",
+      "affected_ui": "Scene / Robot / Route tablist",
+      "reproduction": [
+        "Focus the Scene tab.",
+        "Press ArrowRight.",
+        "Inspect focus and selected-tab state."
+      ],
+      "observed": {
+        "focus_after_arrow": "tab-scene",
+        "selected_after_arrow": "Scene",
+        "tabs": [
+          {
+            "name": "Scene",
+            "role": "tab",
+            "aria_selected": "true",
+            "tabIndex": 0,
+            "aria_controls": "panel-scene"
+          },
+          {
+            "name": "Robot",
+            "role": "tab",
+            "aria_selected": "false",
+            "tabIndex": 0,
+            "aria_controls": "panel-robot"
+          },
+          {
+            "name": "Route",
+            "role": "tab",
+            "aria_selected": "false",
+            "tabIndex": 0,
+            "aria_controls": "panel-route"
+          }
+        ],
+        "controls_clickable": true,
+        "click_results": "Clicking Robot and Route successfully revealed their respective configuration panels."
+      },
+      "impact": "Keyboard and screen-reader users encountering a tablist cannot move between tabs using its expected left/right interaction. The controls remain available as ordinary Tab stops, so this is not a complete task blocker.",
+      "recommendation": "Support directional navigation between tabs with a single tab stop, selected-state updates, and consistent panel activation.",
+      "suggested_command": "/impeccable harden",
+      "limitation": "This is a directly observed interaction-pattern defect, not a claim of an independently certified accessibility-standard violation."
+    }
+  ],
+  "manual_finding_count": 2,
+  "manual_counts_by_priority": {
+    "P0": 0,
+    "P1": 0,
+    "P2": 2,
+    "P3": 0
+  },
+  "manual_checks": [
+    {
+      "name": "Keyboard route editing and undo",
+      "result": "passed in sampled flow",
+      "evidence": "ArrowRight on Move Start changed Start from (1.2, 4.0) to (1.3, 4.0), changed the selected handle, enabled Undo, and recalculated travel time from 4.13 s to 4.04 s. Undo restored (1.2, 4.0), the 4.13 s result, and announced 'Change undone.'."
+    },
+    {
+      "name": "Stress-test generation",
+      "result": "passed in sampled flow",
+      "evidence": "Default case produced 45 trial controls: 5 speeds × 9 delays. The UI reported 23 of 45 sampled cases did not reach the goal and explicitly said this is not a probability or safety score."
+    },
+    {
+      "name": "Grid result accessibility",
+      "result": "positive observed evidence",
+      "evidence": "The table has a descriptive caption, 10 column headers with scope=col, 5 speed row headers with scope=row, and 45 named buttons. Each button's accessible name includes speed, delay, outcome, and replay action; icons also distinguish goal/contact/time-limit outcomes."
+    },
+    {
+      "name": "Grid replay and return",
+      "result": "replay and numeric results worked; status defect B-01",
+      "evidence": "The 1.20 m/s +3.0 s cell selected successfully, focused the replay heading, and displayed Goal reached / 9.28 s / 0.23 m. Return to my settings restored Contact with Crossing cart / 4.13 s / 0.00 m."
+    },
+    {
+      "name": "3D rendering and simulation playback",
+      "result": "passed in sampled flow",
+      "evidence": "3D view replaced the editable plan with a rendered scene. Play simulation changed to Pause simulation and advanced replay from 0 to 0.24 s; it later returned to Play simulation at 4.13/4.13 s. Console remained empty."
+    },
+    {
+      "name": "Accessible names and landmarks",
+      "result": "positive observed evidence",
+      "evidence": "The page exposes header, named Main navigation, main, footer, a skip-to-editor link, named plan handles, labeled visible fields, and polite live result/status regions. No button lacked all of text, aria-label, aria-labelledby, and title in the inspected DOM."
+    },
+    {
+      "name": "File-entry UI",
+      "result": "inspected only",
+      "evidence": "The expanded section presents named Choose 2D floorplan, Choose 3D model, and Load experiment JSON controls. Supported types and local-processing limits are described. Hidden file inputs use display:none and are activated through named visible controls.",
+      "limitation": "No imports, uploads, malformed-file tests, or exports were performed."
+    },
+    {
+      "name": "Default viewport layout",
+      "result": "positive observed evidence",
+      "evidence": "At 1280×720 CSS px, document scrollWidth equaled viewport width (1280); no document-wide horizontal overflow was present in the initial state. The same viewport dimensions were recorded before close.",
+      "limitation": "No responsive, zoom, reduced-motion, or full contrast audit was performed."
+    }
+  ],
+  "security_observations": {
+    "confirmed_security_defects": [],
+    "evidence": [
+      "Both observed GitHub links opening new tabs use rel=noreferrer.",
+      "The inspected DOM contained no absolute http(s) external script, iframe, image, or stylesheet URLs.",
+      "The file-entry UI states local processing and explicitly calls imported geometry an approximation.",
+      "No unexpected dialog, permission prompt, or secret exposure was observed in the sampled flows."
+    ],
+    "limitation": "UI/DOM observations only. No complete network capture, backend/header audit, uploaded-model validation, malicious-input testing, or proof of local-only processing was attempted."
+  },
+  "false_positive_notes": [
+    "There were no CLI detector findings to adjudicate.",
+    "Unlabeled hidden file inputs were not reported as a UI accessibility defect: they were display:none and paired with named visible trigger buttons.",
+    "The screenshot's apparent simultaneous successful-replay and current-input failure messages were verified as real stale UI state, not detector inference.",
+    "One Playwright role locator did not resolve the native Scene files summary. The control worked through its current accessibility-tree entry; this tooling mismatch is not a product defect."
+  ],
+  "limitations": [
+    "This is Assessment B only; no design-health scoring, Assessment A review, parent synthesis, or trend inspection was performed.",
+    "Default viewport only, as requested.",
+    "No live browser detector overlay because evaluate is read-only and page injection was prohibited.",
+    "No source code was edited or implementation fix attempted.",
+    "Browser status, screenshots, DOM semantics, and routine reversible UI interactions support the findings; no screen-reader audio session was run.",
+    "Source target file paths were enumerated, but manual findings were established from the live interface rather than inferred from implementation."
+  ]
+}

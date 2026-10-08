@@ -1,25 +1,21 @@
-# A two-minute SceneBreaker walkthrough
+# Two-minute demonstration
 
-Use the default warehouse, seed 42, 24 trials, 2.40 m maximum shift. Rehearse on the built application; do not narrate the search as a learned AI model.
+0:00 — “One successful route does not tell you which timing changes will break it.”
 
-## 0:00–0:20 — the problem
+Play the homepage crossing. Let the robot contact the cart. Set **Cart starts after** to 6 s and replay; the same route now succeeds.
 
-“A robot can complete a task in the scene we designed for it. The more useful question is: how little does the world have to change before that stops being true?”
+0:25 — “This is your experiment, not a video.”
 
-Play the original route. Point to the start, goal and orange movable pallet.
+Open **Build your experiment**. Pin the current run. Edit the cart delay, robot speed or a waypoint; show the current result beside the pinned one. Dragging and numeric fields change the same scene.
 
-## 0:20–0:50 — discover the counterexample
+0:55 — “Test a range, then inspect the exact counterexample.”
 
-Click **Find a failure**. Explain that only one obstacle moves; the start, goal and controller stay fixed. The feasibility check rejects impossible tasks. Point to the measured 1.15 m result, not a hardcoded score.
+Run **Stress-test this route**. Explain the axes: maximum robot speed and extra start delay for moving objects. Click a failed cell, play it, then click a successful cell. Do not describe the fraction as a real-world failure probability.
 
-## 0:50–1:15 — make the cause visible
+1:25 — “Bring your own geometry.”
 
-Play the original and failed trajectories together. Switch to the top view if useful. “The local policy gets stuck, even though a collision-free route remains open. A separate sweep checked every smaller allowed 5 cm shift.”
+Choose **Import your scene** on the homepage or **Import scene** above the editor and load `public/examples/simple-room.gltf`. Review the projected boxes before accepting; acceptance returns focus to the editor. Show the 2D plan and move a route point. A floorplan can also be loaded, calibrated and traced manually; importing an image does not generate walls.
 
-## 1:15–1:40 — compare a different controller
+1:45 — “The evidence travels with the experiment.”
 
-Click **Test A\* replanning**, then play. “Same obstacle; different planning strategy. A\* can plan around the obstruction because it has a full map. This is an alternative controller, not a magically trained fix.”
-
-## 1:40–2:00 — show the engineering evidence
-
-Point to equal trial budgets, the separate minimum-verification cost and **Inspect every trial**. “Random search actually found a failure faster here. The point is reproducible evidence, not making one algorithm look better.” Export the JSON, show the tests in the repository and close with the scope: 3D visualization of a 2D kinematic experiment, not real-world certification.
+Save JSON. Explain that loading it validates and reruns inputs rather than trusting its recorded result. End with the boundary: browser-based route and timing experiments, not full robotics physics or safety certification.

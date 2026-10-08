@@ -1,0 +1,141 @@
+DIRECTION CONCEPT SEED (key: f629f14e; mode: persuade; source: api; approved pool: c3b204a1eed6; 306/564 human-approved; rerun with --scope direction --mode persuade --from f629f14e --candidate-count 7 to reproduce this roll against this catalog revision)
+ASSIGNED INDEX: 6
+  After ordering the grounded directions by resonance, build candidate
+  6 of your own grounded list; the assignment never points at a
+  challenger. The assignment is the roll, not a suggestion: your top-ranked
+  direction is what every run would ship, so the script decides which grounded
+  direction gets built. Each direction joins a durable visual system to a
+  concrete expression for the requested first surface, decided as one. It must
+  survive the current task plus navigation, quiet and dense content,
+  interaction and state, and a substantially different future surface. In an
+  attended run, present the assigned direction fully committed and offer
+  re-roll. You may add ONE card for your top-ranked grounded candidate when
+  it is not the assigned direction, kicker IMPECCABLE’S PICK, with an honest risk line
+  naming its familiarity; one pick card, never a ranked lineup, and the pick
+  never takes the lead position. When the assignment IS your top candidate,
+  there is no pick card. Re-roll yourself only
+  on named factual grounds, when the assignment cannot carry the product's
+  truth or task; taste is never grounds.
+  The assignment exists to refuse the model's ranking rut, never to outrank
+  the user or the brief. Never expose assignment metadata in user-facing labels.
+CHALLENGERS:
+  1. a Constructivist agit-train stopped at a village platform, where diagonal red wedges, stencil type, and photomontage turn railcars into moving broadsides
+     SOURCE ID: design-canon-constructivist-agit-train
+     CREATIVE SPARK: A red wedge drives across a railcar; stenciled slogans and pasted photographs angle forward as if the train were still moving.
+     SYSTEM GRAMMAR:
+       - Palette/material: unbleached newsprint cream ground, soot-black stencil ink for body, revolutionary red rationed to the wedge that drives the action
+       - Type/composition: stenciled wood-type caps and heavy numerals angled with the line of travel, photomontage fragments locked into the wedge's thrust, slogans banding each car
+       - Topology/navigation: content advances car by car along one strong diagonal axis of travel.
+       - Controls/state: calls to action are wedges that physically enter the composition; pressed states drive deeper.
+       - Responsive/motion: diagonals steepen on tall screens and relax on wide; scroll advances the train
+     WEB LEVERAGE: Scroll-driven horizontal travel with clip-path wedges keeps the diagonal grammar live in the browser.
+     QUALITY BAR: board https://impeccable.style/worlds/cards/design-canon-constructivist-agit-train.webp · hero https://impeccable.style/worlds/cards/design-canon-constructivist-agit-train-hero.webp
+  2. a rain-slicked Tokyo signboard alley at midnight, where stacked floor-by-floor signs, vending glow, and lantern script turn buildings into indexes of nightlife
+     SOURCE ID: vernacular-ephemera-signboard-canyon-midnight
+     CREATIVE SPARK: Every building is a spine of glowing titles: fourth-floor jazz, second-floor curry, basement karaoke, all reflected twice in the wet street.
+     SYSTEM GRAMMAR:
+       - Palette/material: wet asphalt black doubling every hue in reflection, backlit panel white and neon red stacked floor by floor, lantern vermilion marking the open room
+       - Type/composition: one sign one voice per floor, gothic panel, brush kanji, or neon script, stacked into a vertical spine with the ground floor set loudest
+       - Topology/navigation: destinations stack vertically per building; the alley scrolls sideways while floors index upward.
+       - Controls/state: open, crowded, and closed states read as sign illumination; the reflection doubles the live state below.
+       - Responsive/motion: alleys become single sign spines on phones; flicker is rare, brief, and disabled under
+     WEB LEVERAGE: Live-state-driven illumination and a reflective ground plane rendered with CSS transforms and filters.
+     QUALITY BAR: board https://impeccable.style/worlds/cards/vernacular-ephemera-signboard-canyon-midnight.webp · hero https://impeccable.style/worlds/cards/vernacular-ephemera-signboard-canyon-midnight-hero.webp
+  3. a small aircraft's night instrument six-pack, where six luminous gauges hold a pilot's trust through cloud with nothing outside the glass
+     SOURCE ID: signals-instruments-night-flight-six-pack
+     CREATIVE SPARK: Outside is ink; inside, six calm dials agree with each other, and the practiced eye sweeps them in a quiet ritual of cross-checks.
+     SYSTEM GRAMMAR:
+       - Palette/material: matte black panel ground, instrument faces near-black with luminous white markings, radium-green glow for needles; amber and red lamps only for caution
+       - Type/composition: white aviation numerals and tick scales on round dials, terse placard caps beneath each gauge; two ranked rows of three set the fixed composition
+       - Topology/navigation: a fixed constellation of instruments, each owning one truth; the cross-check sweep is the reading order.
+       - Controls/state: deviations tilt needles before alarms; every gauge shows trend as well as value.
+       - Responsive/motion: the six-pack stacks by criticality on phones; needle motion is damped and physical, never snapped.
+     WEB LEVERAGE: Real-time data binds to SVG gauges with damped spring physics and a screen-reader flight summary.
+     QUALITY BAR: board https://impeccable.style/worlds/cards/signals-instruments-night-flight-six-pack.webp · hero https://impeccable.style/worlds/cards/signals-instruments-night-flight-six-pack-hero.webp
+  4. a data-sublime field, where dense barcode columns and sine lattices strobe in pure black and white
+     SOURCE ID: ikeda-datamatics
+     CREATIVE SPARK: A wall of hairline vertical bars, some black, some white, holds like a frozen barcode. Dense monospace numbers pack the margin. A single sine curve traces the lattice, and for one frame the whole field snaps to its negative.
+     SYSTEM GRAMMAR:
+       - Palette/material: Pure black and pure white only, no grey and no color; flat pixel-crisp bars, hairline rules, and monospace numerics; the occasional full-frame inversion.
+       - Type/composition: One monospace face at data density, set in tight tabular columns; barcode bar-fields and sine curves structure the page
+       - Topology/navigation: Move by data column, by frequency band, and by frame index.
+       - Controls/state: Scan, sample, and invert; selecting a column pulls its numbers into focus while the surrounding field drops to a faint bar pattern.
+       - Responsive/motion: Columns thin and drop from the edges as width shrinks; reduced-motion disables all strobing and holds a single high-contrast still.
+     WEB LEVERAGE: Render the barcode and sine lattice on canvas from a seeded sequence, stepping frames on requestAnimationFrame that halts entirely under prefers-reduced-motion.
+     QUALITY BAR: board https://impeccable.style/worlds/cards/ikeda-datamatics.webp · hero https://impeccable.style/worlds/cards/ikeda-datamatics-hero.webp
+  5. a pickling brine calendar, where salt, acidity, spice, vegetable, vessel, temperature, and crunch mature through bright seasonal jars
+     SOURCE ID: food-fermentation-culinary-theater-pickling-brine-calendar
+     CREATIVE SPARK: Spring radishes tint one jar coral, summer cucumbers cloud another with dill, and a winter cabbage crock slowly turns ruby as bubbles climb its stone weight.
+     SYSTEM GRAMMAR:
+       - Palette/material: clear jar glass and pale brine haze as ground, radish coral and cabbage ruby as seasonal accents, dill green for fresh states, labels in kraft brown
+       - Type/composition: hand-lettered jar-label script over stamped date caps, jars ranked on shelf lines, each label banded with harvest, brine, and day count
+       - Topology/navigation: Browse jars by harvest, brine, fermentation stage, sensory change, and safe storage.
+       - Controls/state: Mix a brine, log a taste, vent or chill a vessel, and compare batches over days.
+       - Responsive/motion: Arrange jars as a vertical seasonal shelf on phones with safety thresholds stated in text.
+     WEB LEVERAGE: Batch timers, optional pH and temperature input, and photo comparison connect daily observation to safe, sensory maturation.
+     QUALITY BAR: board https://impeccable.style/worlds/cards/food-fermentation-culinary-theater-pickling-brine-calendar.webp · hero https://impeccable.style/worlds/cards/food-fermentation-culinary-theater-pickling-brine-calendar-hero.webp
+  6. a sleeping city fold, where streets crease into blankets, towers become bedposts, and neighborhoods dream different weather beneath one night
+     SOURCE ID: dream-surreal-impossible-worlds-sleeping-city-fold
+     CREATIVE SPARK: At midnight an avenue rises like a quilt seam, apartment lights become embroidered stars, and a whole district folds gently over a park dreaming tropical rain.
+     SYSTEM GRAMMAR:
+       - Palette/material: night navy city as ground, window lights as embroidered gold stars, quilt seams in pale thread white, each dreaming district tinted its own weather hue
+       - Type/composition: soft rounded caps for district names stitched along seam lines, the map grid relaxing into blanket folds, morning notes set in a plain waking sans
+       - Topology/navigation: Move through waking streets, folded neighborhoods, shared dream edges, and morning return.
+       - Controls/state: Tuck a district, open its dream, connect two sleeping weather patterns, and unfold at dawn.
+       - Responsive/motion: Use layered city quilts on phones and substitute crossfades with static night and morning plates.
+     WEB LEVERAGE: Deformable map geometry, local time, and collaborative dream fragments create a nightly city that remains spatially recognizable.
+     QUALITY BAR: board https://impeccable.style/worlds/cards/dream-surreal-impossible-worlds-sleeping-city-fold.webp · hero https://impeccable.style/worlds/cards/dream-surreal-impossible-worlds-sleeping-city-fold-hero.webp
+Fuse each challenger before judging it: the challenger supplies the form
+  and its system grammar, the product supplies every fact, and clarity wins
+  conflicts. Weigh the fused result against the assigned direction on exactly
+  two axes, audience identification and product clarity. Losing to strong
+  grounded material is a valid outcome; beating a thin or tool-monoculture
+  list is the point. A fused challenger that wins both axes becomes the build.
+  Close the weighing with a verdict per challenger, decided before any
+  borrowing is considered: wins (beats the assigned direction on both axes),
+  competitive (holds one axis), or declined (loses both). A declined
+  challenger is not spent: name the one discipline of its system the assigned
+  direction lacks, and raise the assigned direction to match before
+  presenting it. A donation transfers ambition and system discipline, never
+  the challenger's clothes; one world owns the page. Write each raise as its
+  own named line on the presented direction, and carry every verdict, kept
+  line, and raise into the decision page payload.
+When you can view images, open the QUALITY BAR board and hero for any
+challenger you weigh seriously and for the world you build. They exist as a
+craft bar, the finish level and commitment the build is expected to reach,
+never as a mockup to copy; your surface serves this product, not that render.
+PRODUCT.md and explicit incumbent brand commitments constrain every direction.
+The seed never chooses exact colors, fonts, tokens, or a user preference, and
+it never permits the world and first surface to be selected independently.
+The CREATIVE SPARK is a complete visual system, not a theme or decorative
+reference. Translate every supplied system rule into the product: palette and
+material, type and composition, topology, controls and states, and adaptation.
+Keep the source's visible character, scale, rhythm, and interaction instead of
+reducing vivid grammar to generic nouns. Keep a literal carrier only when it
+becomes functional.
+Ambitious motion, spatial media, or interaction is welcome when it strengthens
+the product without weakening semantics, performance, or fallback behavior.
+MODE RULES (persuade, from /Users/diegocrisafulli/.codex/skills/impeccable/reference/mode-persuade.md). They govern this surface's directions and every comp you write or judge for it, the decision comps included; where shared guidance conflicts, these win.
+DIRECTIONS
+When a catalog world's source is itself an interface language, the surface may carry its native grammar across navigation, content, controls, and states, within the platform conventions a native app keeps.
+
+For **Persuade**, the opening must make the offer intelligible and desirable, expose a clear action, and demonstrate something only this product can prove. The action is the one the category's visitors came to take, in its working form: an airline's route-and-dates search, a clinic's open appointment slots, a store's add to cart. A decorative link pointing at it elsewhere does not count. Conversion lives inside the form's own vocabulary: a hook that lands in one line, a visible primary action, a legible reading order. A committed form that hides the offer or the action has not finished translating. For **Experience**, the work itself leads from the first viewport.
+COMPS
+The world may be the carrier of the page, never a picture of it: a facade, a shutter or a book can be what the page is built on, while a viewport painted whole as a facade, a book cover or a travel poster, with no working parts in it, is a picture of the world, not its website. Material coverage is wanted: the world's material is the ground and the major surfaces, its type sets the headlines, and a world reduced to an accent on a neutral template is the category default with a sticker on it. Coverage is not performance: how many regions act out the concept is limited by the depth rule in visualize.md, and the rest stay in the world's material without performing it. Both ends erase the direction: the painted poster, and the generic product page (a headline over subcopy and a button, a row of equal cards below). The dealt composition sets the skeleton, and the compositions you write for comps two and three answer to the same test: a split hero (copy on one side, the product on the other, a badge row under it) or a centred headline over a row of cards is the template whatever world paints it.
+
+The world carries the page's parts and never absorbs them, so wherever it puts one, the page still works as a page: navigation set into a facade reads as links, copy on a shutter as set text a visitor reads, an action on a door plaque as plainly clickable, text reads against whatever sits behind it, the sections keep a steady vertical rhythm, the primary action is unmistakable, and the section below starts as a section rather than more painting. Fix a poster by making its parts work where the world put them, never by moving them into a standard layout on the world's colour: a cover that becomes copy beside a device on marigold has lost the cover.
+
+When the world is an object, the page is that one object seen once, at one scale and from one point of view, and the object keeps its real form: a book opens to two pages on one gutter, never a third panel, and a spine that carries the navigation belongs to the book on the page, never a second book beside it. More content goes on the object's own surfaces or on the next spread below, never on extra copies or impossible folds.
+
+Comps two and three each go further than the first, never cleaner: a bolder use of the same world, where the world's material carries more of the page's structure (still one dominant move, per the depth rule), a larger or stranger focal move, or a composition the category would not attempt.
+TELEMETRY: after the user's choice resolves, rerun this script once with
+  --kind <assigned|pick|challenger|canon> --from f629f14e --scope direction --mode persuade,
+  adding --chosen <challenger-id> when a dealt challenger won and keeping
+  --register <safer|bolder> when the resolved round came from a steered hand.
+  One ping per resolved attended round. The ping is anonymous, the card kind
+  plus the catalog id when one won; your grounded candidates' names never
+  leave the machine, and the ping is skipped automatically when DO_NOT_TRACK
+  or IMPECCABLE_NO_TELEMETRY is set.
+A user- or brief-pinned decision beats the roll, always.
+ASSIGNED INDEX (restated for truncated readers): 6. Build candidate
+6 of your own grounded list; seed key f629f14e.

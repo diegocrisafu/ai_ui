@@ -1,99 +1,82 @@
-# SceneBreaker
+# SceneBreaker — Route Laboratory
 
-**Small changes. Big failures.** A browser-based laboratory for finding reproducible robot-navigation counterexamples.
+**Build a route. Find where it fails.** A local-first, browser-based workbench for testing the interaction between a mobile robot's route, footprint, acceleration and a changing environment.
 
-A delivery robot crosses a room successfully. SceneBreaker moves one obstacle, searches for a position that traps the controller **while a valid route still exists**, then replays the original and failing runs together. Switch to an A\* controller to see the same robot navigate the same changed scene successfully.
+This version replaces the preset counterexample demonstration. The user now authors the experiment: draw or import a scene, edit route points and object motion, choose a drive model, and replay a finite speed × timing test grid.
 
-This is a working, deterministic **2D kinematic simulator with a 3D visualization**. It is not an LLM wrapper, learned robotics model, physics engine, Isaac Sim integration, or real-world safety certification.
+It is a **2D kinematic simulator with a live 3D view**, not a robotics physics engine, trained AI model, Isaac Sim substitute, or real-world safety tool.
 
-## Run locally
+## Run
 
-Use Node.js 22 LTS (`.nvmrc`) and npm. No API keys, database, accounts, or environment variables are needed.
+Node 22 LTS and npm. No account, API key, database, GPU server or environment variable is required.
 
-```bash
+```sh
 npm ci
 npm run dev
-```
-
-Open [localhost:3000](http://localhost:3000). WebGL enables the interactive Three.js view; a matching SVG plan view is the fallback when WebGL is unavailable.
-
-```bash
-npm run check                         # lint, type checking, deterministic tests
-npm run build                         # production build
-npm start                             # serve that build
-npm run benchmark -- --seeds 20       # measured results for seeds 0–19
+npm run check
+npm run build
+npm start -- --port 3100
 npm audit --omit=dev --audit-level=high
 ```
 
+The production build exports static files to `out/`. `npm start` serves that directory locally. The source does not depend on server API routes.
+
 ## Try it in two minutes
 
-1. Leave **Warehouse aisle**, seed **42**, **24 trials**, and a **2.40 m** shift limit selected.
-2. Play the original scene. The robot reaches its goal.
-3. Click **Find a failure**. A worker evaluates guided and seeded-random searches, each with the same trial allowance.
-4. Inspect the discovered **1.15 m** counterexample. Play the synchronized comparison: the baseline finishes, but the changed scene traps the local controller.
-5. Click **Test A\* replanning**. The obstacle stays put; a full-map planner takes a valid route around it.
-6. Inspect the trial table, export the complete JSON, or copy a reproducible setup link. Importing a report loads **settings only**; rerun it to verify the results.
+1. Play the crossing on the homepage. The default robot contacts the cart.
+2. Delay the cart to six seconds, then play again: the same route reaches the goal.
+3. Open the laboratory. Pin the current run, change **Start delay** or the robot's speed, and compare the outcomes.
+4. Add a waypoint and drag it, or move a focused handle using arrow keys. Select **Robot** to change footprint, acceleration, turn rate or drive model.
+5. Run **Stress-test this route**. Each cell replays its own exact speed and moving-object delay.
+6. Choose **Import your scene** on the homepage, or **Import scene** above the editor. Load a floorplan to scale and trace, or a self-contained GLB/glTF to review as projected collision boxes. Accepting a 3D model returns you to the editable scene; it is an approximation, not mesh physics.
+7. Save the experiment. The selected test's speed and timing override are included. Loading its JSON recalculates that replay from validated inputs instead of trusting a stored score.
 
-For the shorter presentation script, see [docs/DEMO.md](docs/DEMO.md).
+## Actual capabilities
 
-## What is implemented
+- A blank room and two editable starting examples; rooms from 4 to 30 m.
+- Up to 24 rectangular objects and 16 route points; undo/redo for geometry and settings.
+- Per-object position, footprint and ping-pong trajectory, speed and initial delay.
+- Differential and omnidirectional kinematics, acceleration/braking, turn-rate limit and circular footprint.
+- Optional delayed-map emergency braking. No sensor model or replanning claim.
+- Swept collision detection against moving rectangles, including motion reversal within a timestep.
+- 2D authoring, 3D orbit view, playback and time scrubbing.
+- Speed × extra-start-delay grids in a cancellable Web Worker; exact single-cell replay.
+- Pinned before/current run comparison and JSON evidence export.
+- Effective-input differences, pinned-experiment restore, and the nearest tested condition with the opposite outcome (explicit grid-step distance).
+- Local PNG/JPG/WebP references and self-contained GLB/glTF import with collision review.
+- Keyboard geometry editing, numeric alternatives to dragging, reduced-motion styling and text outcomes.
 
-- Three environments: warehouse aisle, loading bay, and narrow passage.
-- Bounded obstacle translation in 5 cm increments; configurable seed and trial budget.
-- Collision checking for the robot's swept circular footprint, not just point samples.
-- Independent A\* feasibility check; impossible scenes cannot be counted as valid failures.
-- Guided search versus seeded random sampling without replacement.
-- Separate exhaustive verification of every smaller displacement on the bounded one-axis grid.
-- Web Worker computation, actual progress updates, and cancellation without saving partial results.
-- Interactive 3D and top views, synchronized comparison, scrubber, playback speed, and route visibility.
-- Full trajectory/trial JSON export; bounded, validated local import; shareable setup links; in-memory session history.
-- Responsive layout, named controls, keyboard-accessible playback/settings, text results, and reduced-motion styling.
+## Measured example, not a universal benchmark
 
-## Evidence, not a leaderboard claim
+The unmodified crossing produces contact at **4.13 s**. Setting the cart's initial delay to **6 s** produces goal arrival at **9.28 s**. The default grid has **23 unsuccessful cases out of 45 sampled cases**.
 
-With 24 trials per method across seeds 0–19, both methods found a failure in every preset/run. **Random search found its first failure sooner on average; guided search found a smaller displacement within its budget.** The guided algorithm is seed-independent, so repeating it across seeds is not 20 independent observations.
-
-| Preset          | Grid-minimum failure | Guided first failure | Random mean first failure |
-| --------------- | -------------------: | -------------------: | ------------------------: |
-| Warehouse aisle |               1.15 m |              trial 6 |                 trial 1.9 |
-| Loading bay     |               1.30 m |              trial 6 |                 trial 1.8 |
-| Narrow passage  |               1.20 m |              trial 6 |                 trial 2.2 |
-
-These are three deliberately designed demonstration scenes, **not held-out evaluation or evidence of broad superiority**. Additional minimum-verification evaluations are excluded from the equal-budget comparison. See [the full methodology and measured results](docs/METHODOLOGY.md).
+Those figures come from the deterministic engine and were verified through the production browser interface. They are not a probability of failure, a safety rating, a claim about real robots, or evidence of superiority to another simulator.
 
 ## Architecture
 
-| Location                                       | Responsibility                                                           |
-| ---------------------------------------------- | ------------------------------------------------------------------------ |
-| `src/lib/simulation/scenarios.ts`              | Presets, constants, mutation and configuration validation                |
-| `src/lib/simulation/engine.ts`                 | Geometry, swept collisions, A\*, local policy and replay interpolation   |
-| `src/lib/simulation/search.ts`                 | Seeded search, trial accounting and grid-minimum verification            |
-| `src/lib/simulation/experiment.worker.ts`      | Off-main-thread orchestration and progress messages                      |
-| `src/components/scenebreaker/SceneBreaker.tsx` | Experiment state, controls, evidence and local reports                   |
-| `src/components/scenebreaker/SceneView.tsx`    | Three.js renderer and SVG fallback; no simulation decisions              |
-| `tests/simulation.test.ts`                     | Determinism, counterexamples, collision geometry, budgets and validation |
+| Path                                | Responsibility                                                      |
+| ----------------------------------- | ------------------------------------------------------------------- |
+| `src/lib/lab/model.ts`              | Bounded experiment schema, validation, examples and immutable edits |
+| `src/lib/lab/engine.ts`             | Kinematics, relative swept collisions, replay and finite test grid  |
+| `src/lib/lab/sweep.worker.ts`       | Background trials, progress and completion                          |
+| `src/lib/lab/import.ts`             | Model loading, resource isolation and reviewed 2D projection        |
+| `src/components/lab/RouteLab.tsx`   | Authoring, history, comparison, playback and files                  |
+| `src/components/lab/PlanEditor.tsx` | Pointer/keyboard 2D geometry editor                                 |
+| `src/components/lab/Scene3D.tsx`    | Live visualization of the engine's recorded state                   |
+| `tests/lab.test.ts`                 | Determinism, kinematics, motion collisions and input validation     |
 
-The renderer consumes recorded trajectories. Changing playback speed or camera does not change the experiment. There are no application API routes or server-side experiment stores.
+The old `src/lib/simulation/` engine and `src/components/scenebreaker/` interface remain as unmounted historical code. Their original benchmark script and tests concern that version only. The new importer reuses the old directory's resource validator. The old project is recoverable at commit `60e7d34`.
 
-## Deployment
+## Static hosting
 
-Deploy as a normal Next.js 16 application using Node 22: install with `npm ci`, build with `npm run build`, and serve with `npm start`. A Next.js-compatible host can use its standard preset with the repository root as its root directory. Do not enable analytics or add secrets by default.
+Build with `npm run build` and publish `out/` on a static host at the domain root. Vercel's Next.js preset supports the configured export. A free hosting subdomain is sufficient; no paid compute backend is required. Provider quotas and acceptable-use rules still apply.
 
-The checked-in GitHub Actions workflow runs installation, lint, type checking, tests, production build and production-dependency audit on pushes to `main` and pull requests. Uncut Sans and Spline Sans are bundled as local WOFF2 files; neither building nor viewing the app requires a font-service request.
+The CI workflow runs lint, types, tests, build and a production dependency audit. The app and fonts are self-hosted; viewing it does not call a font service. A deployment URL must be separately verified before calling a release live.
 
-## Design system
+## Design and limits
 
-Headings use [Uncut Sans](https://uncut.wtf/sans-serif/uncut-sans/); body and interface text use [Spline Sans from Fontshare](https://www.fontshare.com/fonts/spline-sans). Both are self-hosted under the SIL Open Font License, with full notices in `public/fonts/`.
+The typography uses locally bundled Familjen Grotesk (downloaded from Fontshare) for bold, monochrome headings and the interface, with Azeret Mono for measurements. The system follows a 1.25× type scale, 150% line height and 12/8/4-column layout. Paper, graphite and ultramarine are the three colour anchors; headline words are not colour-highlighted. Archived Instrument Serif assets are no longer loaded.
 
-The interface uses a strict 1.25× type scale, 150% line height, and shared 12/8/4-column desktop/tablet/phone grids. Three palette anchors—paper, forest and rust—produce all interface shades through opacity. See [the design system](docs/DESIGN_SYSTEM.md) for tokens, breakpoints, color roles and verification; `tests/design-system.test.ts` guards the core rules.
+Imported 3D meshes are visual references; **editable axis-aligned boxes drive collision detection**. Floorplans require manual tracing. No articulated bodies, physical contact dynamics, perception, model training or real-world validation are included. See [methodology](docs/METHODOLOGY.md), [demo script](docs/DEMO.md), [practical pre-launch review](docs/REVIEW.md), and [licenses](public/third-party-notices.txt).
 
-## Limits and privacy
-
-- One rectangle moves on one axis. A reported minimum is on a finite grid, not the smallest possible change in every direction or in continuous space.
-- The controller is intentionally short-sighted. There is no training, sensor noise, inertia, robot dynamics, camera perception or real-world validation.
-- A\* has full map access and serves both as the independent feasibility check and the alternative controller. The comparison does not imply that a deployed robot can obtain that information.
-- A\*'s 20 cm grid is conservative and can reject narrow continuous routes that the grid does not represent.
-- A bounded search that finds no failure does not prove robustness.
-- Settings, imported files, trial data and history stay in the browser. Reloading clears history. The app adds no analytics, cookies or persistent browser storage; a deployment host can still keep ordinary access logs.
-
-See [the practical pre-launch review](docs/REVIEW.md) and [third-party notices](public/third-party-notices.txt). The previous WeatherLens app is recoverable from Git commit `c4bca5f` and the local `archive/weatherlens-c4bca5f` branch.
+Files and results remain in tab memory. Save before reloading. The app has no analytics, cookies, accounts, persistent browser storage or application file uploads; the hosting provider may retain ordinary access logs.

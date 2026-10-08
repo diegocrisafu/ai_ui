@@ -1,8 +1,8 @@
 /** Shared scene palette; CSS uses the same three anchors. */
 export const PALETTE = {
-  paper: "#f5f3ec",
-  ink: "#183f35",
-  rust: "#9d432c",
+  paper: "#f5f6f8",
+  ink: "#17191f",
+  rust: "#2547d0",
 } as const;
 
 /** Composite an anchor over paper; equivalent to an opacity-derived UI tone. */

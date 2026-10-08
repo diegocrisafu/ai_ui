@@ -1,69 +1,59 @@
-# SceneBreaker methodology
+# Route Laboratory methodology
 
-Engine version **1.0.0**. This document describes the implemented model, not a roadmap or a safety claim.
+## Question and scope
 
-## Experiment contract
+For a user-authored route and scene, how do robot speed and the timing of moving obstacles alter whether the robot reaches its goal?
 
-The baseline must reach the goal. An experiment keeps the controller, start, goal, robot footprint and fixed obstacles unchanged. Only obstacle P-01 translates along positive Y, in 0.05 m steps up to the selected preset's limit. Zero shift is the baseline and is excluded from search trials.
+This is an inspectable kinematic experiment. It is not an optimizer, learned policy, simulator certification or real-world safety assessment. Product-market demand has not been validated with robotics teams.
 
-A **valid failure** is a stalled, timed-out or colliding reactive run in a scene whose geometry is valid and for which the independent planner finds a collision-free route. Overlapping/out-of-bounds obstacles, blocked endpoints and scenes with no oracle route are rejected. Rejected scenes consume trial budget and are not failures.
+## Simulation
 
-## Model
+Engine version: `route-lab-2.0.0`. A run uses a fixed 0.04 s step and stops at first collision, arrival at all ordered waypoints, or 60 s. Position units are metres.
 
-| Parameter        | Value                                    |
-| ---------------- | ---------------------------------------- |
-| Room             | 12 × 8 m                                 |
-| Robot            | Circle, radius 0.24 m                    |
-| Speed            | 0.8 m/s                                  |
-| Integration step | 0.1 s                                    |
-| Horizon          | 350 ticks / 35 s                         |
-| Goal tolerance   | 0.09 m                                   |
-| Stall threshold  | Under 0.025 m displacement over 25 ticks |
-| Collision margin | 0.002 m in swept checks                  |
-| Feasibility grid | 0.2 m, 8-connected                       |
-| Mutation grid    | 0.05 m                                   |
+The robot has a circular footprint. Differential drive rotates toward the next waypoint under a configured angular-rate limit. The omnidirectional model can translate in any direction. Both use bounded acceleration/braking, decelerate near each waypoint and stop there. These are simplified motion models, not detailed wheel dynamics.
 
-The reactive policy tests nine headings relative to the goal: 0°, ±15°, ±30°, ±60° and ±90°. It chooses a safe candidate that strictly reduces goal distance. It cannot temporarily move away from the goal and can therefore become trapped at a local minimum. Swept-circle collision detection covers each entire segment using the rounded Minkowski expansion of each axis-aligned rectangle; a thin obstacle cannot be skipped just because both endpoints are free.
+Objects are axis-aligned rectangles, static or translating along a straight segment and back. Each has speed and an initial start delay. A grid trial adds the same extra start delay to every moving object.
 
-The independent A\* planner uses Euclidean edge cost and heuristic, checked endpoint-to-grid connections, and swept-checked neighbor edges. Line-of-sight simplification preserves checked segments. Its returned route is a constructive feasibility witness within this model; failure to find a route is not proof that continuous free space is disconnected.
+Collision uses a swept circle against rounded rectangle expansion in relative robot/object coordinates. Intervals split at object motion starts and reversals. A collision time is refined by bisection within the timestep. The trajectory between samples is treated as linear; the model is not a continuous dynamics solver.
 
-The alternate controller follows the A\* route with the same speed, footprint and collision checks. It receives privileged full-map information. It does not retrain, modify or automatically repair the reactive controller.
+Clearance is sampled at recorded steps. It is not a proven continuous minimum. Optional emergency braking observes delayed, otherwise perfect map positions and checks a forward stopping corridor. It does not replan and has no claim of universal safety.
 
-## Search accounting
+## Finite tests
 
-Both methods receive `min(budget, numberOfAvailableShifts)` distinct evaluations, including invalid scenes.
+Five speed multipliers (0.5, 0.75, 1, 1.25, 1.5) apply to the configured maximum speed and are clamped to 0.2–3 m/s, with duplicates removed. Moving scenes use nine extra delays, 0–4 s in 0.5 s increments. Static scenes use only zero delay.
 
-- **Guided:** probe coarse ascending shifts; after discovering a failure, refine below the smallest one seen, then consume remaining untested shifts. This heuristic does not assume failure is monotonic.
-- **Random:** use a deterministic uint32-seeded generator to sample the same grid without replacement.
-- **Verification:** if either search finds a failure, independently evaluate shifts in ascending order through the first valid failure. This checks every smaller 5 cm displacement. These extra evaluations are stored in `minimizationTrials`, not hidden inside either search's budget.
+The default grid is 45 explicitly enumerated cases. A cell can be replayed using precisely the saved speed and phase. A failed case means contact or the time limit; it is not necessarily proof that no feasible alternative route exists.
 
-The UI's “smallest” is the smallest **valid failure on this one-axis finite grid**. `minimalOnGrid` is false when neither search found a counterexample. A seed affects only random search; guided search and simulation are deterministic.
+The highlighted contrasting condition minimizes Manhattan distance in speed-index plus delay-index from the current-input baseline. Ties prefer less added delay, then lower speed. This metric counts tested grid steps, not physical distance or control cost. It is not a claim of a globally minimal failure or repair. The original maximum speed remains an exact axis point even when a imported value has more than two decimal places.
 
-## Reproduced benchmark
+Pinned comparisons identify effective input differences, including each moving object's initial delay plus any grid override. Restoring a pin restores its experiment and replay overrides. Undo/redo detach visual reference assets, with an explicit reattachment notice, so geometry cannot silently coexist with the wrong imported model.
 
-Run `npm run benchmark -- --seeds 20`. Parameters: engine 1.0.0, seeds 0–19, 24 trials/method, full shift range for each preset. Conditional means exclude unsuccessful runs; all runs in this measurement found a failure. Timing is deliberately not reported as a portable performance result.
+The default crossing measured:
 
-| Scene          | Method | Runs with a failure | Mean first-failure trial | Mean smallest shift found | Mean valid failures / 24 |
-| -------------- | ------ | ------------------: | -----------------------: | ------------------------: | -----------------------: |
-| Warehouse      | Guided |               20/20 |                        6 |                  1.1500 m |                        2 |
-| Warehouse      | Random |               20/20 |                      1.9 |                  1.1775 m |                     12.8 |
-| Loading bay    | Guided |               20/20 |                        6 |                  1.3000 m |                        5 |
-| Loading bay    | Random |               20/20 |                      1.8 |                  1.3525 m |                    12.95 |
-| Narrow passage | Guided |               20/20 |                        6 |                  1.2000 m |                        1 |
-| Narrow passage | Random |               20/20 |                      2.2 |                  1.2300 m |                     10.8 |
+| Inputs                | Outcome                 |              Time |
+| --------------------- | ----------------------- | ----------------: |
+| Original crossing     | Contact with cart       |            4.13 s |
+| Cart starts after 6 s | Goal reached            |            9.28 s |
+| Default finite grid   | 23/45 do not reach goal | Not a probability |
 
-No invalid trials occurred with these particular preset limits. Minimum verification required 23, 26 and 24 additional evaluations respectively. Random sampling discovers failures sooner in these scenes; the guided heuristic finds a smaller shift within its allotted budget. Neither observation establishes broad superiority. The guided rows repeat identical searches across seeds and must not be treated as independent evidence.
+No search-minimum or statistically representative success-rate claim is made. Those claims in the archived preset-engine methodology do not apply to this interface.
 
-The three presets were selected to illustrate local-policy failure, not sampled from a representative population. There is no held-out scene set, statistical generalization claim, sim-to-real result, physical robot test, or GPU performance claim.
+## Scene import
 
-## Reproducibility and trust boundaries
+PNG/JPG/WebP is a scaled reference. Users set room dimensions and trace collision boxes. The image itself is never treated as detected collision geometry.
 
-Export includes engine version, validated configuration, all trials, baseline/failure/alternate trajectories, minimum-verification trials and scope text. Import accepts at most 2 MB, validates the scene ID and bounded numeric settings, and rejects a different declared engine version. Imported outcome claims and trajectories are never executed or trusted: the user reruns the settings locally. Setup links contain only scene, seed, budget and shift limit in the URL fragment.
+GLB/glTF must be self-contained, Y-up, under 15 MB and within the model complexity bounds. URI-bearing fields are screened before loading; external HTTP and local-file resources are rejected. A loading-manager allowlist provides a second boundary. Draco/KTX decoder services are not configured.
 
-A Web Worker owns each search. Cancellation terminates it and does not save partial results. Replay is visual interpolation of recorded states; camera motion and playback speed cannot influence the simulation. The engine has no DOM, renderer or network dependencies.
+Meshes crossing a 0.08–0.6 m navigation band yield conservative world-aligned bounding rectangles. Thin, overhead, tiny or excess meshes are skipped. The import review states the number retained/skipped before replacing geometry. Inspect the boxes before using a result. Mesh animations, materials, joints and visual details do not drive the solver. Imported meshes remain visual references when collision boxes are edited.
 
-Repeat runs within the same JavaScript engine are deterministic. Floating-point trigonometric functions can differ in their last bits across JavaScript engines; cross-runtime trajectory comparisons should use a small numeric tolerance (for example 1e-9), while requiring identical configuration, trial ordering and categorical outcomes. Bit-identical exports across all runtimes are not promised.
+## Evidence and verification
 
-## Sensible next experiments
+The new lab test suite covers deterministic replay, user-controlled outcomes, acceleration/turn bounds, drive-model differences, braking, waypoint order, thin and moving obstacles, reversal intervals, footprint size, grid reproduction, validation and external-resource rejection. The repository also retains historical engine tests and design-token tests; their combined count is not a claim that every UI path is automated.
 
-These are extensions, **not implemented features**: held-out procedural scenes, two-axis translation and rotation, multiple controller families, noise distributions with repeated trials, policy-plugin interfaces, and an external simulator adapter. Any extension must preserve a separate feasibility check, budget accounting, versioned reports and honest comparisons.
+Manual production-browser checks cover outcome-changing edits, keyboard waypoint movement, finite-grid replay, a real glTF import, responsive screenshots and console inspection. Remaining review findings belong in the critique report, not hidden behind a passing test count.
+
+## Alternatives and non-goals
+
+Isaac Sim provides robot/sensor/physics capabilities far beyond this model. SceneBreaker trades that scope for immediate static-web access, editable small experiments and inspectable deterministic evidence. That trade does not make it a replacement.
+
+No machine learning, automatic map reconstruction, ROS integration, articulated robotics, sensor noise, friction, collision response, crowd dynamics or hardware transfer is claimed.
