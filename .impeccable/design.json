@@ -274,6 +274,18 @@
           "inspectorSpan": 4
         }
       ],
+      "methodology": {
+        "desktopColumns": "6 / 6 with one gutter, no empty track",
+        "tabletColumns": "4 / 4",
+        "phoneColumns": "stacked, 32px row gap",
+        "headingSteps": "type-8 wide desktop, type-7 small desktop, type-5 tablet, type-4 phone",
+        "proseMaxWidth": "65ch"
+      },
+      "importEntry": {
+        "position": "before .lab-layout",
+        "entryPoints": "opening, workbench toolbar, methodology",
+        "focus": "panel summary on open, model review after reading, editor after acceptance"
+      },
       "mobileContext": {
         "sourceSelector": ".mobile-context",
         "position": "sticky",

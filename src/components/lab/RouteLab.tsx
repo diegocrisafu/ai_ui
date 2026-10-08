@@ -109,7 +109,7 @@ const outcomeText = (r: Result | Trial) =>
       ? `Contact with ${r.hit ?? "an obstacle"}`
       : "Time limit reached";
 
-function Opening() {
+function Opening({ onImport }: { onImport: () => void }) {
   const [delay, setDelay] = useState(0);
   const e = useMemo(() => {
     const e = example();
@@ -131,6 +131,9 @@ function Opening() {
           <a className="primary" href="#workbench">
             Build your experiment <ArrowDown size={19} />
           </a>
+          <button className="text-button" onClick={onImport}>
+            <FileUp size={18} /> Import your scene
+          </button>
         </div>
       </div>
       <div className="opening-scene">
@@ -187,6 +190,7 @@ export default function RouteLab() {
   } | null>(null);
   const [dirty, setDirty] = useState(false);
   const filesDrawer = useRef<HTMLDetailsElement>(null);
+  const importReview = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (!dirty) return;
     const warn = (event: BeforeUnloadEvent) => {
@@ -206,6 +210,12 @@ export default function RouteLab() {
     [modelWidth, setModelWidth] = useState(10);
   const [pendingModel, setPendingModel] = useState<ImportedModel | null>(null),
     pendingRef = useRef<ImportedModel | null>(null);
+  useEffect(() => {
+    if (pendingModel && importReview.current) {
+      importReview.current.focus({ preventScroll: true });
+      importReview.current.scrollIntoView({ behavior: "auto", block: "center" });
+    }
+  }, [pendingModel]);
   const [showClearance, setShowClearance] = useState(false),
     [showBounds, setShowBounds] = useState(true),
     [message, setMessage] = useState(
@@ -318,7 +328,7 @@ export default function RouteLab() {
     setMessage(
       (direction === "back" ? "Change undone." : "Change restored.") +
         (detached
-          ? " Imported visuals were detached to keep the restored geometry accurate; reattach them under Open scene."
+          ? " Imported visuals were detached to keep the restored geometry accurate; reattach them under Import scene."
           : ""),
     );
   }
@@ -377,6 +387,16 @@ export default function RouteLab() {
       "Scene loaded. Undo restores geometry. Reattach imported visual files if needed.",
     );
   }
+  function openFiles() {
+    if (!filesDrawer.current) return;
+    filesDrawer.current.open = true;
+    filesDrawer.current.scrollIntoView({ behavior: "auto", block: "start" });
+    filesDrawer.current.querySelector("summary")?.focus({ preventScroll: true });
+  }
+  function returnToEditor() {
+    if (filesDrawer.current) filesDrawer.current.open = false;
+    document.getElementById("replay-heading")?.focus();
+  }
   function save() {
     if (!parsed.experiment) return;
     download(
@@ -423,6 +443,7 @@ export default function RouteLab() {
       setMessage(
         "Experiment imported and rerun locally. Stored results were ignored.",
       );
+      returnToEditor();
     } catch (error) {
       setFileError(
         error instanceof SyntaxError
@@ -520,6 +541,7 @@ export default function RouteLab() {
     setMessage(
       "Model applied. Review the projected collision boxes in 2D; remove floor/ceiling false positives. Meshes are visual references; edited boxes control collisions.",
     );
+    returnToEditor();
   }
   function testGrid() {
     if (!parsed.experiment) return;
@@ -594,7 +616,7 @@ export default function RouteLab() {
           <a href="#workbench">Laboratory</a>
           <a href="#how-it-works">How it works</a>
           <a
-            href="https://github.com/diegocrisafu/ai_ui"
+            href="https://github.com/diegocrisafu/ai_ui/tree/codex/scenebreaker-route-lab"
             target="_blank"
             rel="noreferrer"
           >
@@ -604,7 +626,7 @@ export default function RouteLab() {
         </nav>
       </header>
       <main id="top">
-        <Opening />
+        <Opening onImport={openFiles} />
         <section
           id="workbench"
           className="workbench"
@@ -645,17 +667,9 @@ export default function RouteLab() {
               />
             </label>
             <div className="file-actions">
-              <button
-                onClick={() => {
-                  if (filesDrawer.current) {
-                    filesDrawer.current.open = true;
-                    filesDrawer.current.scrollIntoView({ behavior: "auto" });
-                    filesDrawer.current.querySelector("summary")?.focus();
-                  }
-                }}
-              >
+              <button onClick={openFiles}>
                 <FileUp size={17} />
-                Open scene
+                Import scene
               </button>
               <button onClick={() => travel("back")} disabled={!history.back}>
                 <Undo2 size={17} />
@@ -674,6 +688,182 @@ export default function RouteLab() {
               </button>
             </div>
           </div>
+          <details ref={filesDrawer} id="scene-imports" className="file-drawer">
+            <summary>
+              <FileUp size={19} />
+              Import your scene{" "}
+              <span>
+                2D floorplan, 3D model or saved experiment · files stay local
+              </span>
+              <ChevronRight size={18} />
+            </summary>
+            <div className="file-grid">
+              <section>
+                <h3>2D floorplan</h3>
+                <p>
+                  Choose a PNG, JPG or WebP, set the real room dimensions,
+                  then trace walls and obstacles with Add object. An image
+                  alone does not create collision geometry.
+                </p>
+                <button onClick={() => imageInput.current?.click()}>
+                  Choose 2D floorplan
+                </button>
+                {image && (
+                  <div>
+                    <p>Floorplan loaded. Existing objects are unchanged.</p>
+                    <button
+                      onClick={() => {
+                        setPanel("scene");
+                        returnToEditor();
+                      }}
+                    >
+                      Set scale & trace obstacles <ArrowDown size={17} />
+                    </button>
+                    <button
+                      className="text-button"
+                      onClick={() => {
+                        if (imageRef.current)
+                          URL.revokeObjectURL(imageRef.current);
+                        imageRef.current = undefined;
+                        setImage(undefined);
+                        setMessage(
+                          "Floorplan visual removed; collision objects are unchanged.",
+                        );
+                      }}
+                    >
+                      Remove floorplan visual
+                    </button>
+                  </div>
+                )}
+                <input
+                  ref={imageInput}
+                  type="file"
+                  hidden
+                  accept="image/png,image/jpeg,image/webp"
+                  onChange={(event) => {
+                    void loadImage(event.target.files?.[0]);
+                    event.target.value = "";
+                  }}
+                />
+              </section>
+              <section>
+                <h3>3D model</h3>
+                <p>
+                  Choose a self-contained GLB or glTF under 15 MB, with Y up.
+                  Set its width, then review the obstacle boxes before using
+                  the scene. This is an approximation, not mesh physics.
+                </p>
+                <Numeric
+                  label="Model width"
+                  value={modelWidth}
+                  min={2}
+                  max={28}
+                  unit="m"
+                  onChange={setModelWidth}
+                />
+                <button
+                  disabled={loadingFile}
+                  onClick={() => modelInput.current?.click()}
+                >
+                  {loadingFile ? "Reading model…" : "Choose 3D model"}
+                </button>
+                <input
+                  ref={modelInput}
+                  type="file"
+                  hidden
+                  accept=".glb,.gltf"
+                  onChange={(event) => {
+                    void loadModel(event.target.files?.[0]);
+                    event.target.value = "";
+                  }}
+                />
+                {model && (
+                  <button
+                    className="text-button"
+                    onClick={() => {
+                      setModel(null);
+                      if (modelRef.current) disposeModel(modelRef.current.root);
+                      modelRef.current = null;
+                      setMessage(
+                        "3D visual removed; editable collision boxes remain.",
+                      );
+                    }}
+                  >
+                    Remove model visual
+                  </button>
+                )}
+              </section>
+              <section>
+                <h3>Saved experiment</h3>
+                <p>
+                  Load inputs from a saved SceneBreaker file. We recalculate the
+                  result; a file cannot supply a fake score.
+                </p>
+                <button onClick={() => jsonInput.current?.click()}>
+                  Load experiment JSON
+                </button>
+                <input
+                  ref={jsonInput}
+                  type="file"
+                  hidden
+                  accept=".json,application/json"
+                  onChange={(event) => {
+                    void loadJson(event.target.files?.[0]);
+                    event.target.value = "";
+                  }}
+                />
+                <a
+                  className="text-link"
+                  href="/examples/simple-room.gltf"
+                  download
+                >
+                  Download a sample 3D scene
+                </a>
+              </section>
+            </div>
+            {pendingModel && (
+              <div
+                ref={importReview}
+                className="import-review"
+                role="region"
+                aria-label="Review this model import"
+                tabIndex={-1}
+              >
+                <h3>Review this model import</h3>
+                <p>
+                  {pendingModel.name}: {pendingModel.width.toFixed(1)} ×{" "}
+                  {pendingModel.depth.toFixed(1)} m, {pendingModel.boxes.length}{" "}
+                  projected collision boxes, {pendingModel.skipped} meshes
+                  skipped (thin, overhead, tiny or over the 24-object limit).
+                  Replaces the room and route; Undo restores geometry. Model
+                  animations are not imported.
+                </p>
+                <div className="button-row">
+                  <button className="primary" onClick={applyModel}>
+                    Use this scene
+                  </button>
+                  <button
+                    onClick={() => {
+                      if (pendingRef.current)
+                        disposeModel(pendingRef.current.root);
+                      pendingRef.current = null;
+                      setPendingModel(null);
+                    }}
+                  >
+                    Cancel import
+                  </button>
+                </div>
+              </div>
+            )}
+          </details>
+          {fileError && (
+            <div className="error-message" role="alert">
+              {fileError}
+              <button className="text-button" onClick={() => setFileError("")}>
+                Dismiss
+              </button>
+            </div>
+          )}
           <div className="lab-layout">
             <div className="lab-stage">
               <div className="stage-toolbar">
@@ -1536,161 +1726,6 @@ export default function RouteLab() {
           <p className="status-line" role="status">
             {message}
           </p>
-          <details ref={filesDrawer} className="file-drawer">
-            <summary>
-              <FileUp size={19} />
-              Scene files{" "}
-              <span>Bring your own floorplan, 3D model or experiment</span>
-              <ChevronRight size={18} />
-            </summary>
-            <div className="file-grid">
-              <section>
-                <h3>A floorplan</h3>
-                <p>
-                  PNG, JPG or WebP. Calibrate with room width/depth, then trace
-                  collision objects. Nothing is uploaded.
-                </p>
-                <button onClick={() => imageInput.current?.click()}>
-                  Choose 2D floorplan
-                </button>
-                {image && (
-                  <button
-                    className="text-button"
-                    onClick={() => {
-                      if (imageRef.current)
-                        URL.revokeObjectURL(imageRef.current);
-                      imageRef.current = undefined;
-                      setImage(undefined);
-                      setMessage(
-                        "Floorplan visual removed; collision objects are unchanged.",
-                      );
-                    }}
-                  >
-                    Remove floorplan visual
-                  </button>
-                )}
-                <input
-                  ref={imageInput}
-                  type="file"
-                  hidden
-                  accept="image/png,image/jpeg,image/webp"
-                  onChange={(event) => {
-                    void loadImage(event.target.files?.[0]);
-                    event.target.value = "";
-                  }}
-                />
-              </section>
-              <section>
-                <h3>A 3D scene</h3>
-                <p>
-                  Self-contained GLB/glTF, Y up, under 15 MB. Projected boxes
-                  are a starting approximation, not mesh physics.
-                </p>
-                <Numeric
-                  label="Model width"
-                  value={modelWidth}
-                  min={2}
-                  max={28}
-                  unit="m"
-                  onChange={setModelWidth}
-                />
-                <button
-                  disabled={loadingFile}
-                  onClick={() => modelInput.current?.click()}
-                >
-                  {loadingFile ? "Reading model…" : "Choose 3D model"}
-                </button>
-                <input
-                  ref={modelInput}
-                  type="file"
-                  hidden
-                  accept=".glb,.gltf"
-                  onChange={(event) => {
-                    void loadModel(event.target.files?.[0]);
-                    event.target.value = "";
-                  }}
-                />
-                {model && (
-                  <button
-                    className="text-button"
-                    onClick={() => {
-                      setModel(null);
-                      if (modelRef.current) disposeModel(modelRef.current.root);
-                      modelRef.current = null;
-                      setMessage(
-                        "3D visual removed; editable collision boxes remain.",
-                      );
-                    }}
-                  >
-                    Remove model visual
-                  </button>
-                )}
-              </section>
-              <section>
-                <h3>An experiment</h3>
-                <p>
-                  Load inputs from a saved SceneBreaker file. We recalculate the
-                  result; a file cannot supply a fake score.
-                </p>
-                <button onClick={() => jsonInput.current?.click()}>
-                  Load experiment JSON
-                </button>
-                <input
-                  ref={jsonInput}
-                  type="file"
-                  hidden
-                  accept=".json,application/json"
-                  onChange={(event) => {
-                    void loadJson(event.target.files?.[0]);
-                    event.target.value = "";
-                  }}
-                />
-                <a
-                  className="text-link"
-                  href="/examples/simple-room.gltf"
-                  download
-                >
-                  Download a sample 3D scene
-                </a>
-              </section>
-            </div>
-            {pendingModel && (
-              <div className="import-review" role="status">
-                <h3>Review this model import</h3>
-                <p>
-                  {pendingModel.name}: {pendingModel.width.toFixed(1)} ×{" "}
-                  {pendingModel.depth.toFixed(1)} m, {pendingModel.boxes.length}{" "}
-                  projected collision boxes, {pendingModel.skipped} meshes
-                  skipped (thin, overhead, tiny or over the 24-object limit).
-                  Replaces the room and route; Undo restores geometry. Model
-                  animations are not imported.
-                </p>
-                <div className="button-row">
-                  <button className="primary" onClick={applyModel}>
-                    Use this scene
-                  </button>
-                  <button
-                    onClick={() => {
-                      if (pendingRef.current)
-                        disposeModel(pendingRef.current.root);
-                      pendingRef.current = null;
-                      setPendingModel(null);
-                    }}
-                  >
-                    Cancel import
-                  </button>
-                </div>
-              </div>
-            )}
-          </details>
-          {fileError && (
-            <div className="error-message" role="alert">
-              {fileError}
-              <button className="text-button" onClick={() => setFileError("")}>
-                Dismiss
-              </button>
-            </div>
-          )}
           <section className="stress-section" aria-labelledby="stress-heading">
             <div className="stress-intro">
               <div>
@@ -1874,6 +1909,14 @@ export default function RouteLab() {
               for articulated robots, physical sensors, contact dynamics and
               real deployment validation.
             </p>
+            <p>
+              Bring your own 2D floorplan or 3D model. Trace image obstacles,
+              or review the collision boxes generated from a GLB/glTF.
+              Your files stay on your device.
+              <button className="text-button" onClick={openFiles}>
+                Import your scene <ArrowUp size={16} />
+              </button>
+            </p>
             <details>
               <summary>
                 What the engine actually calculates <ChevronRight size={18} />
@@ -1920,7 +1963,7 @@ export default function RouteLab() {
             </details>
             <a
               className="text-link"
-              href="https://github.com/diegocrisafu/ai_ui"
+              href="https://github.com/diegocrisafu/ai_ui/tree/codex/scenebreaker-route-lab"
               target="_blank"
               rel="noreferrer"
             >

@@ -237,6 +237,10 @@ nav a:hover {
   align-self: flex-start;
   white-space: nowrap;
 }
+.opening-aside > .text-button {
+  align-self: flex-start;
+  margin-top: -12px;
+}
 .opening-scene {
   position: relative;
   margin-top: 12px;
@@ -892,6 +896,14 @@ details[open] > summary > svg:last-child {
 .file-grid section {
   min-width: 0;
 }
+.file-drawer {
+  margin-bottom: 24px;
+  scroll-margin-top: 24px;
+}
+.file-drawer p,
+.error-message {
+  overflow-wrap: anywhere;
+}
 .file-grid p {
   margin: 8px 0 20px;
   color: var(--muted);
@@ -1034,31 +1046,40 @@ progress {
   accent-color: var(--accent);
 }
 .method-section {
-  padding: 80px 0 110px;
+  padding: 96px 0;
   border-top: 1px solid var(--line);
+  align-items: start;
 }
 .method-section h2 {
   grid-column: span 6;
-  font-size: var(--type-5);
+  font-size: var(--type-7);
 }
 .method-content {
-  grid-column: 8 / -1;
-  max-width: 75ch;
+  grid-column: 7 / -1;
+  max-width: 65ch;
+  padding-top: 24px;
 }
 .method-content .lead {
   font-size: var(--type-1);
-  margin-bottom: 18px;
+  margin-bottom: 24px;
 }
 .method-content > p:not(.lead) {
   color: var(--muted);
-  margin-bottom: 28px;
+  margin-bottom: 32px;
+}
+.method-content summary {
+  font-weight: 600;
+}
+.method-content .text-button {
+  display: flex;
+  margin-top: 8px;
 }
 .method-content details {
   border-top: 1px solid var(--line);
 }
 .method-content details p {
   color: var(--muted);
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }
 .method-content > a {
   margin-top: 24px;
@@ -1115,6 +1136,12 @@ footer small {
   .opening-copy h1 {
     font-size: var(--type-9);
   }
+  .method-section h2 {
+    font-size: var(--type-8);
+  }
+  .method-content {
+    padding-top: 36px;
+  }
 }
 @media (max-width: 1199px) {
   :root {
@@ -1161,10 +1188,11 @@ footer small {
   }
   .method-section h2 {
     grid-column: span 4;
-    font-size: var(--type-4);
+    font-size: var(--type-5);
   }
   .method-content {
     grid-column: 5 / -1;
+    padding-top: 8px;
   }
   .run-summary dl {
     gap: 10px;
@@ -1408,7 +1436,8 @@ footer small {
     gap: 6px;
   }
   .method-section {
-    padding: 50px 0 64px;
+    padding: 64px 0;
+    row-gap: 32px;
   }
   .method-section h2,
   .method-content {
@@ -1416,7 +1445,9 @@ footer small {
   }
   .method-section h2 {
     font-size: var(--type-4);
-    margin-bottom: 18px;
+  }
+  .method-content {
+    padding-top: 0;
   }
   footer {
     padding-block: 24px;

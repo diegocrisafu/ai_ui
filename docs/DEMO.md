@@ -14,7 +14,7 @@ Run **Stress-test this route**. Explain the axes: maximum robot speed and extra 
 
 1:25 — “Bring your own geometry.”
 
-Choose **Open scene** and load `public/examples/simple-room.gltf`. Review the projected boxes before accepting. Show the 2D plan and move a route point. A floorplan can also be loaded and traced manually.
+Choose **Import your scene** on the homepage or **Import scene** above the editor and load `public/examples/simple-room.gltf`. Review the projected boxes before accepting; acceptance returns focus to the editor. Show the 2D plan and move a route point. A floorplan can also be loaded, calibrated and traced manually; importing an image does not generate walls.
 
 1:45 — “The evidence travels with the experiment.”
 

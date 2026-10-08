@@ -19,6 +19,8 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 - Nielsen target36/40; separate product/engineering judgment, never fabricated9/10.
 
 ## Post-critique revision
+October 8 discoverability correction: the methodology title is substantially larger, with adjacent equal columns instead of an unused grid track. Import is a first-class homepage action and precedes the editor. Explain image tracing versus reviewed 3D collision projection before file selection; do not assume users will find a buried file drawer. Retain the approved flow, family, palette and 150% leading.
+
 The 28/40 authoring workbench did not satisfy the flagship bar. The interaction now centres on explaining a contrast: select the nearest sampled opposite outcome, pin the baseline, list effective changes, restore either experiment, and keep a live spatial context beside mobile edits. The next review must score these changes against actual use, not award a target score on request.
 
 The original roll was reproduced with its same seed and saved at `.impeccable/review/direction-roll.txt`. This is grounded custom direction 6, not a selected catalog challenger; there is no catalog QUALITY BAR image for this custom candidate and none is claimed. The user-specified reference is Apple's product-storytelling pattern, not a supplied pixel comp.

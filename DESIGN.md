@@ -228,18 +228,18 @@ The frontmatter records the complete implemented size ramp and the main semantic
 | type-1 | 20px | Intro copy, inspector and comparison headings |
 | type-2 | 25px | Default h3, desktop result values, experiment name |
 | type-3 | 31.25px | Stopping-distance value |
-| type-4 | 39.0625px | Mobile section headings, tablet methodology heading |
-| type-5 | 48.828125px | Mobile opening, tablet workbench, desktop methodology |
+| type-4 | 39.0625px | Mobile section headings |
+| type-5 | 48.828125px | Mobile opening, tablet workbench and methodology |
 | type-6 | 61.03515625px | Desktop workbench heading |
-| type-7 | 76.2939453125px | Tablet opening |
-| type-8 | 95.367431640625px | Opening at 1200–1439px |
+| type-7 | 76.2939453125px | Tablet opening; methodology at 1200–1439px |
+| type-8 | 95.367431640625px | Opening at 1200–1439px; methodology at 1440px+ |
 | type-9 | 119.20928955078125px | Opening at 1440px and wider |
 
 **The Whole Steps Rule.** Use the existing 1.25 scale and 1.5 line height; responsive type changes move between whole scale steps.
 
 Display and section headings use Familjen Grotesk at weight 700, normal style, −0.035em tracking and balanced natural wrapping. All heading text is graphite. Familjen also carries body copy, controls and labels, with weight 400 for body, 500 for buttons and h3 headings and 600 for the wordmark. Azeret Mono is reserved for measured output, definition-list values, grid headings, grid durations and stopping distance. Numeric inputs retain Familjen Grotesk with tabular figures.
 
-The opening uses type-9 at 1440px and wider, type-8 at 1200–1439px, type-7 on tablet and type-5 on phone. The workbench heading uses type-6 / type-5 / type-4. The methodology heading uses type-5 / type-4 / type-4. Inspector and comparison headings override the general title size with type-1. Measurement text inherits its context's scale step; the frontmatter measurement role describes the ordinary comparison measurement paragraph. Methodology and import-review prose are bounded at 75ch; the stress introduction uses 60ch. These are observed local limits, not a page-wide measure.
+The opening uses type-9 at 1440px and wider, type-8 at 1200–1439px, type-7 on tablet and type-5 on phone. The workbench heading uses type-6 / type-5 / type-4. The methodology heading uses type-8 at 1440px+, type-7 at 1200–1439px, type-5 on tablet and type-4 on phone. Inspector and comparison headings override the general title size with type-1. Measurement text inherits its context's scale step; the frontmatter measurement role describes the ordinary comparison measurement paragraph. Methodology prose is bounded at 65ch, import-review prose at 75ch and the stress introduction at 60ch. These are observed local limits, not a page-wide measure.
 
 ### Local font files and licenses
 
@@ -262,7 +262,7 @@ The notices are in [public/third-party-notices.txt](public/third-party-notices.t
 
 Header, main and footer share a centered maximum width (1600px), including their horizontal padding. The opening, section introduction, laboratory and methodology each use explicit repeated tracks; the current CSS does not use subgrid. Main navigation is flex layout, with a 100px desktop/tablet header and 76px phone header.
 
-The opening title spans nine desktop tracks, with supporting copy starting at track ten. On tablet they use five and three tracks; on phone both span the full grid. Methodology follows a six-track title / track-eight content arrangement on desktop, four / four on tablet, and full-width sections on phone. These are this surface's compositions.
+The opening title spans nine desktop tracks, with supporting copy starting at track ten. On tablet they use five and three tracks; on phone both span the full grid. Methodology uses adjacent six/six columns on desktop and four/four on tablet, with no empty intervening track. On phone the title and explanation stack with a single 32px row gap. The heading remains bold and monochrome; content padding provides optical top alignment. These are this surface's compositions.
 
 Spacing is a practical vocabulary, not a strict multiples-of-eight system: labels use 6–7px separation, adjacent actions commonly use 8–12px, control groups use 16–24px, and major sections have larger explicit breaks. The frontmatter records recurring small spacing values; it does not claim every gap uses a custom property.
 
@@ -326,7 +326,7 @@ Pinned and current runs show named outcomes, time, speed and extra grid delay. �
 
 Stress cells are buttons in a labeled table: soft surface for reached, ultramarine for contact, graphite for timeout. Icons, accessible labels and measured duration supplement the fills. Hover and selection have graphite outlines. The finding above the table uses ruled edges and an action; it stacks on phone.
 
-File/import tools use native details/summary and ruled groups. Empty stress results use a broad soft region with explanatory text. These are task containers, not a reusable raised-card system.
+File/import tools use native details/summary and ruled groups above the editor. “Import your scene” is also available in the opening and methodology; each entry opens and focuses the same panel. Choices state the next step: trace an image, review projected 3D boxes, or reload a saved experiment. Pending 3D review receives keyboard focus; accepting it returns to the editor. Long filenames wrap without widening the page. Empty stress results use a broad soft region with explanatory text. These are task containers, not a reusable raised-card system.
 
 ## Do's and Don'ts
 

@@ -28,7 +28,7 @@ The production build exports static files to `out/`. `npm start` serves that dir
 3. Open the laboratory. Pin the current run, change **Start delay** or the robot's speed, and compare the outcomes.
 4. Add a waypoint and drag it, or move a focused handle using arrow keys. Select **Robot** to change footprint, acceleration, turn rate or drive model.
 5. Run **Stress-test this route**. Each cell replays its own exact speed and moving-object delay.
-6. Choose **Open scene** to load a floorplan or self-contained GLB/glTF. Review the projected collision geometry; it is an approximation.
+6. Choose **Import your scene** on the homepage, or **Import scene** above the editor. Load a floorplan to scale and trace, or a self-contained GLB/glTF to review as projected collision boxes. Accepting a 3D model returns you to the editable scene; it is an approximation, not mesh physics.
 7. Save the experiment. The selected test's speed and timing override are included. Loading its JSON recalculates that replay from validated inputs instead of trusting a stored score.
 
 ## Actual capabilities
